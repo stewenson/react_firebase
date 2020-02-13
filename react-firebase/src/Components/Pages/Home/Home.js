@@ -1,7 +1,8 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Card } from "react-bootstrap";
-import {Container} from "../../../Styles/HomeStyled/Styled";
+import { Card } from "react-bootstrap";
+import {Container} from "../../../Styles/Styled";
+import ButtonComponents from "../../Button/ButtonComponent";
 
 const Home = props => {
     return <Container>
@@ -9,36 +10,21 @@ const Home = props => {
             <Card.Body>
                 <Card.Header>Firebase Hooks Tutorial</Card.Header>
                 <Card.Body>
-                    <Button
-                        variant="outline-primary"
-                        ghost
-                        style={{width: '100%', marginBottom: '10px'}}
-                        onClick={() => {
-                            props.history.push('/register');
-                        }}
-                    >
-                        Register
-                    </Button>
-                    <Button
-                        variant="outline-primary"
-                        ghost
-                        style={{width: '100%', marginBottom: '10px'}}
-                        onClick={() => {
-                            props.history.push('/login');
-                        }}
-                    >
-                        Login
-                    </Button>
-                    <Button
-                        variant="outline-primary"
-                        ghost
-                        style={{width: '100%', marginBottom: '10px'}}
-                        onClick={() => {
-                            props.history.push('/dashboard');
-                        }}
-                    >
-                        Dashboard
-                    </Button>
+                    <ButtonComponents
+                        clicked={() => props.history.push('/register')}
+                        style={{width: '100%', marginTop: '10px'}}
+                        text={"Registration"}
+                        color={"primary"}
+                        variant={"outlined"}
+                    />
+
+                    <ButtonComponents
+                        style={{width: '100%', marginTop: '10px'}}
+                        clicked={() => props.history.push('/login')}
+                        text={"Log In"}
+                        color={"primary"}
+                        variant={"outlined"}
+                    />
                 </Card.Body>
             </Card.Body>
         </Card>

@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useFormik } from "formik";
+import {withRouter, Redirect} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Button, Card} from 'react-bootstrap';
-import { Container } from '../../../Styles/HomeStyled/Styled';
+import { Card } from 'react-bootstrap';
+import { Container } from '../../../Styles/Styled';
 import '../../../Styles/LoginStyle/LoginStyle.scss';
+import LoginForm from "../../Form/LoginForm/LoginForm";
+import ButtonComponent from '../../Button/ButtonComponent';
+import app from "../../../config/base";
+import { AuthContext } from '../Auth/Auth';
 
-function Login(props) {
+function Login({history}) {
 
     const validate  = values => {
         const errors = {};
@@ -25,64 +30,57 @@ function Login(props) {
             password: '',
         },
         validate,
-        onSubmit: values => {
-            console.log(values)
+        onSubmit: async values => {
+            try {
+                await app
+                    .auth()
+                    .signInWithEmailAndPassword(values.email, values.password);
+                history.push('/dashboard');
+            } catch (e) {
+                alert(e.message);
+            }
+
         }
     });
+
+    const { currentUser } = useContext(AuthContext);
+    if (currentUser) {
+        return <Redirect to='/dashboard' />
+    }
 
     return (
         <Container>
             <Card>
                 <Card.Header>Login</Card.Header>
                 <Card.Body>
-                    <Form
-                        style={{ width: '300px'}}
-                        onSubmit={formik.handleSubmit}>
-                        <Form.Group>
-                            <Form.Control
-                                type="email"
-                                id="email"
-                                placeholder="Enter email"
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control
-                                type="password"
-                                id="password"
-                                placeholder="Enter password"
-                                onBlur={formik.handleBlur}
-                                onChange={formik.handleChange}
-                                value={formik.values.password}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Button
-                            style={{width: '100%', marginBottom: '10px'}}
-                            type="submit">
-                            Submit
-                        </Button>
-                        <p style={{ textAlign: 'center'}}>Or</p>
-                        <Button
-                            style={{width: '100%', marginBottom: '10px'}}
-                            type="submit"
-                            onClick={() => {
-                                props.history.push('/register');
-                            }}
-                        >
-                            Register
-                        </Button>
-                    </Form>
+                    <LoginForm
+                        //action
+                        submit={formik.handleSubmit}
+                        clicked={formik.handleSubmit}
+                        changed={formik.handleChange}
+                        // values
+                        email={formik.values.email}
+                        password={formik.values.password}
+                        // errors
+                        emailError={formik.errors.email}
+                        passwordError={formik.errors.password}
+                        // labels (placeholder)
+                        emailLabel={"Enter email"}
+                        passwordLabel={"Enter password"}
+                    />
                 </Card.Body>
+                <Card.Footer>
+                    <p style={{ textAlign: 'center'}}>
+                        You don't have an account?
+                        <ButtonComponent
+                            clicked={() => history.push('/register')}
+                            color={"secondary"}
+                            text={"Register here"}
+                        />
+                    </p>
+                </Card.Footer>
             </Card>
         </Container>
     );
 }
-export default Login;
+export default withRouter(Login);

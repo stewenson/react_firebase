@@ -1,10 +1,12 @@
 import React from "react";
 import { useFormik } from 'formik'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Button, Card} from 'react-bootstrap';
-import { Container } from '../../../Styles/HomeStyled/Styled';
+import { Card } from 'react-bootstrap';
+import { Container } from '../../../Styles/Styled';
 import '../../../Styles/RegisterStyle/RegisterStyle.scss';
 import app from '../../../config/base';
+import RegisterForm from '../../Form/RegisterForm/RegisterForm';
+import ButtonComponents from "../../Button/ButtonComponent";
 
 function Register({ history }) {
 
@@ -41,24 +43,29 @@ function Register({ history }) {
             password_confirm: ''
         },
         validate,
-        onSubmit: values => {
-            app
-                .auth()
-                .createUserWithEmailAndPassword(values.email, values.password)
-                .then(() => {
-                    const user = app.auth().currentUser;
-                    user
-                        .updateProfile({
-                            displayName: values.firstName
-                        })
-                        .then(() => {
-                            history.push('/login');
+        onSubmit: async values => {
+            try {
+                await app
+                    .auth()
+                    .createUserWithEmailAndPassword(values.email, values.password)
+                    .then(() => {
+                        const user = app.auth().currentUser;
+                        user
+                            .updateProfile({
+                                displayName: values.firstName
+                            })
+                            .then(() => {
+                                history.push('/login');
+                            }).catch(error => {
+                            alert(error.message);
+                        });
                     }).catch(error => {
                         alert(error.message);
-                    });
-                }).catch(error => {
-                    alert(error.message);
-            })
+                    })
+            } catch (e) {
+                alert(e.message);
+            }
+
         }
     });
 
@@ -67,80 +74,38 @@ function Register({ history }) {
             <Card>
                 <Card.Header>Register</Card.Header>
                 <Card.Body>
-                    <Form
-                        style={{ width: '300px'}}
-                        onSubmit={formik.handleSubmit}
-                    >
-                        <Form.Group>
-                            <Form.Control
-                                id="firstName"
-                                name="firstName"
-                                type="text"
-                                placeholder="Enter firstName"
-                                onChange={formik.handleChange}
-                                value={formik.values.firstName}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.firstName ? <div>{formik.errors.firstName}</div>: null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control
-                                id="email"
-                                name="email"
-                                type="email"
-                                placeholder="Enter email"
-                                onChange={formik.handleChange}
-                                value={formik.values.email}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.email ? <div>{formik.errors.email}</div>: null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control
-                                id="password"
-                                name="password"
-                                type="password"
-                                placeholder="Enter password"
-                                onChange={formik.handleChange}
-                                value={formik.values.password}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.password ? <div>{formik.errors.password}</div>: null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Control
-                                id="password_confirm"
-                                name="password_confirm"
-                                type="password"
-                                placeholder="Confirm password"
-                                onChange={formik.handleChange}
-                                value={formik.values.password_confirm}
-                            />
-                            <Form.Text className="text-muted">
-                                {formik.errors.password_confirm ? <div>{formik.errors.password_confirm}</div>: null}
-                            </Form.Text>
-                        </Form.Group>
-                        <Button
-                            style={{width: '100%', marginBottom: '10px'}}
-                            type="submit"
-                        >
-                            Submit
-                        </Button>
-                        <p style={{ textAlign: 'center'}}>Or</p>
-                        <Button
-                            style={{width: '100%', marginBottom: '10px'}}
-                            type="submit"
-                            onClick={() => {
-                                history.push('/login');
-                            }}
-                        >
-                            Login
-                        </Button>
-                    </Form>
+                    <RegisterForm
+                    //action
+                    submit={formik.handleSubmit}
+                    clicked={formik.handleSubmit}
+                    changed={formik.handleChange}
+                    // values
+                    firstName={formik.values.firstName}
+                    email={formik.values.email}
+                    password={formik.values.password}
+                    password_confirm={formik.values.password_confirm}
+                    // errors
+                    firstNameError={formik.errors.firstName}
+                    emailError={formik.errors.email}
+                    passwordError={formik.errors.password}
+                    password_confirmError={formik.errors.password_confirm}
+                    // labels (placeholder)
+                    nameLabel={"Enter name"}
+                    emailLabel={"Enter email"}
+                    passwordLabel={"Enter password"}
+                    password_confirmLabel={"Password_confirm"}
+                    />
                 </Card.Body>
+                <Card.Footer>
+                    <p style={{ textAlign: 'center'}}>
+                        You are already registered?
+                        <ButtonComponents
+                            clicked={() => history.push('/login')}
+                            color={"secondary"}
+                            text={"Log In"}
+                        />
+                    </p>
+                </Card.Footer>
             </Card>
         </Container>
     );
