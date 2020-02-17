@@ -3,7 +3,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import app from "../../config/base";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ButtonComponent from "../Button/ButtonComponent";
 

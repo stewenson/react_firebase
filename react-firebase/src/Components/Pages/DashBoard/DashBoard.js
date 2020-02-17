@@ -14,7 +14,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Header from "../../Layout/Header";
 
 function DashBoard({history}) {
