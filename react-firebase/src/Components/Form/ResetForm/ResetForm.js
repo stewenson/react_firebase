@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from "../TextField/TextField";
 import ButtonComponent from "../../Button/ButtonComponent";
 
-const LoginForm = (props) => {
+const ResetForm = (props) => {
     const useStyles = makeStyles(theme => ({
         root: {
             '& > *': {
@@ -32,18 +32,6 @@ const LoginForm = (props) => {
                 />
             </div>
             <div>
-                <TextField
-                    error={props.passwordError ? true : null}
-                    helperText={props.passwordError}
-                    id="password"
-                    name="password"
-                    type="password"
-                    label={props.passwordLabel}
-                    changed={props.changed}
-                    value={props.password}
-                />
-            </div>
-            <div>
                 <ButtonComponent
                     style={{width: '100%', marginTop: '10px'}}
                     text={"Submit"}
@@ -56,4 +44,4 @@ const LoginForm = (props) => {
     );
 }
 
-export default LoginForm;
+export default ResetForm;

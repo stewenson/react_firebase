@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useFormik } from 'formik'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
@@ -7,6 +7,8 @@ import '../../../Styles/RegisterStyle/RegisterStyle.scss';
 import app from '../../../config/base';
 import RegisterForm from '../../Form/RegisterForm/RegisterForm';
 import ButtonComponents from "../../Button/ButtonComponent";
+import {AuthContext} from "../Auth/Auth";
+import {Redirect} from "react-router-dom";
 
 function Register({ history }) {
 
@@ -18,6 +20,16 @@ function Register({ history }) {
         } else if (!/^[a-žA-Ž ]+(.+)*$/.test(values.firstName)) {
             errors.firstName = 'First Name must contain only text';
         }
+        if (!values.lastName) {
+            errors.lastName = 'Required';
+        } else if (!/^[a-žA-Ž ]+(.+)*$/.test(values.lastName)) {
+            errors.lastName = 'Last Name must contain only text';
+        }
+        if (!values.nickName) {
+            errors.nickName = 'Required';
+        } else if (!/^[a-žA-Ž ]+(.+)*$/.test(values.nickName)) {
+            errors.nickName = 'Nick Name must contain only text';
+        }
         if (!values.password) {
             errors.password = 'Required';
         } else if (!values.password.length > 6) {
@@ -25,6 +37,8 @@ function Register({ history }) {
         }
         if (!values.email) {
             errors.email = 'Required';
+        } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(values.email)) {
+            errors.email = 'Wrong email';
         }
         if (!values.password_confirm) {
             errors.password_confirm = 'Required';
@@ -38,6 +52,8 @@ function Register({ history }) {
     const formik = useFormik({
         initialValues: {
             firstName: '',
+            lastName: '',
+            nickName: '',
             email: '',
             password: '',
             password_confirm: ''
@@ -45,22 +61,22 @@ function Register({ history }) {
         validate,
         onSubmit: async values => {
             try {
-                await app
-                    .auth()
-                    .createUserWithEmailAndPassword(values.email, values.password)
-                    .then(() => {
-                        const user = app.auth().currentUser;
-                        user
-                            .updateProfile({
-                                displayName: values.firstName
+                await app.auth().createUserWithEmailAndPassword(values.email, values.password)
+                    .then((resp) => {
+                        return app.firestore().collection('users').doc(resp.user.uid).set({
+                            firstName: values.firstName,
+                            lastName: values.lastName,
+                            email: values.email,
+                            nickName: values.nickName
+                        }).then(() =>{
+                            app.auth().currentUser.updateProfile({
+                                displayName: values.nickName
                             })
-                            .then(() => {
-                                history.push('/login');
-                            }).catch(error => {
-                            alert(error.message);
-                        });
-                    }).catch(error => {
-                        alert(error.message);
+                        }).then(() => {
+                            history.push('/login');
+                        })
+                    }).catch(e => {
+                        alert(e.message);
                     })
             } catch (e) {
                 alert(e.message);
@@ -68,11 +84,15 @@ function Register({ history }) {
 
         }
     });
+    const { currentUser } = useContext(AuthContext);
+    if (currentUser) {
+        return <Redirect to='/dashboard' />
+    }
 
     return (
         <Container>
             <Card>
-                <Card.Header>Register</Card.Header>
+                <Card.Header>Registration</Card.Header>
                 <Card.Body>
                     <RegisterForm
                     //action
@@ -81,16 +101,22 @@ function Register({ history }) {
                     changed={formik.handleChange}
                     // values
                     firstName={formik.values.firstName}
+                    lastName={formik.values.lastName}
+                    nickName={formik.values.nickName}
                     email={formik.values.email}
                     password={formik.values.password}
                     password_confirm={formik.values.password_confirm}
                     // errors
                     firstNameError={formik.errors.firstName}
+                    lastNameError={formik.errors.lastName}
+                    nickNameError={formik.errors.nickName}
                     emailError={formik.errors.email}
                     passwordError={formik.errors.password}
                     password_confirmError={formik.errors.password_confirm}
                     // labels (placeholder)
-                    nameLabel={"Enter name"}
+                    firstNameLabel={"Enter First name"}
+                    lastNameLabel={"Enter Last name"}
+                    nickNameLabel={"Enter Nick name"}
                     emailLabel={"Enter email"}
                     passwordLabel={"Enter password"}
                     password_confirmLabel={"Password_confirm"}

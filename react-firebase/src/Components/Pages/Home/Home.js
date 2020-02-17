@@ -1,17 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from "react-bootstrap";
 import {Container} from "../../../Styles/Styled";
 import ButtonComponents from "../../Button/ButtonComponent";
+import {AuthContext} from "../../Auth/Auth/Auth";
+import {Redirect} from "react-router-dom";
 
 const Home = props => {
+    const { currentUser } = useContext(AuthContext);
+    if (currentUser) {
+        return <Redirect to='/dashboard' />
+    }
     return <Container>
         <Card>
+            <Card.Header>Firebase Hooks Tutorial</Card.Header>
             <Card.Body>
-                <Card.Header>Firebase Hooks Tutorial</Card.Header>
                 <Card.Body>
                     <ButtonComponents
-                        clicked={() => props.history.push('/register')}
+                        clicked={() => props.history.push('/registration')}
                         style={{width: '100%', marginTop: '10px'}}
                         text={"Registration"}
                         color={"primary"}

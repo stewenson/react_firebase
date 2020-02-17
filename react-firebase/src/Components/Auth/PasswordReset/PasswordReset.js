@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
 import { Container } from '../../../Styles/Styled';
 import '../../../Styles/LoginStyle/LoginStyle.scss';
-import LoginForm from "../../Form/LoginForm/LoginForm";
+import ResetForm from "../../Form/ResetForm/ResetForm";
 import ButtonComponent from '../../Button/ButtonComponent';
 import app from "../../../config/base";
 import { AuthContext } from '../Auth/Auth';
 
-function Login({history}) {
+function PasswordReset({history}) {
 
     const validate  = values => {
         const errors = {};
@@ -19,24 +19,20 @@ function Login({history}) {
         } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(values.email)) {
             errors.email = 'Wrong email';
         }
-        if (!values.password) {
-            errors.password = 'Required';
-        }
         return errors;
     };
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: ''
         },
         validate,
         onSubmit: async values => {
             try {
                 await app
                     .auth()
-                    .signInWithEmailAndPassword(values.email, values.password);
-
-                history.push('/dashboard');
+                    .sendPasswordResetEmail(values.email);
+                alert('We have sen a reset password email. Please click the reset password link to set your new password');
+                history.push('/login');
             } catch (e) {
                 alert(e.message);
             }
@@ -52,38 +48,31 @@ function Login({history}) {
     return (
         <Container>
             <Card>
-                <Card.Header>Login</Card.Header>
+                <Card.Header>
+                    <h4>Forgot your password?</h4>
+                    <p>Please enter your email to resset password!</p>
+                </Card.Header>
                 <Card.Body>
-                    <LoginForm
+                    <ResetForm
                         //action
                         submit={formik.handleSubmit}
                         clicked={formik.handleSubmit}
                         changed={formik.handleChange}
                         // values
                         email={formik.values.email}
-                        password={formik.values.password}
                         // errors
                         emailError={formik.errors.email}
-                        passwordError={formik.errors.password}
                         // labels (placeholder)
                         emailLabel={"Enter email"}
-                        passwordLabel={"Enter password"}
                     />
                 </Card.Body>
                 <Card.Footer>
                     <p style={{ textAlign: 'center'}}>
-                        You don't have an account?
+                        Back to Login
                         <ButtonComponent
-                            clicked={() => history.push('/registration')}
+                            clicked={() => history.push('/login')}
                             color={"secondary"}
-                            text={"Register here"}
-                        />
-                    </p>
-                    <p style={{ textAlign: 'center'}}>
-                        <ButtonComponent
-                            clicked={() => history.push('/password_reset')}
-                            color={"primary"}
-                            text={"Forgot Password"}
+                            text={"Log In"}
                         />
                     </p>
                 </Card.Footer>
@@ -91,4 +80,4 @@ function Login({history}) {
         </Container>
     );
 }
-export default withRouter(Login);
+export default withRouter(PasswordReset);
