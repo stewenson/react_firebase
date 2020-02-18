@@ -9,7 +9,7 @@ import {Redirect} from "react-router-dom";
 const Home = props => {
     const { currentUser } = useContext(AuthContext);
     if (currentUser) {
-        return <Redirect to='/dashboard' />
+        return <Redirect to='/profile' />
     }
     return <Container>
         <Card>

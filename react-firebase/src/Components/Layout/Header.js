@@ -3,8 +3,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ButtonComponent from "../Button/ButtonComponent";
+import app from "../../config/base";
 
 const Header = props => {
     return (
@@ -13,20 +12,12 @@ const Header = props => {
             <AppBar position="fixed" className={props.className}>
                 <Toolbar>
                     <Typography variant="h6" noWrap>
-                        Hello {props.title}
+                        Hello {app.auth().currentUser.displayName}
                     </Typography>
                     <Typography
                         variant="h6"
                         style={{ textAligh: 'right'}}
                     >
-                        <ExitToAppIcon
-                            onClick={props.clicked}
-                        />
-                        <ButtonComponent
-                            clicked={props.clicked}
-                            text={props.text}
-                            variant={props.variant}
-                        />
                     </Typography>
                 </Toolbar>
             </AppBar>

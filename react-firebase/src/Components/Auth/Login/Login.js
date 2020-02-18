@@ -36,7 +36,7 @@ function Login({history}) {
                     .auth()
                     .signInWithEmailAndPassword(values.email, values.password);
 
-                history.push('/dashboard');
+                history.push('/profile');
             } catch (e) {
                 alert(e.message);
             }
@@ -46,7 +46,7 @@ function Login({history}) {
 
     const { currentUser } = useContext(AuthContext);
     if (currentUser) {
-        return <Redirect to='/dashboard' />
+        return <Redirect to='/profile' />
     }
 
     return (

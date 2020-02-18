@@ -1,29 +1,73 @@
-import React from 'react';
-import Home from './Components/Pages/Home/Home';
-import Login from './Components/Auth/Login/Login';
-import Register from './Components/Auth/Register/Register';
-import { HashRouter as Router, Route } from "react-router-dom";
-import { AuthProvider } from "./Components/Auth/Auth/Auth";
-import PrivateRoute  from './Components/Auth/PrivateRoute/PrivateRoute';
-import DashBoard from "./Components/Pages/DashBoard/DashBoard";
-import Profile from "./Components/Pages/Profile/Profile";
-import PasswordReset from "./Components/Auth/PasswordReset/PasswordReset";
+import React, {useContext} from 'react';
+import Header from "./Components/Layout/Header";
+import app from "./config/base";
+import Navigation from "./Components/Layout/Navigation";
+import {makeStyles} from "@material-ui/core/styles";
+import Routes from "./Routes/Routes";
+import {AuthContext} from "./Components/Auth/Auth/Auth";
 
 function App() {
+
+    const drawerWidth = 240;
+
+    const useStyles = makeStyles(theme => ({
+        root: {
+            display: 'flex',
+        },
+        appBar: {
+            width: `calc(100% - ${drawerWidth}px)`,
+            marginLeft: drawerWidth,
+        },
+        drawer: {
+            width: drawerWidth,
+            flexShrink: 1,
+        },
+        drawerPaper: {
+            width: drawerWidth,
+        },
+        toolbar: theme.mixins.toolbar,
+        content: {
+            flexGrow: 1,
+            backgroundColor: theme.palette.background.default,
+            padding: theme.spacing(2),
+        },
+    }));
+    const classes = useStyles();
+    const { currentUser } = useContext(AuthContext);
+
+    let data;
+    if (currentUser) {
+        data = (
+            <div className={classes.root}>
+                <Header
+                    className={classes.appBar}
+                    text={"Sign Out"}
+                    variant={'outlined'}
+                />
+                <Navigation
+                    classNameDrawer={classes.drawer}
+                    variant={"permanent"}
+                    classes={{paper: classes.drawerPaper}}
+                    anchor={"left"}
+                    classNameToolbar={classes.toolbar}
+                    clickedLogOut={() => app.auth().signOut()}
+
+                />
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <Routes/>
+                </main>
+            </div>
+        )
+    }else {
+        data = (
+           <Routes/>
+        )
+    }
   return (
-      <AuthProvider>
-          <Router>
-              <div>
-                  <PrivateRoute exact path='/dashboard' component={DashBoard} />
-                  <PrivateRoute exact path='/profile' component={Profile} />
-                  <Route exact path='/' component={Home} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/registration' component={Register} />
-                  <Route exact path='/password_reset' component={PasswordReset} />
-              </div>
-          </Router>
-      </AuthProvider>
+      <div>
+          {data}
+      </div>
   );
 }
-
 export default App;
