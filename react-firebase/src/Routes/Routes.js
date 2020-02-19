@@ -8,10 +8,12 @@ import Home from "../Components/Pages/Home/Home";
 import Login from "../Components/Auth/Login/Login";
 import Register from "../Components/Auth/Register/Register";
 import PasswordReset from "../Components/Auth/PasswordReset/PasswordReset";
+import Dashboard from "../Components/Pages/Dashboard/Dashboard";
 
 function Routes() {
     return (
         <div>
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/profile' component={Profile} />
             <PrivateRoute exact path='/todo' component={Todo} />
             <PrivateRoute exact path='/movie' component={Movie} />
