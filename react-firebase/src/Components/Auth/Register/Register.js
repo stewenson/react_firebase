@@ -12,6 +12,30 @@ import {Redirect} from "react-router-dom";
 
 function Register({ history }) {
 
+    const registerData = async values => {
+        try {
+            await app.auth().createUserWithEmailAndPassword(values.email, values.password)
+                .then((resp) => {
+                    return app.firestore().collection('users').doc(resp.user.uid).set({
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        email: values.email,
+                        nickName: values.nickName
+                    }).then(() =>{
+                        app.auth().currentUser.updateProfile({
+                            displayName: values.nickName
+                        })
+                    }).then(() => {
+                        history.push('/login');
+                    })
+                }).catch(e => {
+                    alert(e.message);
+                })
+        } catch (e) {
+            alert(e.message);
+        }
+    };
+
     const validate = values => {
 
         const errors = {};
@@ -45,7 +69,6 @@ function Register({ history }) {
         } else if (values.password !== values.password_confirm) {
             errors.password_confirm = 'Password do not mach';
         }
-
         return errors;
     };
 
@@ -59,31 +82,9 @@ function Register({ history }) {
             password_confirm: ''
         },
         validate,
-        onSubmit: async values => {
-            try {
-                await app.auth().createUserWithEmailAndPassword(values.email, values.password)
-                    .then((resp) => {
-                        return app.firestore().collection('users').doc(resp.user.uid).set({
-                            firstName: values.firstName,
-                            lastName: values.lastName,
-                            email: values.email,
-                            nickName: values.nickName
-                        }).then(() =>{
-                            app.auth().currentUser.updateProfile({
-                                displayName: values.nickName
-                            })
-                        }).then(() => {
-                            history.push('/login');
-                        })
-                    }).catch(e => {
-                        alert(e.message);
-                    })
-            } catch (e) {
-                alert(e.message);
-            }
-
-        }
+        onSubmit: registerData
     });
+
     const { currentUser } = useContext(AuthContext);
     if (currentUser) {
         return <Redirect to='/dashboard' />

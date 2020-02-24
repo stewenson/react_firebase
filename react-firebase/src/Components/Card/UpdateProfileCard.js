@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import UpdateProfileForm from "../Form/UpdateProfileForm/UpdateProfileForm";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import {CardHeader} from "@material-ui/core";
+import '../../Styles/ProfileStyle/ProfileFormCard.scss';
 
 const useStyles = makeStyles({
     root: {
@@ -15,6 +17,9 @@ function UpdateProfileCard(props) {
 
     return (
         <Card className={classes.root}>
+            <CardHeader
+                title="Update Profile"
+            />
             <CardContent>
             <UpdateProfileForm
                 //action

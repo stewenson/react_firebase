@@ -12,6 +12,18 @@ import { AuthContext } from '../Auth/Auth';
 
 function Login({history}) {
 
+    const loginData = async values => {
+        try {
+            await app
+                .auth()
+                .signInWithEmailAndPassword(values.email, values.password);
+            history.push('/dashboard');
+        } catch (e) {
+            alert(e.message);
+        }
+    };
+
+    // regex helper https://www.regextester.com/19
     const validate  = values => {
         const errors = {};
         if (!values.email) {
@@ -30,18 +42,7 @@ function Login({history}) {
             password: '',
         },
         validate,
-        onSubmit: async values => {
-            try {
-                await app
-                    .auth()
-                    .signInWithEmailAndPassword(values.email, values.password);
-
-                history.push('/dashboard');
-            } catch (e) {
-                alert(e.message);
-            }
-
-        }
+        onSubmit: loginData
     });
 
     const { currentUser } = useContext(AuthContext);

@@ -65,7 +65,7 @@ function UpdateProfileForm(props) {
             </div>
             <div>
                 <ButtonComponent
-                    style={{width: '100%', marginTop: '10px'}}
+                    style={{width: '30%', marginTop: '10px', backgroundColor: '#7b1fa2'}}
                     text={"Submit"}
                     variant={"contained"}
                     color={"primary"}

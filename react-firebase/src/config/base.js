@@ -1,6 +1,6 @@
 import * as firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/firestore';
 
 const app =  firebase.initializeApp( {
     apiKey: "AIzaSyA9SgURjhRSKK-u6uLi8bAHZcNKyKh9Fyo",
@@ -11,5 +11,4 @@ const app =  firebase.initializeApp( {
     messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID,
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 });
-
 export default app;
