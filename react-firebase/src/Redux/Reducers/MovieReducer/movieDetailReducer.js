@@ -5,6 +5,7 @@ const initState = {
     error: "",
 };
 
+
 function movieDetailReducer(state = initState, action) {
     switch (action.type) {
         case FETCH_DETAIL_MOVIE:

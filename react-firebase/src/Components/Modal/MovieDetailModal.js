@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -22,27 +22,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function MovieDetailModal(props) {
-    const content = useSelector(state => state);
+    const content= useSelector(state => state);
     const dispatch = useDispatch();
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
         setOpen(true);
+        dispatch(getDetailData(props.id))
+
     };
 
     const handleClose = () => {
         setOpen(false);
     };
-
-    try {
-        dispatch(getDetailData(props.id))
-    } catch (e) {
-        alert(e.message);
-    }
-    console.log(content);
-
-
 
     return (
         <div>
@@ -63,8 +56,8 @@ export default function MovieDetailModal(props) {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">Detail</p>
+                        <h2 id="transition-modal-title">{content.detailMovie.detailData.Title}</h2>
+                        <p id="transition-modal-description">{props.id}</p>
                     </div>
                 </Fade>
             </Modal>

@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../../Redux/Actions/MovieActions/FetchMovieById";
 import TextField from "@material-ui/core/TextField";
-import ButtonComponent from "../../Button/ButtonComponent";
 import MovieList from "./MovieList";
 import "../../../Styles/MovieStyle/MovieStyle.scss";
 
@@ -11,7 +10,7 @@ import "../../../Styles/MovieStyle/MovieStyle.scss";
 function Movie() {
     const content = useSelector(state => state);
     const dispatch = useDispatch();
-
+    console.log(content)
     const searchMovie = values => {
         try {
             dispatch(getData(values.title));
@@ -19,6 +18,7 @@ function Movie() {
             alert(e.message);
         }
     };
+
 
     const validate  = values => {
         const errors = {};
@@ -48,12 +48,6 @@ function Movie() {
                         onChange={formik.handleChange}
                         value={formik.values.title}
                         label={"Enter movie Title"}
-                    />
-                    <ButtonComponent
-                        text={"Search"}
-                        variant={"contained"}
-                        color={"primary"}
-                        clicked={formik.handleSubmit}
                     />
                 </form>
             </div>

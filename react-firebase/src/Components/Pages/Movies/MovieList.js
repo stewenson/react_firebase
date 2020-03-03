@@ -16,8 +16,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function MovieList(props) {
     const classes = useStyles();
-    console.log(props.data)
-
 
     let movieList;
     if (props.data){
