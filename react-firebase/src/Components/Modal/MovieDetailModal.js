@@ -31,14 +31,17 @@ export default function MovieDetailModal(props) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
+        setOpen(true);
         dispatch(getDetailData(props.id));
-            setOpen(true);
+
     };
 
     const handleClose = () => {
         setOpen(false);
-        dispatch(clearDetailData())
+        dispatch(clearDetailData());
     };
+
+
 
     let data;
     if (content.detailMovie.detailData){
@@ -65,7 +68,6 @@ export default function MovieDetailModal(props) {
     } else {
         data = (<Progress />);
     }
-
     return (
         <div>
             <Button size="small"

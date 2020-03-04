@@ -6,7 +6,6 @@ import TextField from "@material-ui/core/TextField";
 import MovieList from "./MovieList";
 import "../../../Styles/MovieStyle/MovieStyle.scss";
 
-
 function Movie() {
     const content = useSelector(state => state);
     const dispatch = useDispatch();
@@ -18,7 +17,6 @@ function Movie() {
             alert(e.message);
         }
     };
-
 
     const validate  = values => {
         const errors = {};
