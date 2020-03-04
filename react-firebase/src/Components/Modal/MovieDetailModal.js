@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -6,6 +6,9 @@ import Fade from '@material-ui/core/Fade';
 import Button from "@material-ui/core/Button";
 import {useDispatch, useSelector} from "react-redux";
 import { getDetailData } from "../../Redux/Actions/MovieActions/FetchDetailMovie";
+import { clearDetailData } from '../../Redux/Actions/MovieActions/ClearDetailMovieData';
+import DetailMovie from '../Pages/Movies/DetailMovie';
+import Progress from "../Progress/Progress";
 
 const useStyles = makeStyles(theme => ({
     modal: {
@@ -28,18 +31,48 @@ export default function MovieDetailModal(props) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
-        setOpen(true);
-        dispatch(getDetailData(props.id))
-
+        dispatch(getDetailData(props.id));
+            setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
+        dispatch(clearDetailData())
     };
+
+    let data;
+    if (content.detailMovie.detailData){
+        const result = content.detailMovie.detailData;
+        data = (
+            <DetailMovie
+            title={result.Title}
+            img={result.Poster}
+            rated={result.Rated}
+            runtime={result.Runtime}
+            year={result.Year}
+            released={result.Released}
+            boxoffice={result.BoxOffice}
+            plot={result.Plot}
+            language={result.Language}
+            genre={result.Genre}
+            director={result.Director}
+            writer={result.Writer}
+            actors={result.Actors}
+            awards={result.Awards}
+            imdblink={result.imdbID}
+            production={result.Production}
+        />);
+    } else {
+        data = (<Progress />);
+    }
 
     return (
         <div>
-            <Button size="small" color="primary" onClick={handleOpen}>
+            <Button size="small"
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleOpen}
+            >
                 Detail
             </Button>
             <Modal
@@ -50,14 +83,11 @@ export default function MovieDetailModal(props) {
                 onClose={handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
+                BackdropProps={{timeout: 0.1,}}
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2 id="transition-modal-title">{content.detailMovie.detailData.Title}</h2>
-                        <p id="transition-modal-description">{props.id}</p>
+                        {data}
                     </div>
                 </Fade>
             </Modal>

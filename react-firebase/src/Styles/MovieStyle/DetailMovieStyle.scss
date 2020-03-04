@@ -1,0 +1,19 @@
+.detail {
+  .spanClass {
+    .badge.badge-secondary.span {
+      margin-left: 5px;
+      color: #fff;
+      background-color: #6f6c7d;
+      a {
+        color: black;
+        text-decoration: none;
+      }
+    }
+    .badge.badge-secondary.span.imdblink {
+      background-color: #ffcb00;
+    }
+  }
+  .info {
+    text-align: center;
+  }
+}

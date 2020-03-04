@@ -1,4 +1,5 @@
-import { FETCH_DETAIL_MOVIE, ERROR } from "../../Actions/MovieActions/FetchDetailMovie";
+import {FETCH_DETAIL_MOVIE, ERROR,} from "../../Actions/MovieActions/FetchDetailMovie";
+import {CLEAR_DETAIL_MOVIE_DATA} from "../../Actions/MovieActions/ClearDetailMovieData";
 
 const initState = {
     detailData: [],
@@ -9,6 +10,11 @@ const initState = {
 function movieDetailReducer(state = initState, action) {
     switch (action.type) {
         case FETCH_DETAIL_MOVIE:
+            return {
+                ...state,
+                detailData: action.detailData
+            };
+        case CLEAR_DETAIL_MOVIE_DATA:
             return {
                 ...state,
                 detailData: action.detailData

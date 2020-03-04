@@ -10,7 +10,7 @@ import "../../../Styles/MovieStyle/MovieStyle.scss";
 function Movie() {
     const content = useSelector(state => state);
     const dispatch = useDispatch();
-    console.log(content)
+    
     const searchMovie = values => {
         try {
             dispatch(getData(values.title));

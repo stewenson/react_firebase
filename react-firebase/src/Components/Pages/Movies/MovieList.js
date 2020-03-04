@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MovieCard from "../../Card/MovieCard";
+import Progress from "../../Progress/Progress";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,7 +31,7 @@ export default function MovieList(props) {
             </Grid>
         ))
     } else {
-        movieList = "No Movies";
+        movieList = (<Progress/>);
     }
     return (
         <div className="MovieList">

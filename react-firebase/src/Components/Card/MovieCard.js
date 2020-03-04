@@ -43,9 +43,7 @@ export default function MediaCard(props) {
                 <MovieDetailModal
                     id={props.id}
                 />
-
                 <a href={`https://www.imdb.com/title/${props.id}`}>IMDB link</a>
-
             </CardActions>
         </Card>
     );

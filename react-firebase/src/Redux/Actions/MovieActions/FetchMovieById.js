@@ -2,7 +2,6 @@ import axios from "axios";
 export const FETCH_DATA_BY_ID = "FETCH_DATA_BY_ID";
 export const ERROR = "ERROR";
 
-
 export const getData = query => {
     return dispatch => {
         axios
