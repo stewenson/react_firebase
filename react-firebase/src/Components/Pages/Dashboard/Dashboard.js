@@ -6,6 +6,7 @@ import CollectionsIcon from '@material-ui/icons/Collections';
 import MovieCreationIcon from '@material-ui/icons/MovieCreation';
 import QueueIcon from '@material-ui/icons/Queue';
 import OutlineCard from "../../Card/OutlineCard";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles(theme => ({
     root: {
