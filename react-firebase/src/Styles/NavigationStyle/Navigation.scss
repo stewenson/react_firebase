@@ -5,8 +5,16 @@
   margin-bottom: 0;
   list-style: none;
 }
-a {
-  color: #0f0f0f;
-  text-decoration: none;
-  background-color: transparent;
+.Navigation {
+  a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  .MuiPaper-root.MuiDrawer-paper.makeStyles-drawerPaper-6.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
+    background-color: rgba(0, 0, 3, 0.86);
+  }
+  .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+    color: white;
+  }
 }

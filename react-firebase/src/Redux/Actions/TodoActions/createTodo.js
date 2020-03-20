@@ -12,7 +12,8 @@ export const createTodo = query => {
             .set({
                 author: query[1],
                 todo: query[0],
-                complete: query[2]
+                complete: query[2],
+                created: new Date()
             }).then(
             dispatch({
                 type: ADD_TODO,

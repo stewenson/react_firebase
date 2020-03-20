@@ -7,12 +7,13 @@ import PersonIcon from '@material-ui/icons/Person';
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
 import app from "../../config/base";
+import '../../Styles/LayoutStyle/HeaderStyle.scss';
 
-const Header = props => {
+export default function Header(props) {
     return (
-        <>
+        <div className="Header">
             <CssBaseline />
-            <AppBar position="fixed" className={props.className}>
+            <AppBar className={props.className}>
                 <Toolbar>
                     <IconButton
                         color={props.color}
@@ -28,7 +29,6 @@ const Header = props => {
                     </Typography>
                 </Toolbar>
             </AppBar>
-        </>
+        </div>
     );
 };
-export default Header;

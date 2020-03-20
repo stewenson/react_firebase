@@ -8,6 +8,7 @@ export const fetchAllTodo = (uid) => {
         app.firestore()
             .collection("todos")
             .where('author', '==', uid)
+            .orderBy('created', 'desc')
             .get()
             .then(res => {
                 dispatch({

@@ -13,7 +13,7 @@ import MovieIcon from '@material-ui/icons/Movie';
 
 const DrawerList = props => {
     return (
-        <>
+        <div className="DrawerList">
             <div className={props.classesDrawerList} />
             <Divider />
             <List>
@@ -66,7 +66,7 @@ const DrawerList = props => {
                 <ExitToAppIcon/>
                 <ListItemText primary='Log out'/>
             </ListItem>
-        </>
+        </div>
     );
 };
 export default DrawerList;
