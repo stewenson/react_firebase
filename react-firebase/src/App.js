@@ -5,6 +5,8 @@ import Navigation from "./Components/Layout/Navigation";
 import { AuthContext } from "./Components/Auth/Auth/Auth";
 import Routes from "./Routes/Routes";
 import app from "./config/base";
+import '../src/Styles/RootStyle/RootStyle.scss';
+
 
 const drawerWidth = 240;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import '../../../Styles/DashBoardStyle/DashBoardStyle.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -6,7 +6,10 @@ import CollectionsIcon from '@material-ui/icons/Collections';
 import MovieCreationIcon from '@material-ui/icons/MovieCreation';
 import QueueIcon from '@material-ui/icons/Queue';
 import OutlineCard from "../../Card/OutlineCard";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAllTodo} from "../../../Redux/Actions/TodoActions/FetchAllTodo";
+import {fetchCompleteTodo} from "../../../Redux/Actions/TodoActions/FetchCompleteTodo";
+import {AuthContext} from "../../Auth/Auth/Auth";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,8 +22,25 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Dashboard() {
+export default function Dashboard() {
+    const content = useSelector(state => state);
+    const { currentUser } = useContext(AuthContext);
+    const userId = currentUser.uid;
+    const dispatch = useDispatch();
     const classes = useStyles();
+
+    const loadData = () => {
+        dispatch(fetchAllTodo(userId));
+        dispatch(fetchCompleteTodo(userId))
+    };
+
+    useEffect(() => {
+        loadData();
+    },[]);
+
+    const all = content.todo.fetchData.length;
+    const complete = content.todo.completeTodo.length;
+    const uncomplete = content.todo.fetchData.length - content.todo.completeTodo.length;
 
     return (
         <div className={classes.root}>
@@ -29,8 +49,9 @@ function Dashboard() {
                        <OutlineCard
                            icon={<CollectionsIcon fontSize={"large"}/>}
                            header={"Todo"}
-                           sumtodo={"Total"}
-                           complete={"Complete"}
+                           sumtodo={"You have " + all + " Todo"}
+                           complete={"Completed todo: " + complete}
+                           uncomplete={"Uncomplete todo: " +  uncomplete}
                        />
                 </Grid>
                 <Grid item xs={6} sm={3}>
@@ -54,4 +75,3 @@ function Dashboard() {
         </div>
     );
 }
-export default Dashboard;

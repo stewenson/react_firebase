@@ -13,8 +13,7 @@ import {useDispatch} from "react-redux";
 import {AuthContext} from "../../Auth/Auth/Auth";
 import {DeleteTodo} from "../../../Redux/Actions/TodoActions/DeleteTodo";
 import '../../../Styles/TodoStyle/ListTodoStyle.scss';
-import Pagination from "../../Pagination/Pagination";
-
+import Paginator from "../../Pagination/Paginator";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -45,7 +44,6 @@ export default function ListData(props) {
     const deleteTodo = (id) => {
         dispatch(DeleteTodo(id))
     };
-
 
     const indexOfLastTodo = currentPage * todoPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
@@ -131,7 +129,7 @@ export default function ListData(props) {
         <List component="nav" aria-label="contacts">
             {fetchData}
         </List>
-            <Pagination
+            <Paginator
                 todoPerPage={todoPerPage}
                 totalTodo={totalData}
                 paginate={paginate}

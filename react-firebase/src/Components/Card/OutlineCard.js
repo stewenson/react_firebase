@@ -11,27 +11,30 @@ const useStyles = makeStyles({
     },
 });
 
-function OutlineCard(props) {
+export default function OutlineCard(props) {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography  variant="h4" component="h2">
                         {props.icon}
                         {props.header}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="h6" color="textPrimary" component="h4">
                         {props.sumtodo}
                         {props.text}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="h6" color="textPrimary"  component="h4">
                         {props.complete}
                         <a href={props.linkToOmdb}>
                             {props.linkText}
                         </a>
                         {props.totalPost}
+                    </Typography>
+                    <Typography variant="h6" color="textPrimary"  component="h4">
+                        {props.uncomplete}
                     </Typography>
                 </CardContent>
             </CardActionArea>
@@ -39,5 +42,3 @@ function OutlineCard(props) {
         </Card>
     );
 }
-
-export default OutlineCard;

@@ -4,10 +4,12 @@ import {MESSAGE} from "../../Actions/TodoActions/createTodo";
 import {FETCH_ALL_TODO} from "../../Actions/TodoActions/FetchAllTodo";
 import {COMPLETE_TODO} from "../../Actions/TodoActions/CompleteTodo";
 import {DELETE_TODO} from "../../Actions/TodoActions/DeleteTodo";
+import {FETCH_COMPLETE_TODO} from "../../Actions/TodoActions/FetchCompleteTodo";
 
 const initState = {
     data: {},
     fetchData: {},
+    completeTodo: {},
     complete: "",
     delete: "",
     error: "",
@@ -25,6 +27,11 @@ function todoReducer(state = initState, action) {
             return {
                 ...state,
                 fetchData: action.data
+            };
+            case FETCH_COMPLETE_TODO:
+            return {
+                ...state,
+                completeTodo: action.data
             };
         case COMPLETE_TODO:
             return {

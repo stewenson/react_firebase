@@ -11,10 +11,40 @@
     text-decoration: none;
     background-color: transparent;
   }
+  .MuiDivider-root {
+    background-color: darkred;
+    padding-top: 3px;
+  }
   .MuiPaper-root.MuiDrawer-paper.makeStyles-drawerPaper-6.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
-    background-color: rgba(0, 0, 3, 0.86);
+    background-color: rgba(0, 0, 3, 0.9);
   }
   .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+    //color: #d3cdff;
     color: white;
   }
+  .MuiPaper-root.MuiDrawer-paper.jss6.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.MuiPaper-elevation0 {
+    background-color: rgba(0, 0, 3, 0.9);
+  }
 }
+
+.MuiPaper-root.MuiDrawer-paper.makeStyles-drawerPaper-6.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.MuiPaper-root.MuiDrawer-paper.jss6.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.DrawerList {
+  color: white;
+  a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+  }
+  .MuiDivider-root {
+    background-color: darkred;
+    padding-top: 3px;
+  }
+}
+
+
+

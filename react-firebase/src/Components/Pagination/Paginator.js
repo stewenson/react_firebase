@@ -1,6 +1,7 @@
 import React from 'react';
+import '../../Styles/PaginationStyle/PaginationStyle.scss';
 
-const Pagination = ({ todoPerPage, totalTodo, paginate}) => {
+export default function Paginator ({ todoPerPage, totalTodo, paginate})  {
     const pageNumber = [];
 
     for (let i = 1; i <= Math.ceil(totalTodo / todoPerPage); i++) {
@@ -13,7 +14,7 @@ const Pagination = ({ todoPerPage, totalTodo, paginate}) => {
                 {pageNumber.map(number => (
                     <li key={number} className="page-item">
                         <a onClick={() => paginate(number)}
-                           href="!#/todo"
+                           href="#/todo"
                            className="page-link">
                             {number}
                         </a>
@@ -23,5 +24,3 @@ const Pagination = ({ todoPerPage, totalTodo, paginate}) => {
         </nav>
     )
 };
-
-export default Pagination;

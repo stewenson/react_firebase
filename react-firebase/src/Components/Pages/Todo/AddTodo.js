@@ -18,12 +18,14 @@ function AddTodo() {
     };
 
     const validate  = values => {
+
         const errors = {};
         if (!values.todo) {
             errors.todo = 'Required';
         } else if (!/^[a-žA-Ž0-9 ]+(.+)*$/.test(values.todo)) {
-            errors.todo = 'Wrong title';
+            errors.todo = 'Todo must only contain numbers or text.';
         }
+        return errors;
     };
     const formik = useFormik({
         initialValues: {
@@ -39,10 +41,10 @@ function AddTodo() {
                 <form onSubmit={formik.handleSubmit}>
                     <TextField
                         fullWidth
-                        name="todo"
-                        type="text"
                         error={formik.errors.todo ? true : null}
                         helperText={formik.errors.todo}
+                        name="todo"
+                        type="text"
                         onChange={formik.handleChange}
                         value={formik.values.todo}
                         label={"Enter new todo"}

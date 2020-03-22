@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(1),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
@@ -47,60 +47,64 @@ export default function ListTodo() {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                    <Paper className={classes.paper}>
-                        <ListData
-                            data={data}
-                        />
-                    </Paper>
+                    <div className={classes.paper}>
+                        <Paper elevation={3}>
+                            <ListData
+                                data={data}
+                            />
+                        </Paper>
+                    </div>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Paper className={classes.paper}>
-                        <h3>Usage</h3>
-                        <ListItem>
-                            <ListItemIcon >
-                                <StarIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="After click on star, todo will be changed to completed. Star will had yellow color."/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon >
-                                <DeleteIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="After click on trash, todo will be deleted."/>
-                        </ListItem>
-                        <h3>Use technology</h3>
-                        <ListItem>
-                            <ListItemIcon >
-                                <ArrowForwardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="React Hooks Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class."/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon >
-                                <ArrowForwardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="React Redux React Redux is the official React binding for Redux. It lets your React components read data from a Redux store, and dispatch actions to the store to update data."/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon >
-                                <ArrowForwardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="React Bootstrap The most popular front-end framework Rebuilt for React."/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon >
-                                <ArrowForwardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Material UI - React components for faster and easier web development. Build your own design system, or start with Material Design."/>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon >
-                                <ArrowForwardIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Google Firebase Build apps fast, without managing infrastructure Firebase gives you functionality like analytics,
+                    <div className={classes.paper}>
+                        <Paper elevation={3}>
+                            <h3>Usage</h3>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <StarIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="After click on star, todo will be changed to completed. Star will had yellow color."/>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <DeleteIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="After click on trash, todo will be deleted."/>
+                            </ListItem>
+                            <h3>Use technology</h3>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ArrowForwardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="React Hooks Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class."/>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ArrowForwardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="React Redux React Redux is the official React binding for Redux. It lets your React components read data from a Redux store, and dispatch actions to the store to update data."/>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ArrowForwardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="React Bootstrap The most popular front-end framework Rebuilt for React."/>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ArrowForwardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Material UI - React components for faster and easier web development. Build your own design system, or start with Material Design."/>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon >
+                                    <ArrowForwardIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Google Firebase Build apps fast, without managing infrastructure Firebase gives you functionality like analytics,
                             databases, messaging and crash reporting so you can move quickly and focus on your users."/>
-                        </ListItem>
-                    </Paper>
+                            </ListItem>
+                        </Paper>
+                    </div>
                 </Grid>
             </Grid>
         </div>
