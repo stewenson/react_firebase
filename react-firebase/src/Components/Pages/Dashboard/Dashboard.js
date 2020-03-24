@@ -46,30 +46,36 @@ export default function Dashboard() {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid id="todo" item xs={6} sm={3}>
+                    {/*<a href="#/todo">*/}
                        <OutlineCard
                            icon={<CollectionsIcon fontSize={"large"}/>}
-                           header={"Todo"}
+                           header={<a href="#/todo">Todo</a>}
                            sumtodo={"You have " + all + " Todo"}
                            complete={"Completed todo: " + complete}
                            uncomplete={"Uncomplete todo: " +  uncomplete}
                        />
+                    {/*</a>*/}
                 </Grid>
                 <Grid item xs={6} sm={3}>
+                    {/*<a href="#/movie">*/}
                        <OutlineCard
                            icon={<MovieCreationIcon fontSize={"large"} /> }
-                           header={"Movie"}
+                           header={<a href="#/movie">Movie</a>}
                            text={"Movie app from omdbApi"}
                            linkText={"OMDb Api Link"}
                            linkToOmdb={"http://www.omdbapi.com/"}
                        />
+                    {/*</a>*/}
                 </Grid>
                 <Grid item xs={6} sm={3}>
+                    {/*<a href="#/blog">*/}
                     <OutlineCard
                         icon={<QueueIcon fontSize={"large"} /> }
-                        header={"Blog"}
+                        header={<a href="#/blog">Blog</a>}
                         text={"Latest Post"}
                         totalPost={"Total Post"}
                     />
+                    {/*</a>*/}
                 </Grid>
             </Grid>
         </div>

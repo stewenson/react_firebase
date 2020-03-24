@@ -1,6 +1,23 @@
 .Movie {
   .TextField {
     padding-bottom: 20px;
+    display: block ruby;
     text-align: center;
+    .ErrorMessage {
+      color: red;
+      font-family: cursive;
+    }
+    .MuiListItem-root.MuiListItem-gutters {
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
+  }
+  form {
+    display: inline-flex;
+    border-radius: 15px;
+  }
+  form.MuiPaper-root.jss430.MuiPaper-elevation3.MuiPaper-rounded {
+    display: inline-flex;
+    border-radius: 15px;
   }
 }

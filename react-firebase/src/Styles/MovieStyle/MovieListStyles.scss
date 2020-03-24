@@ -1,3 +1,20 @@
-.MovieText {
-  padding-top: 30px;
+.MovieList {
+  .MovieText {
+    padding-top: 30px;
+    font-family: "Apple Color Emoji";
+  }
+  .MuiListItem-root.MuiListItem-gutters {
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
+  .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-4 {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    .MovieNotFound {
+      font-family: "Apple Color Emoji";
+      padding-top: 15px;
+    }
+  }
 }
+

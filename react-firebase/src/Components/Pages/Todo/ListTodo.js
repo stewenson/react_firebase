@@ -12,8 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-
-// import '../../../Styles/TodoStyle/ListTodoStyle.scss';
+import '../../../Styles/TodoStyle/ListTodoStyle.scss';
 
 
 const useStyles = makeStyles(theme => ({
@@ -57,7 +56,7 @@ export default function ListTodo() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <div className={classes.paper}>
-                        <Paper elevation={3}>
+                        <Paper elevation={3} className="TodoInfo">
                             <h3>Usage</h3>
                             <ListItem>
                                 <ListItemIcon >

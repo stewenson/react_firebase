@@ -1,29 +1,44 @@
 import React, {useContext} from "react";
 import TextField from "@material-ui/core/TextField";
+import { makeStyles } from '@material-ui/core/styles';
 import {useFormik} from "formik";
 import { createTodo } from "../../../Redux/Actions/TodoActions/createTodo";
 import {AuthContext} from "../../Auth/Auth/Auth";
-import { useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import '../../../Styles/TodoStyle/AddTodoStyle.scss';
 
-
-function AddTodo() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: 450,
+        },
+    },
+}));
+export default function AddTodo() {
+    const classes = useStyles();
     const { currentUser } = useContext(AuthContext);
     const dispatch = useDispatch();
     const complete = false;
     const userId = currentUser.uid;
 
     const addTodo = values => {
-        dispatch(createTodo([values.todo, userId, complete]))
+        try {
+            dispatch(createTodo([values.todo, userId, complete]));
+            values.todo = ' ';
+        } catch (e) {
+            alert(e.message);
+        }
     };
 
     const validate  = values => {
-
         const errors = {};
         if (!values.todo) {
             errors.todo = 'Required';
-        } else if (!/^[a-žA-Ž0-9 ]+(.+)*$/.test(values.todo)) {
-            errors.todo = 'Todo must only contain numbers or text.';
+        } else if (values.todo.length <= 3) {
+            errors.todo = 'Todo must have 3 or more characters.';
+        } else if (!/^[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]*$/.test(values.todo)) {
+            errors.todo = 'Wrong todo';
         }
         return errors;
     };
@@ -32,26 +47,31 @@ function AddTodo() {
             todo: '',
         },
         validate,
-        onSubmit: addTodo
+        onSubmit: addTodo,
     });
 
     return (
         <div className="Todo">
             <div className="TextField">
-                <form onSubmit={formik.handleSubmit}>
+                <form className={classes.root} onSubmit={formik.handleSubmit}>
                     <TextField
-                        fullWidth
-                        error={formik.errors.todo ? true : null}
-                        helperText={formik.errors.todo}
+                        id="outlined-full-width"
+                        label={formik.errors.todo}
                         name="todo"
                         type="text"
+                        error={formik.errors.todo ? true : null}
+                        helperText={formik.errors.todo}
                         onChange={formik.handleChange}
                         value={formik.values.todo}
-                        label={"Enter new todo"}
+                        placeholder={"Enter new todo"}
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
                     />
                 </form>
             </div>
         </div>
     )
 }
-export default AddTodo;

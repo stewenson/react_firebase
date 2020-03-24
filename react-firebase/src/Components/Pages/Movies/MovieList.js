@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MovieCard from "../../Card/MovieCard";
-import Progress from "../../Progress/Progress";
 import Paper from "@material-ui/core/Paper";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -37,7 +36,7 @@ export default function MovieList(props) {
             </Grid>
         ))
     } else {
-        movieList = (<Progress />);
+        movieList = (<h2 className="MovieNotFound">Movie not found</h2>);
     }
     return (
         <div className="MovieList">
