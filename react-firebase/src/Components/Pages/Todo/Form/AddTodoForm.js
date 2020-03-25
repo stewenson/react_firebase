@@ -2,10 +2,10 @@ import React, {useContext} from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from '@material-ui/core/styles';
 import {useFormik} from "formik";
-import { createTodo } from "../../../Redux/Actions/TodoActions/createTodo";
-import {AuthContext} from "../../Auth/Auth/Auth";
+import { createTodo } from "../../../../Redux/Actions/TodoActions/createTodo";
+import {AuthContext} from "../../../Auth/Auth/Auth";
 import {useDispatch} from "react-redux";
-import '../../../Styles/TodoStyle/AddTodoStyle.scss';
+import '../../../../Styles/TodoStyle/AddTodoStyle.scss';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         },
     },
 }));
-export default function AddTodo() {
+export default function AddTodoForm() {
     const classes = useStyles();
     const { currentUser } = useContext(AuthContext);
     const dispatch = useDispatch();
@@ -51,27 +51,23 @@ export default function AddTodo() {
     });
 
     return (
-        <div className="Todo">
-            <div className="TextField">
-                <form className={classes.root} onSubmit={formik.handleSubmit}>
-                    <TextField
-                        id="outlined-full-width"
-                        label={formik.errors.todo}
-                        name="todo"
-                        type="text"
-                        error={formik.errors.todo ? true : null}
-                        helperText={formik.errors.todo}
-                        onChange={formik.handleChange}
-                        value={formik.values.todo}
-                        placeholder={"Enter new todo"}
-                        margin="normal"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                    />
-                </form>
-            </div>
-        </div>
+        <form className={classes.root} onSubmit={formik.handleSubmit}>
+            <TextField
+                id="outlined-full-width"
+                label={formik.errors.todo}
+                name="todo"
+                type="text"
+                error={formik.errors.todo ? true : null}
+                helperText={formik.errors.todo}
+                onChange={formik.handleChange}
+                value={formik.values.todo}
+                placeholder={"Enter new todo"}
+                margin="normal"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                variant="outlined"
+            />
+        </form>
     )
 }

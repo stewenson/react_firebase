@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import PrivateRoute from "../Components/Auth/PrivateRoute/PrivateRoute";
 import Profile from "../Components/Pages/Profile/Profile";
 import Todo from "../Components/Pages/Todo/Todo";
