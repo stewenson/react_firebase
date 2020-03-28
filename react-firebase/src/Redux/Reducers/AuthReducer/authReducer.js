@@ -7,7 +7,8 @@ import {USER_PROFILE_UPDATE} from "../../Actions/AuthActions/UserProfileUpdate";
 const initState = {
     data: {},
     error: "",
-    message: ''
+    message: '',
+    isLogged: false
 };
 
 function authReducer(state = initState, action) {
@@ -31,7 +32,8 @@ function authReducer(state = initState, action) {
             case USER_LOG_IN:
             return {
                 ...state,
-                data: action.data
+                data: action.data,
+                isLogged: action.isLogged
             };
             case RESET_PASSWORD:
             return {

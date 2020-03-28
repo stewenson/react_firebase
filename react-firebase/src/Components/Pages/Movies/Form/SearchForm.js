@@ -36,9 +36,8 @@ export default function SearchForm () {
         const errors = {};
         if (!values.title) {
             errors.title = 'Required';
-        } else if (values.title.length <= 3) {
-            errors.title = 'Title must have 3 or more characters.';
-        } else if (!/^[a-žA-Ž0-9]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]*$/.test(values.title)) {
+
+        } else if (!/^[a-zA-Z-: ]*$/.test(values.title)) {
             errors.title = 'Wrong title';
         }
         return errors;

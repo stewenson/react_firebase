@@ -10,7 +10,8 @@ export const UserLogin = query => {
             .then(
                 dispatch({
                     type: USER_LOG_IN,
-                    data: query
+                    data: query,
+                    isLogged: true
                 }))
             .catch(e => {
                 dispatch({

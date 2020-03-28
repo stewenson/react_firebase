@@ -5,16 +5,21 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import {Nav} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PersonIcon from '@material-ui/icons/Person';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import MovieIcon from '@material-ui/icons/Movie';
+import IconButton from "@material-ui/core/IconButton";
+import '../../Styles/NavigationStyle/Navigation.scss';
 
-const DrawerList = props => {
+export default function DrawerList(props) {
     return (
         <div className="DrawerList">
-            <div className={props.classesDrawerList} />
+            <div className={props.class}>
+                <IconButton onClick={props.clicked}>
+                    {props.themeDirection}
+                </IconButton>
+            </div>
             <Divider />
             <List>
                 <Nav.Item>
@@ -57,16 +62,18 @@ const DrawerList = props => {
                         </ListItem>
                     </NavLink>
                 </Nav.Item>
+                <Nav.Item>
+                    <NavLink to="/blog">
+                        <ListItem
+                            button
+                        >
+                            <MovieIcon/>
+                            <ListItemText primary='Blog'/>
+                        </ListItem>
+                    </NavLink>
+                </Nav.Item>
             </List>
             <Divider />
-            <ListItem
-                button
-                onClick={props.clickedLogOut}
-            >
-                <ExitToAppIcon/>
-                <ListItemText primary='Log out'/>
-            </ListItem>
         </div>
     );
 };
-export default DrawerList;

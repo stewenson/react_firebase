@@ -1,39 +1,23 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
-import Button from "@material-ui/core/Button";
-import {useDispatch, useSelector} from "react-redux";
+import React from 'react';
 import { getDetailData } from "../../Redux/Actions/MovieActions/FetchDetailMovie";
 import { clearDetailData } from '../../Redux/Actions/MovieActions/ClearDetailMovieData';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import {useDispatch ,useSelector} from "react-redux";
 import DetailMovie from '../Pages/Movies/DetailMovie';
 import Progress from "../Progress/Progress";
-
-const useStyles = makeStyles(theme => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-}));
+import '../../Styles/MovieStyle/DialogDetailStyle.scss';
 
 export default function MovieDetailModal(props) {
     const content= useSelector(state => state);
     const dispatch = useDispatch();
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => {
+    const handleClickOpen = () => {
         setOpen(true);
         dispatch(getDetailData(props.id));
-
     };
 
     const handleClose = () => {
@@ -41,7 +25,15 @@ export default function MovieDetailModal(props) {
         dispatch(clearDetailData());
     };
 
-
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
 
     let data;
     if (content.detailMovie.detailData){
@@ -69,30 +61,26 @@ export default function MovieDetailModal(props) {
         data = (<Progress />);
     }
     return (
-        <div>
-            <Button size="small"
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleOpen}
-            >
+        <div className="DialogDetail">
+            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                 Detail
             </Button>
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
+            <Dialog
                 open={open}
                 onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{timeout: 0.1,}}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                style={{maxWidth: '100%'}}
             >
-                <Fade in={open}>
-                    <div className={classes.paper}>
-                        {data}
-                    </div>
-                </Fade>
-            </Modal>
+                <DialogContent>
+                    {data}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

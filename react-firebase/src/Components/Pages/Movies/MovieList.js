@@ -24,6 +24,7 @@ export default function MovieList(props) {
     const classes = useStyles();
 
     let movieList;
+    let movieListError;
     if (props.data){
         movieList = props.data.map(movie => (
             <Grid item xs={6} sm={3} key={movie.imdbID}>
@@ -36,14 +37,15 @@ export default function MovieList(props) {
             </Grid>
         ))
     } else {
-        movieList = (<h2 className="MovieNotFound">Movie not found</h2>);
+        movieListError = (<h2 className="MovieNotFound">Movie not found</h2>);
     }
     return (
         <div className="MovieList">
             <div className={classes.root}>
                 <Grid container spacing={4}>
-                {movieList}
+                    {movieList}
                 </Grid>
+                {movieListError}
                 <Grid container spacing={4} className="MovieText">
                     <div className={classes.paper}>
                         <Paper elevation={3}>

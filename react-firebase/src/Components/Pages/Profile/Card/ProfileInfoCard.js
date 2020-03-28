@@ -1,54 +1,51 @@
 import React from "react";
 import "../../../../Styles/ProfileStyle/ProfileInfoCard.scss";
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import {CardHeader} from "@material-ui/core";
-import Typography from '@material-ui/core/Typography';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Image} from 'react-bootstrap';
-
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 'auto',
-        flexGrow: 1,
-    },
-});
+import {Table} from "react-bootstrap";
 
 function ProfileInfoCard(props) {
-    const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
-            <CardHeader
-                title={props.header}
-            />
-                <CardContent>
-                    <div className={classes.root}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={4}>
-                                <Image src="holder.js/171x180" roundedCircle />
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {props.fName}
-                                </Typography>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {props.lName}
-                                </Typography>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {props.nickName}
-                                </Typography>
-                                <Typography gutterBottom variant="h5" component="h2">
-                                    {props.eMail}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </CardContent>
-
-        </Card>
+        <div>
+            <h4>Personal info</h4>
+            <Table responsive="sm">
+                <tbody>
+                <tr>
+                    <th>First Name</th>
+                    <td>{props.fName}</td>
+                </tr>
+                <tr>
+                    <th>Last Name</th>
+                    <td>{props.lName}</td>
+                </tr>
+                <tr>
+                    <th>Nick Name</th>
+                    <td>{props.nickName}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{props.state}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{props.city}</td>
+                </tr>
+                </tbody>
+            </Table>
+            <h4>Contact info</h4>
+            <Table responsive="md">
+                <tbody>
+                <tr>
+                    <th>Email</th>
+                    <td>{props.eMail}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number</th>
+                    <td>{props.phone}</td>
+                </tr>
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

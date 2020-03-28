@@ -14,7 +14,8 @@ export const UserRegistration = query => {
                     nickName: query[4]
                 }).then(() =>{
                     app.auth().currentUser.updateProfile({
-                        displayName: query[4]
+                        displayName: query[4],
+                        photoURL: query[5]
                     })
                 }).then(
                     dispatch({

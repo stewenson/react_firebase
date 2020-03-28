@@ -7,3 +7,9 @@
   height: 4%;
   border-radius: 13px;
 }
+.ProfileContainer {
+  .MuiButtonBase-root.MuiButton-root.MuiButton-contained.UpdateForm.MuiButton-containedPrimary {
+    margin-top: 10px;
+    width: auto;
+  }
+}

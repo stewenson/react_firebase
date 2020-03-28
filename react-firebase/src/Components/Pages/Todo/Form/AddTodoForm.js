@@ -37,7 +37,7 @@ export default function AddTodoForm() {
             errors.todo = 'Required';
         } else if (values.todo.length <= 3) {
             errors.todo = 'Todo must have 3 or more characters.';
-        } else if (!/^[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]+[a-žA-Ž0-9 ]*$/.test(values.todo)) {
+        } else if (!/^[a-zA-Z,/: ]*$/.test(values.todo)) {
             errors.todo = 'Wrong todo';
         }
         return errors;

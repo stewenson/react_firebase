@@ -1,13 +1,13 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import {UserRegistration} from "../../../../../Redux/Actions/AuthActions/UserRegistration";
 import {useDispatch} from "react-redux";
 import {useFormik} from "formik";
-import {UserProfileUpdate} from '../../../../../Redux/Actions/AuthActions/UserProfileUpdate';
-import {AuthContext} from "../../../../Auth/Auth/Auth";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -15,7 +15,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import '../../../../../Styles/ProfileStyle/UpdateProfileForm.scss';
 
 function Copyright() {
     return (
@@ -50,31 +49,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UpdateProfileForm(props) {
+export default function SignUPForm() {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const { currentUser } = useContext(AuthContext);
 
     const registerData = async values => {
         const data = [
             values.email,
+            values.password,
             values.firstName,
             values.lastName,
             values.nickName,
-            values.city,
-            values.State,
-            values.phoneNumber,
-            currentUser.uid,
-            values.intro,
+            values.image
         ];
         try {
-            dispatch(UserProfileUpdate(data))
-
+            dispatch(UserRegistration(data))
         } catch (e) {
             alert(e.message);
         }
     };
-
     const validate = values => {
 
         const errors = {};
@@ -93,19 +86,20 @@ export default function UpdateProfileForm(props) {
         } else if (!/^[a-žA-Ž ]+(.+)*$/.test(values.nickName)) {
             errors.nickName = 'Nick Name must contain only text';
         }
-        if (!values.city) {
-            errors.city = 'Required';
-        }
-        if (!values.State) {
-            errors.State = 'Required';
-        }
-        if (!values.phoneNumber) {
-            errors.phoneNumber = 'Required';
+        if (!values.password) {
+            errors.password = 'Required';
+        } else if (!values.password.length > 6) {
+            errors.password = 'Password must 6 or more character';
         }
         if (!values.email) {
             errors.email = 'Required';
         } else if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(values.email)) {
             errors.email = 'Wrong email';
+        }
+        if (!values.password_confirm) {
+            errors.password_confirm = 'Required';
+        } else if (values.password !== values.password_confirm) {
+            errors.password_confirm = 'Password do not mach';
         }
         return errors;
     };
@@ -115,12 +109,10 @@ export default function UpdateProfileForm(props) {
             firstName: '',
             lastName: '',
             nickName: '',
-            city: '',
+            image: '',
             email: '',
-            State: '',
-            phoneNumber: '',
-            intro: '',
-
+            password: '',
+            password_confirm: ''
         },
         validate,
         onSubmit: registerData
@@ -134,7 +126,7 @@ export default function UpdateProfileForm(props) {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Update profile info
+                    Sign up
                 </Typography>
                 <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
@@ -142,7 +134,7 @@ export default function UpdateProfileForm(props) {
                             <TextField
                                 autoComplete="firstName"
                                 name="firstName"
-                                variant="standard"
+                                variant="outlined"
                                 fullWidth
                                 id="firstName"
                                 label="First Name"
@@ -154,7 +146,7 @@ export default function UpdateProfileForm(props) {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                variant="standard"
+                                variant="outlined"
                                 required
                                 fullWidth
                                 id="lastName"
@@ -168,7 +160,7 @@ export default function UpdateProfileForm(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                variant="standard"
+                                variant="outlined"
                                 required
                                 fullWidth
                                 id="nickName"
@@ -182,12 +174,12 @@ export default function UpdateProfileForm(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                variant="standard"
+                                variant="outlined"
+                                required
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                type="text"
                                 autoComplete="email"
                                 onChange={formik.handleChange}
                                 value={formik.values.email}
@@ -196,65 +188,40 @@ export default function UpdateProfileForm(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                variant="standard"
+                                variant="outlined"
                                 required
                                 fullWidth
-                                name="city"
-                                label="city"
-                                type="city"
-                                id="city"
-                                autoComplete="city"
+                                name="password"
+                                label="Password"
+                                type="password"
+                                id="password"
+                                autoComplete="current-password"
                                 onChange={formik.handleChange}
-                                value={formik.values.city}
+                                value={formik.values.password}
                             />
-                            <strong>{formik.errors.city}</strong>
+                            <strong>{formik.errors.password}</strong>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                variant="standard"
+                                variant="outlined"
                                 required
                                 fullWidth
-                                name="State"
-                                label="State"
-                                type="State"
-                                id="State"
-                                autoComplete="State"
+                                name="password_confirm"
+                                label="Confirm Password"
+                                type="password"
+                                id="password_confirm"
+                                autoComplete="current-password"
                                 onChange={formik.handleChange}
-                                value={formik.values.State}
+                                value={formik.values.password_confirm}
                             />
-                            <strong>{formik.errors.State}</strong>
+                            <strong>{formik.errors.password_confirm}</strong>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="standard"
-                                required
-                                fullWidth
-                                name="phoneNumber"
-                                label="phoneNumber"
-                                type="number"
-                                id="phoneNumber"
-                                autoComplete="phoneNumber"
-                                onChange={formik.handleChange}
-                                value={formik.values.phoneNumber}
-                            />
-                            <strong>{formik.errors.phoneNumber}</strong>
-                        </Grid>
-
-                            <TextareaAutosize
-                                variant="standard"
-                                name="intro"
-                                id="intro"
-                                required
-                                aria-label="minimum height"
-                                rowsMin={3}
-                                placeholder="Minimum 3 rows"
-                                autoComplete="phoneNumber"
-                                onChange={formik.handleChange}
-                                value={formik.values.intro}
-                            />
-                            <strong>{formik.errors.phoneNumber}</strong>
-
-
+                        {/*<Grid item xs={12}>*/}
+                        {/*    <FormControlLabel*/}
+                        {/*        control={<Checkbox value="allowExtraEmails" color="primary" />}*/}
+                        {/*        label="I want to receive inspiration, marketing promotions and updates via email."*/}
+                        {/*    />*/}
+                        {/*</Grid>*/}
                     </Grid>
                     <Button
                         type="submit"
@@ -263,8 +230,15 @@ export default function UpdateProfileForm(props) {
                         color="primary"
                         className={classes.submit}
                     >
-                        Update
+                        Sign Up
                     </Button>
+                    <Grid container justify="flex-end">
+                        <Grid item>
+                            <Link href="#/login" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </form>
             </div>
             <Box mt={5}>
