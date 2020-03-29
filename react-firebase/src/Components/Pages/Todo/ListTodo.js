@@ -27,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ListTodo() {
-
     const content = useSelector(state => state);
     const { currentUser } = useContext(AuthContext);
     const dispatch = useDispatch();

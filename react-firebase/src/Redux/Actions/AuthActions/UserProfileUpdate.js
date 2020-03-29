@@ -37,7 +37,7 @@ export const UserProfileUpdate = query => {
                         phoneNumber: query[6]
                     },
                     message: 'Profile was Updated;'
-                })
+                });
                 alert('Profile was updated')
             }).catch(e => {
                 dispatch({

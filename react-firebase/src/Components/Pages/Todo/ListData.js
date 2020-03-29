@@ -45,6 +45,11 @@ export default function ListData(props) {
         dispatch(DeleteTodo(id))
     };
 
+    const convertDate = (seconds) => {
+        let myDate = new Date( seconds *1000);
+        return myDate.toLocaleString();
+    };
+
     const indexOfLastTodo = currentPage * todoPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -61,6 +66,7 @@ export default function ListData(props) {
                         <ListItemIcon onClick={() => isComplete([data.id, data.todo])}>
                             <StarIcon style={{ color: data.complete ? 'gold' : 'grey'}}/>
                         </ListItemIcon>
+                        <ListItemText primary={convertDate(data.created.seconds)}/>
                         <ListItemText primary={data.todo}/>
                         <ListItemIcon onClick={() => deleteTodo(data.id)}>
                             <DeleteIcon style={{ color: "red"}}/>
@@ -77,6 +83,7 @@ export default function ListData(props) {
                         <ListItemIcon onClick={() => isComplete([data.id, data.todo])}>
                             <StarIcon style={{ color: data.complete ? 'gold' : 'grey'}}/>
                         </ListItemIcon>
+                        <ListItemText primary={convertDate(data.created.seconds)}/>
                         <ListItemText primary={data.todo}/>
                         <ListItemIcon onClick={() => deleteTodo(data.id)}>
                             <DeleteIcon style={{ color: "red"}}/>
@@ -93,6 +100,7 @@ export default function ListData(props) {
                         <ListItemIcon onClick={() => isComplete([data.id, data.todo])}>
                             <StarIcon style={{ color: data.complete ? 'gold' : 'grey'}}/>
                         </ListItemIcon>
+                        <ListItemText primary={convertDate(data.created.seconds)}/>
                         <ListItemText primary={data.todo}/>
                         <ListItemIcon onClick={() => deleteTodo(data.id)}>
                             <DeleteIcon style={{ color: "red"}}/>
@@ -105,6 +113,7 @@ export default function ListData(props) {
             <h5>Not data</h5>
         )
     }
+
     return (
         <div className="ListTodo">
         <div className={classes.root}>

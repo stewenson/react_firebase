@@ -7,7 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import {NavLink} from "react-router-dom";
-import {AuthContext} from "../../Auth/Auth/Auth";
+import {AuthContext} from "../../../Auth/Auth/Auth";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {

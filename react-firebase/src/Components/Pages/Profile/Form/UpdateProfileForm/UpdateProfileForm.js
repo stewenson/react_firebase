@@ -69,7 +69,6 @@ export default function UpdateProfileForm(props) {
         ];
         try {
             dispatch(UserProfileUpdate(data))
-
         } catch (e) {
             alert(e.message);
         }
@@ -239,7 +238,6 @@ export default function UpdateProfileForm(props) {
                             />
                             <strong>{formik.errors.phoneNumber}</strong>
                         </Grid>
-
                             <TextareaAutosize
                                 variant="standard"
                                 name="intro"
@@ -253,8 +251,6 @@ export default function UpdateProfileForm(props) {
                                 value={formik.values.intro}
                             />
                             <strong>{formik.errors.phoneNumber}</strong>
-
-
                     </Grid>
                     <Button
                         type="submit"
