@@ -23,13 +23,13 @@ export default function Blog() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Container maxWidth="lg">
+            <Container wdth="80%">
                 <Header title="Blog"/>
                 <main>
                     <MainFeaturedPost />
                     <FeaturedPost />
                     <Grid container spacing={5} className={classes.mainGrid}>
-                        <Main title="From the firehose"  />
+                        <Main title="Posts" />
                         <Sidebar />
                     </Grid>
                 </main>

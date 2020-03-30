@@ -1,4 +1,4 @@
-import {ADD_NEW_POST, MESSAGE, ERROR} from "../../Actions/BlogActions/AddNewPost";
+import {ADD_NEW_COMMENT, MESSAGE, ERROR} from "../../Actions/BlogActions/AddComment";
 
 const initState = {
     data: {},
@@ -6,9 +6,9 @@ const initState = {
     msg: '',
 };
 
-function addPostReducer(state = initState, action) {
+function addCommentReducer(state = initState, action) {
     switch (action.type) {
-        case ADD_NEW_POST:
+        case ADD_NEW_COMMENT:
             return {
                 ...state,
                 data: action.data
@@ -27,4 +27,4 @@ function addPostReducer(state = initState, action) {
             return state;
     }
 }
-export default addPostReducer;
+export default addCommentReducer;

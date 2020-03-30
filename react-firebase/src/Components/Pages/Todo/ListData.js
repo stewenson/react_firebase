@@ -33,7 +33,6 @@ export default function ListData(props) {
     const [all, setAll] = useState(true);
     const [complete, setComplete] = useState('');
     const [uncomplete, setUncomplete] = useState('');
-
     const [currentPage, setCurrentPage] = useState(1);
     const [todoPerPage] = useState(10);
 
@@ -142,6 +141,7 @@ export default function ListData(props) {
                 todoPerPage={todoPerPage}
                 totalTodo={totalData}
                 paginate={paginate}
+                href={"#/todo"}
             />
         </div>
     )

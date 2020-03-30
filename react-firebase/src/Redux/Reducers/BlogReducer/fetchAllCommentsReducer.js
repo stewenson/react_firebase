@@ -1,4 +1,5 @@
-import {ADD_NEW_POST, MESSAGE, ERROR} from "../../Actions/BlogActions/AddNewPost";
+import {FETCH_ALL_COMMENTS, ERROR} from "../../Actions/BlogActions/FetchAllComments";
+
 
 const initState = {
     data: {},
@@ -6,9 +7,9 @@ const initState = {
     msg: '',
 };
 
-function addPostReducer(state = initState, action) {
+function fetchAllCommentsReducer(state = initState, action) {
     switch (action.type) {
-        case ADD_NEW_POST:
+        case FETCH_ALL_COMMENTS:
             return {
                 ...state,
                 data: action.data
@@ -18,13 +19,8 @@ function addPostReducer(state = initState, action) {
                 ...state,
                 error: action.msg
             };
-        case MESSAGE:
-            return {
-                ...state,
-                msg: action.msg
-            };
         default:
             return state;
     }
 }
-export default addPostReducer;
+export default fetchAllCommentsReducer;

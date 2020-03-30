@@ -1,4 +1,6 @@
-import {ADD_NEW_POST, MESSAGE, ERROR} from "../../Actions/BlogActions/AddNewPost";
+import {FETCH_DETAIL_POST} from "../../Actions/BlogActions/FetchDetailPost";
+import {ERROR} from "../../Actions/MovieActions/FetchMovieById";
+import {MESSAGE} from "../../Actions/TodoActions/createTodo";
 
 const initState = {
     data: {},
@@ -6,9 +8,9 @@ const initState = {
     msg: '',
 };
 
-function addPostReducer(state = initState, action) {
+function fetchDetailPostReducer(state = initState, action) {
     switch (action.type) {
-        case ADD_NEW_POST:
+        case FETCH_DETAIL_POST:
             return {
                 ...state,
                 data: action.data
@@ -27,4 +29,4 @@ function addPostReducer(state = initState, action) {
             return state;
     }
 }
-export default addPostReducer;
+export default fetchDetailPostReducer;

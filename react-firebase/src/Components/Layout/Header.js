@@ -10,8 +10,20 @@ import '../../Styles/LayoutStyle/HeaderStyle.scss';
 import {AuthContext} from "../Auth/Auth/Auth";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
+import useScrollTrigger from '@material-ui/core/useScrollTrigger';
+import Slide from '@material-ui/core/Slide';
 import app from "../../config/base";
 
+function HideOnScroll(props) {
+    const { children, window } = props;
+    const trigger = useScrollTrigger({ target: window ? window() : undefined });
+
+    return (
+        <Slide appear={false} direction="down" in={!trigger}>
+            {children}
+        </Slide>
+    );
+}
 export default function Header(props) {
     const { currentUser } = useContext(AuthContext);
 
@@ -29,6 +41,7 @@ export default function Header(props) {
     return (
         <div className="Header">
             <CssBaseline />
+            <HideOnScroll {...props}>
             <AppBar
                 position="fixed"
                 className={props.class}
@@ -49,6 +62,7 @@ export default function Header(props) {
                     {data}
                 </Toolbar>
             </AppBar>
+            </HideOnScroll>
         </div>
     );
 };

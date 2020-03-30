@@ -1,18 +1,18 @@
 import app from "../../../config/base";
 
-export const FETCH_USERS_POSTS = "FETCH_USERS_POSTS";
+export const FETCH_ALL_COMMENTS = "FETCH_ALL_COMMENTS";
 export const ERROR = "ERROR";
 
-export const FetchUserPosts = (uid) => {
+export const FetchAllComments = (query) => {
     return dispatch => {
         app.firestore()
-            .collection("blog")
-            .where('userId', '==', uid)
+            .collection("comments")
+            .where('postId', '==', query)
             .orderBy('created', 'desc')
             .get()
             .then(res => {
                 dispatch({
-                    type: FETCH_USERS_POSTS,
+                    type: FETCH_ALL_COMMENTS,
                     data: res.docs.map(doc => ({...doc.data(), id: doc.id}))
                 });
             }).catch(function(error) {
