@@ -6,17 +6,21 @@ export const ERROR = "ERROR";
 export const FetchAllComments = (query) => {
     return dispatch => {
         app.firestore()
-            .collection("comments")
-            .where('postId', '==', query)
+            .collection('blog')
+            .doc(query.id)
+            .collection('comments')
             .orderBy('created', 'desc')
             .get()
-            .then(res => {
+            .then(doc => {
                 dispatch({
                     type: FETCH_ALL_COMMENTS,
-                    data: res.docs.map(doc => ({...doc.data(), id: doc.id}))
-                });
-            }).catch(function(error) {
-            alert(error.message);
+                    data: doc.docs.map(doc => ({...doc.data(), id: doc.id}))
+                })
+            }).catch(e =>  {
+            dispatch({
+                type: ERROR,
+                msg: e.message
+            })
         });
     };
 };

@@ -2,7 +2,6 @@ import app from "../../../config/base";
 export const FETCH_DETAIL_POST = "FETCH_DETAIL_POST";
 export const ERROR = "ERROR";
 
-
 export const FetchDetailPost = query => {
         return  dispatch => {
             app.firestore()
@@ -15,7 +14,6 @@ export const FetchDetailPost = query => {
                             data: {...doc.data(), id: doc.id}
                         })
                     } else {
-                        // doc.data() will be undefined in this case
                         dispatch ({
                             type: ERROR,
                             msg: 'Data doesnnt exist'

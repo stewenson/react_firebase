@@ -7,7 +7,6 @@ export const FetchAllPosts = () => {
     return dispatch => {
         app.firestore()
             .collection("blog")
-            // .where('author', '==', uid)
             .orderBy('created', 'desc')
             .get()
             .then(res => {

@@ -43,6 +43,7 @@ export default function AllPosts() {
     const classes = useStyles();
     const content = useSelector(state => state);
     const dispatch = useDispatch();
+
     const [currentPage, setCurrentPage] = useState(1);
     const [todoPerPage] = useState(5);
     const indexOfLastTodo = currentPage * todoPerPage;
@@ -53,6 +54,7 @@ export default function AllPosts() {
         dispatch(FetchAllPosts());
     },[content.updateLike.data]);
 
+
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
         let myDate = new Date( seconds * 1);
@@ -62,6 +64,7 @@ export default function AllPosts() {
     const handleLikeChanges = (post) => {
         dispatch(UpdateLikeWithoutLogin([post.id, post.like]));
     };
+
 
     const data = content.allBlogPosts.data;
     const totalData = Object.keys(data).length;
@@ -91,6 +94,7 @@ export default function AllPosts() {
                                     badgeContent={post.like}
                                     {...defaultPropsLike}
                                 />
+
                             </div>
                         </Grid>
                     ))}

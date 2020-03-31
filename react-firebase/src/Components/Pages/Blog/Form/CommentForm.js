@@ -7,7 +7,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import {useDispatch} from "react-redux";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -100,11 +99,10 @@ export default function CommentForm(props) {
         <Container component="main" maxWidth="xs" className="NewPostForm">
             <CssBaseline />
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                </Avatar>
                 <Typography component="h1" variant="h5">
-                    Comment
+                    Comments
                 </Typography>
+                <hr/>
                 <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -115,7 +113,6 @@ export default function CommentForm(props) {
                                 variant="outlined"
                                 id="author"
                                 label="Enter name"
-                                autoFocus
                                 onChange={formik.handleChange}
                                 value={currentUser ? currentUser.displayName : formik.values.author}
                             />

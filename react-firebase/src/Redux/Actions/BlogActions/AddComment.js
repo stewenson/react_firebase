@@ -7,7 +7,10 @@ export const MESSAGE = "MESSAGE";
 
 export const AddComment = query => {
     return dispatch => {
-        app.firestore().collection('comments')
+        app.firestore()
+            .collection('blog')
+            .doc(query[2])
+            .collection('comments')
             .doc()
             .set({
                 userId: query[0],

@@ -2,7 +2,6 @@ import app from "../../../config/base";
 export const FETCH_PROFILE_DATA = "FETCH_PROFILE_DATA";
 export const ERROR = "ERROR";
 
-
 export const UserProfile = query => {
     return  dispatch => {
         app.firestore()

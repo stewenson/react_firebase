@@ -1,6 +1,5 @@
 import {FETCH_ALL_COMMENTS, ERROR} from "../../Actions/BlogActions/FetchAllComments";
 
-
 const initState = {
     data: {},
     error: "",
@@ -14,7 +13,7 @@ function fetchAllCommentsReducer(state = initState, action) {
                 ...state,
                 data: action.data
             };
-        case ERROR:
+            case ERROR:
             return {
                 ...state,
                 error: action.msg
