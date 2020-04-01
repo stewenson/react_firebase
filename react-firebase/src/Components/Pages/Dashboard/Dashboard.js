@@ -1,77 +1,51 @@
-import React, {useContext, useEffect} from "react";
-import '../../../Styles/DashBoardStyle/DashBoardStyle.scss';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import CollectionsIcon from '@material-ui/icons/Collections';
-import MovieCreationIcon from '@material-ui/icons/MovieCreation';
-import QueueIcon from '@material-ui/icons/Queue';
-import OutlineCard from "../../Card/OutlineCard";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAllTodo} from "../../../Redux/Actions/TodoActions/FetchAllTodo";
-import {fetchCompleteTodo} from "../../../Redux/Actions/TodoActions/FetchCompleteTodo";
-import {AuthContext} from "../../Auth/Auth/Auth";
+import React from 'react';
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import TodoInfo from './TodoInfo';
+import BlogInfo from "./BlogInfo";
+import {makeStyles} from "@material-ui/core/styles";
+import clsx from "clsx";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        display: 'flex',
+    },
+    appBarSpacer: theme.mixins.toolbar,
+    container: {
+        paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
     },
     paper: {
         padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+    },
+    fixedHeight: {
+        height: 240,
     },
 }));
 
 export default function Dashboard() {
-    const content = useSelector(state => state);
-    const { currentUser } = useContext(AuthContext);
-    const userId = currentUser.uid;
-    const dispatch = useDispatch();
     const classes = useStyles();
-
-    const loadData = () => {
-        dispatch(fetchAllTodo(userId));
-        dispatch(fetchCompleteTodo(userId))
-    };
-
-    useEffect(() => {
-        loadData();
-    },[]);
-
-    const all = content.todo.fetchData.length;
-    const complete = content.todo.completeTodo.length;
-    const uncomplete = content.todo.fetchData.length - content.todo.completeTodo.length;
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
-        <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid id="todo" item xs={6} sm={3}>
-                       <OutlineCard
-                           icon={<CollectionsIcon fontSize={"large"}/>}
-                           header={<a href="#/todo">Todo</a>}
-                           sumtodo={"You have " + all + " Todo"}
-                           complete={"Completed todo: " + complete}
-                           uncomplete={"Uncomplete todo: " +  uncomplete}
-                       />
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                       <OutlineCard
-                           icon={<MovieCreationIcon fontSize={"large"} /> }
-                           header={<a href="#/movie">Movie</a>}
-                           text={"Movie app from omdbApi"}
-                           linkText={"OMDb Api Link"}
-                           linkToOmdb={"http://www.omdbapi.com/"}
-                       />
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <OutlineCard
-                        icon={<QueueIcon fontSize={"large"} /> }
-                        header={<a href="#/blog">Blog</a>}
-                        text={"Latest Post"}
-                        totalPost={"Total Post"}
-                    />
-                </Grid>
-            </Grid>
-        </div>
+       <div>
+           <Grid container spacing={3}>
+                {/*Todo Info Card */}
+               <Grid item xs={12} md={4} lg={3}>
+                   <Paper className={fixedHeightPaper}>
+                       <TodoInfo />
+                   </Paper>
+               </Grid>
+               {/*Blog info Card*/}
+               <Grid item xs={12} md={4} lg={3}>
+                   <Paper className={fixedHeightPaper}>
+                       <BlogInfo className={fixedHeightPaper}/>
+                   </Paper>
+               </Grid>
+           </Grid>
+       </div>
     );
 }

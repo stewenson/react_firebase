@@ -27,9 +27,7 @@ export const AddNewPost = query => {
                 type: MESSAGE,
                 msg: "Post was created"
             })
-        ).then(() => {
-            alert('Post was created');
-        }).catch(e =>
+        ).catch(e =>
             dispatch({
                 type: ERROR,
                 msg: "Something is wrong"

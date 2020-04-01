@@ -1,16 +1,15 @@
 import React from 'react';
-import { getDetailData } from "../../Redux/Actions/MovieActions/FetchDetailMovie";
-import { clearDetailData } from '../../Redux/Actions/MovieActions/ClearDetailMovieData';
+import { getDetailData } from "../../../Redux/Actions/MovieActions/FetchDetailMovie";
+import { clearDetailData } from '../../../Redux/Actions/MovieActions/ClearDetailMovieData';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import {useDispatch ,useSelector} from "react-redux";
-import DetailMovie from '../Pages/Movies/DetailMovie';
-import Progress from "../Progress/Progress";
-import '../../Styles/MovieStyle/DialogDetailStyle.scss';
+import DetailMovie from '../../Pages/Movies/DetailMovie';
+import '../../../Styles/MovieStyle/DialogDetailStyle.scss';
 
-export default function MovieDetailModal(props) {
+export default function Modal(props) {
     const content= useSelector(state => state);
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
@@ -40,25 +39,25 @@ export default function MovieDetailModal(props) {
         const result = content.detailMovie.detailData;
         data = (
             <DetailMovie
-            title={result.Title}
-            img={result.Poster}
-            rated={result.Rated}
-            runtime={result.Runtime}
-            year={result.Year}
-            released={result.Released}
-            boxoffice={result.BoxOffice}
-            plot={result.Plot}
-            language={result.Language}
-            genre={result.Genre}
-            director={result.Director}
-            writer={result.Writer}
-            actors={result.Actors}
-            awards={result.Awards}
-            imdblink={result.imdbID}
-            production={result.Production}
-        />);
+                title={result.Title}
+                img={result.Poster}
+                rated={result.Rated}
+                runtime={result.Runtime}
+                year={result.Year}
+                released={result.Released}
+                boxoffice={result.BoxOffice}
+                plot={result.Plot}
+                language={result.Language}
+                genre={result.Genre}
+                director={result.Director}
+                writer={result.Writer}
+                actors={result.Actors}
+                awards={result.Awards}
+                imdblink={result.imdbID}
+                production={result.Production}
+            />);
     } else {
-        data = (<Progress />);
+        data = ('');
     }
     return (
         <div className="DialogDetail">

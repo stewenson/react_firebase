@@ -13,21 +13,7 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {TextareaAutosize} from "@material-ui/core";
 import {AuthContext} from "../../../Auth/Auth/Auth";
-
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
+import FlashMessage from "react-flash-message";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -53,7 +39,6 @@ export default function CommentForm(props) {
     const classes = useStyles();
     const { currentUser } = useContext(AuthContext);
     const dispatch = useDispatch();
-
 
     const addComment = async values => {
         const data = [
@@ -95,6 +80,10 @@ export default function CommentForm(props) {
         onSubmit: addComment
     });
 
+    let newComment;
+    if (props.comment != null) {
+        newComment = props.comment;
+    }
     return (
         <Container component="main" maxWidth="xs" className="NewPostForm">
             <CssBaseline />
@@ -102,7 +91,11 @@ export default function CommentForm(props) {
                 <Typography component="h1" variant="h5">
                     Comments
                 </Typography>
-                <hr/>
+                <Typography component="h1" variant="h5">
+                    <FlashMessage duration={5000}>
+                        <strong>{newComment}</strong>
+                    </FlashMessage>
+                </Typography>
                 <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
@@ -145,9 +138,6 @@ export default function CommentForm(props) {
                     </Button>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }

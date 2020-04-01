@@ -48,7 +48,7 @@ export default function MyPosts({match}) {
 
     useEffect(() => {
         dispatch(FetchUserPosts(currentUser.uid));
-    },[content.updateLike.data]);
+    },[content.blog.likePerPost]);
 
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -61,7 +61,7 @@ export default function MyPosts({match}) {
         dispatch(UpdateLike([post.id, post.like]));
     };
 
-    const data = content.userBlogPosts.data;
+    const data = content.blog.userPosts;
 
     return (
         <Grid container spacing={4}>

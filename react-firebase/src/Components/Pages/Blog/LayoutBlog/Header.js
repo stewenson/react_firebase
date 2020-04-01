@@ -33,6 +33,7 @@ export default function Header(props) {
 
     let navigationLink;
     let signButton;
+    let iTunesButton;
     if (currentUser) {
         navigationLink = (
             <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
@@ -43,9 +44,11 @@ export default function Header(props) {
         )
     } else {
         signButton = <a href="#/login">Sign In</a>;
+        iTunesButton = <a href="#/iTunes"> iTunes App</a>;
         navigationLink = (
             <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                 <NavLink to='/blog/allPosts'>All Posts</NavLink>
+                <NavLink to='/'>Back to Home</NavLink>
             </Toolbar>
         )
     }
@@ -67,7 +70,12 @@ export default function Header(props) {
                 <IconButton>
                     <SearchIcon />
                 </IconButton>
-                {signButton}
+                <Typography style={{ marginRight: '15px'}}>
+                    {signButton}
+                </Typography>
+                <Typography>
+                    {iTunesButton}
+                </Typography>
             </Toolbar>
             {navigationLink}
         </React.Fragment>

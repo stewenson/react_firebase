@@ -10,6 +10,7 @@ import SignUP from "../Components/Auth/SignUp/SignUP";
 import PasswordReset from "../Components/Auth/PasswordReset/PasswordReset";
 import Dashboard from "../Components/Pages/Dashboard/Dashboard";
 import Blog  from "../Components/Pages/Blog/Blog";
+import iTunes from "../Components/Pages/iTunes/iTunes";
 
 export default function Routes() {
     return (
@@ -22,7 +23,8 @@ export default function Routes() {
             <Route exact path='/login' component={Login} />
             <Route exact path='/registration' component={SignUP} />
             <Route exact path='/password_reset' component={PasswordReset} />
-            <Route path='/blog' component={Blog} />
+            <Route  path='/blog' component={Blog} />
+            <Route  path='/iTunes' component={iTunes} />
         </div>
     )
 }

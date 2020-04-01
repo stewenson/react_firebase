@@ -114,36 +114,39 @@ export default function ListData(props) {
     }
 
     return (
+        <React.Fragment>
         <div className="ListTodo">
-        <div className={classes.root}>
-            <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                <Button onClick={() => [
-                    setComplete(false),
-                    setAll(false),
-                    setUncomplete(true)
-                ]}>
-                    Uncomplete
-                </Button>
-                <Button onClick={() => [
-                    setComplete(true),
-                    setAll(false),
-                    setUncomplete(false)
-                ]}>
-                    Complete
-                </Button>
-            </ButtonGroup>
+            <div className={classes.root}>
+                <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                    <Button onClick={() => [
+                        setComplete(false),
+                        setAll(false),
+                        setUncomplete(true)
+                    ]}>
+                        Uncomplete
+                    </Button>
+                    <Button onClick={() => [
+                        setComplete(true),
+                        setAll(false),
+                        setUncomplete(false)
+                    ]}>
+                        Complete
+                    </Button>
+                </ButtonGroup>
+            </div>
+            <List component="nav" aria-label="contacts">
+                {fetchData}
+            </List>
         </div>
-
-        <List component="nav" aria-label="contacts">
-            {fetchData}
-        </List>
-            <Paginator
-                todoPerPage={todoPerPage}
-                totalTodo={totalData}
-                paginate={paginate}
-                href={"#/todo"}
-            />
-        </div>
+            <div>
+                <Paginator
+                    todoPerPage={todoPerPage}
+                    totalTodo={totalData}
+                    paginate={paginate}
+                    href={"#/todo"}
+                />
+            </div>
+        </React.Fragment>
     )
 
 }

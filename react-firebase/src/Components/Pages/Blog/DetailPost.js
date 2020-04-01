@@ -44,11 +44,6 @@ const defaultProps = {
     children: <ThumbUpIcon />,
 };
 
-const defaultPropsComment = {
-    color: 'secondary',
-    children: <CommentIcon/>,
-};
-
 export default function DetailPost() {
     const classes = useStyles();
     const params = useParams();
@@ -57,7 +52,7 @@ export default function DetailPost() {
 
     useEffect(() => {
         dispatch(FetchDetailPost(params))
-    }, [content.updateLike.data]);
+    }, [content.blog.likePerPost.length]);
 
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -70,7 +65,7 @@ export default function DetailPost() {
         dispatch(UpdateLike([data.id, data.like]));
     };
 
-    let data = content.detailPost.data;
+    let data = content.blog.detailPost;
 
     return (
         <Grid container spacing={4}>
@@ -92,10 +87,10 @@ export default function DetailPost() {
                             badgeContent={data.like}
                             {...defaultProps}
                         />
-                        <Badge
-                            badgeContent={content.fetchAllComments.data.length}
-                            {...defaultPropsComment}
-                        />
+                        {/*<Badge*/}
+                        {/*    badgeContent={content.blog.fetchAllComments.data.length}*/}
+                        {/*    {...defaultPropsComment}*/}
+                        {/*/>*/}
                     </div>
                     <ListOfComments postId={data.id} />
                 </Grid>

@@ -50,10 +50,14 @@ export default function AllPosts() {
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+
+    const handleLikeChanges = (post) => {
+        dispatch(UpdateLikeWithoutLogin([post.id, post.like]));
+    };
+
     useEffect(() => {
         dispatch(FetchAllPosts());
-    },[content.updateLike.data]);
-
+    },[content.blog.likePerPost]);
 
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -61,12 +65,7 @@ export default function AllPosts() {
         return (myDate.toLocaleDateString("en-US", options)); // Saturday, September 17, 2016
     };
 
-    const handleLikeChanges = (post) => {
-        dispatch(UpdateLikeWithoutLogin([post.id, post.like]));
-    };
-
-
-    const data = content.allBlogPosts.data;
+    const data = content.blog.fetchAllPost;
     const totalData = Object.keys(data).length;
 
     return (

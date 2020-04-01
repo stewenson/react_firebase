@@ -28,9 +28,7 @@ export const AddComment = query => {
                 type: MESSAGE,
                 msg: "Comment added"
             })
-        ).then(() => {
-            alert('Comment added');
-        }).catch(e =>
+        ).catch(e =>
             dispatch({
                 type: ERROR,
                 msg: "Something is wrong"

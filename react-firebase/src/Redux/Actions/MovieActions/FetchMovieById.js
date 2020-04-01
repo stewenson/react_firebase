@@ -3,7 +3,6 @@ export const FETCH_DATA_BY_ID = "FETCH_DATA_BY_ID";
 export const ERROR = "ERROR";
 
 export const getData = query => {
-    console.log(axios.defaults.headers)
     return dispatch => {
         axios
             .get(`http://www.omdbapi.com/?s=${query}&apikey=63f2aa9f`)

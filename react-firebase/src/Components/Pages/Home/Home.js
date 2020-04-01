@@ -38,6 +38,13 @@ const Home = props => {
                         color={"primary"}
                         variant={"outlined"}
                     />
+                    <ButtonComponents
+                        style={{width: '100%', marginTop: '10px'}}
+                        clicked={() => props.history.push('/iTunes')}
+                        text={"ITunes App"}
+                        color={"primary"}
+                        variant={"outlined"}
+                    />
                 </Card.Body>
             </Card.Body>
         </Card>

@@ -40,12 +40,13 @@ export default function ListOfComments(props) {
     const [todoPerPage] = useState(5);
     const indexOfLastTodo = currentPage * todoPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    const comments = content.fetchAllComments.data;
+    const comments = content.blog.fetchAllComments;
 
     useEffect(() => {
             dispatch(FetchAllComments(params));
-    },[comments]);
+    },[content.blog.addComment]);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -53,13 +54,14 @@ export default function ListOfComments(props) {
 
         return (myDate.toLocaleDateString("en-US", options)); // Saturday, September 17, 2016
     };
-
-    const data = content.fetchAllComments.data;
-    const totalData = Object.keys(data).length;
+    const totalData = Object.keys(comments).length;
 
     return (
         <div>
-            <CommentForm postId={props.postId} />
+            <CommentForm
+                comment={content.blog.msg}
+                postId={props.postId}
+            />
             <div className={classes.root}>
                 <CssBaseline />
                 {Object.entries(comments)
@@ -73,12 +75,13 @@ export default function ListOfComments(props) {
                                 {comment.comment}
                             </Typography>
                         </Grid>
-                    ))}<Paginator
-                todoPerPage={todoPerPage}
-                totalTodo={totalData}
-                paginate={paginate}
-                href={"#/blog/allPosts"}
-            />
+                    ))}
+                    <Paginator
+                        todoPerPage={todoPerPage}
+                        totalTodo={totalData}
+                        paginate={paginate}
+                        href={"#/blog/allPosts"}
+                     />
             </div>
         </div>
     );

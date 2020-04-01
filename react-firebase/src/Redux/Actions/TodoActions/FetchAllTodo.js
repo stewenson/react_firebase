@@ -3,7 +3,7 @@ import app from "../../../config/base";
 export const FETCH_ALL_TODO = "FETCH_ALL_TODO";
 export const ERROR = "ERROR";
 
-export const fetchAllTodo = (uid) => {
+export const FetchAllTodo = (uid) => {
     return dispatch => {
         app.firestore()
             .collection("todos")

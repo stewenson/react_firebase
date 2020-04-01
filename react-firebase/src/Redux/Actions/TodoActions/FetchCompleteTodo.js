@@ -3,7 +3,7 @@ import app from "../../../config/base";
 export const FETCH_COMPLETE_TODO = "FETCH_COMPLETE_TODO";
 export const ERROR = "ERROR";
 
-export const fetchCompleteTodo = (uid) => {
+export const FetchCompleteTodo = (uid) => {
     return dispatch => {
         app.firestore()
             .collection("todos")

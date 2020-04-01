@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AddNewPost} from '../../../../../Redux/Actions/BlogActions/AddNewPost';
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,6 +16,7 @@ import Box from "@material-ui/core/Box";
 import {TextareaAutosize} from "@material-ui/core";
 import '../../../../../Styles/BlogStyles/NewPostForm.scss';
 import {AuthContext} from "../../../../Auth/Auth/Auth";
+import FlashMessage from "react-flash-message";
 
 
 function Copyright() {
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NewPostForm() {
+    const content = useSelector(state => state);
     const classes = useStyles();
     const { currentUser } = useContext(AuthContext);
     const dispatch = useDispatch();
@@ -109,6 +111,12 @@ export default function NewPostForm() {
                 <Typography component="h1" variant="h5">
                     Add new Post
                 </Typography>
+                <Typography component="h1" variant="h5">
+                    <FlashMessage duration={5000}>
+                        <strong>{content.blog.msg}</strong>
+                    </FlashMessage>
+                </Typography>
+
                 <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
