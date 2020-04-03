@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Header from './LayoutBlog/Header';
-import MainFeaturedPost from './FeaturedPost/MainFeaturedPost';
+import MainFeaturedPost from './MainFeaturedPost/MainFeaturedPost';
 import FeaturedPost from './FeaturedPost/FeaturedPost';
 import Sidebar from './LayoutBlog/Sidebar';
 import Footer from './LayoutBlog/Footer';

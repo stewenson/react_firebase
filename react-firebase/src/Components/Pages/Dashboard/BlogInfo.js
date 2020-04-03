@@ -1,23 +1,8 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import {useDispatch, useSelector} from "react-redux";
-import {AuthContext} from "../../Auth/Auth/Auth";
-import {FetchAllPosts} from "../../../Redux/Actions/BlogActions/FechAllPost";
-import {FetchUserPosts} from "../../../Redux/Actions/BlogActions/FetchUserPosts";
 
-export default function TodoInfo() {
-    const content = useSelector(state => state);
-    const dispatch = useDispatch();
-    const { currentUser } = useContext(AuthContext);
-
-    useEffect(() => {
-        dispatch(FetchAllPosts());
-        dispatch(FetchUserPosts(currentUser.uid));
-    },[]);
-
-    const allPosts = content.blog.fetchAllPost.length;
-    const userPosts = content.blog.userPosts.length;
+export default function TodoInfo(props) {
 
     return (
         <React.Fragment>
@@ -29,10 +14,10 @@ export default function TodoInfo() {
                 </div>
             </Typography>
             <Typography component="p" variant="h5">
-                All Posts: {allPosts}
+                All Posts: {props.allPosts}
             </Typography>
             <Typography component="p" variant="h5">
-                {currentUser.displayName} Posts : {userPosts}
+                {props.userName} Posts : {props.userPosts}
             </Typography>
         </React.Fragment>
     );

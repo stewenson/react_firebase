@@ -19,7 +19,7 @@ export default function Routes() {
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/profile' component={Profile} />
             <PrivateRoute exact path='/todo' component={Todo} />
-            <PrivateRoute exact path='/movie' component={Movie} />
+            <Route  path='/movie' component={Movie} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/registration' component={SignUP} />
             <Route exact path='/password_reset' component={PasswordReset} />

@@ -1,5 +1,5 @@
 import React from "react";
-import NewPostForm from "./Form/NewPostForm";
+import NewPostForm from "./form/NewPostForm";
 import '../../../../Styles/BlogStyles/NewPost.scss';
 
 export default function NewPost() {

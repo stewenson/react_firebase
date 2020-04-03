@@ -68,7 +68,7 @@ export default function UpdateProfileForm(props) {
             values.intro,
         ];
         try {
-            dispatch(UserProfileUpdate(data))
+            dispatch(UserProfileUpdate(data));
         } catch (e) {
             alert(e.message);
         }
@@ -122,7 +122,7 @@ export default function UpdateProfileForm(props) {
 
         },
         validate,
-        onSubmit: registerData
+        onSubmit: registerData,
     });
 
     return (

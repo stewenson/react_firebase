@@ -1,24 +1,8 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import {useDispatch, useSelector} from "react-redux";
-import {AuthContext} from "../../Auth/Auth/Auth";
-import {FetchAllTodo} from "../../../Redux/Actions/TodoActions/FetchAllTodo";
-import {FetchCompleteTodo} from "../../../Redux/Actions/TodoActions/FetchCompleteTodo";
 
-export default function TodoInfo() {
-    const content = useSelector(state => state);
-    const dispatch = useDispatch();
-    const { currentUser } = useContext(AuthContext);
-
-    useEffect(() => {
-        dispatch(FetchAllTodo(currentUser.uid));
-        dispatch(FetchCompleteTodo(currentUser.uid));
-    },[]);
-
-    const allTodo = content.todo.fetchData.length;
-    const complete = content.todo.completeTodo.length;
-    const uncomplete = content.todo.fetchData.length - content.todo.completeTodo.length;
+export default function TodoInfo(props) {
 
     return (
         <React.Fragment>
@@ -30,13 +14,13 @@ export default function TodoInfo() {
                 </div>
             </Typography>
             <Typography component="p" variant="h5">
-                All todo: {allTodo}
+                All todo: {props.allTodo}
             </Typography>
             <Typography component="p" variant="h5">
-                Complete: {complete}
+                Complete: {props.complete}
             </Typography>
             <Typography component="p" variant="h5">
-                Unomplete: {uncomplete}
+                Unomplete: {props.uncomplete}
             </Typography>
         </React.Fragment>
     );

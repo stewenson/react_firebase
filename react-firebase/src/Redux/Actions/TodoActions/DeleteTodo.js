@@ -7,7 +7,7 @@ export const MESSAGE = "MESSAGE";
 
 export const DeleteTodo = id => {
     return dispatch => {
-        app.firestore().collection('todos')
+        app.firestore().collection('blog')
             .doc(id)
             .delete()
             .then(

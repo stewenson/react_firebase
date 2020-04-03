@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {useFormik} from "formik";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import {makeStyles} from "@material-ui/core/styles";
 import {useDispatch, useSelector} from "react-redux";
 import {AddNewPost} from '../../../../../Redux/Actions/BlogActions/AddNewPost';
@@ -12,26 +11,10 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 import {TextareaAutosize} from "@material-ui/core";
 import '../../../../../Styles/BlogStyles/NewPostForm.scss';
 import {AuthContext} from "../../../../Auth/Auth/Auth";
 import FlashMessage from "react-flash-message";
-
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -160,9 +143,6 @@ export default function NewPostForm() {
                     </Button>
                 </form>
             </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
         </Container>
     );
 }

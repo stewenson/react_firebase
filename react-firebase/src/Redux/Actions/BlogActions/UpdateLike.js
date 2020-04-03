@@ -3,7 +3,6 @@ export const UPDATE_LIKE = "UPDATE_LIKE";
 export const ERROR = "ERROR";
 
 export const UpdateLike = query => {
-    console.log(query)
     return async dispatch => {
         await app.firestore().collection('blog')
             .doc(query[0])

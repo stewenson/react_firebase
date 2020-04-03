@@ -3,7 +3,7 @@ import "../../../../Styles/ProfileStyle/ProfileInfoCard.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from "react-bootstrap";
 
-function ProfileInfoCard(props) {
+export default function ProfileInfoCard(props) {
 
     return (
         <div>
@@ -48,5 +48,3 @@ function ProfileInfoCard(props) {
         </div>
     );
 }
-
-export default ProfileInfoCard;

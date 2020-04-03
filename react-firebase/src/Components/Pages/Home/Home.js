@@ -41,7 +41,14 @@ const Home = props => {
                     <ButtonComponents
                         style={{width: '100%', marginTop: '10px'}}
                         clicked={() => props.history.push('/iTunes')}
-                        text={"ITunes App"}
+                        text={"iTunes App"}
+                        color={"primary"}
+                        variant={"outlined"}
+                    />
+                    <ButtonComponents
+                        style={{width: '100%', marginTop: '10px'}}
+                        clicked={() => props.history.push('/movie')}
+                        text={"Movie App"}
                         color={"primary"}
                         variant={"outlined"}
                     />

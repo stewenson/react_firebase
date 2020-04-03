@@ -36,6 +36,10 @@ export default function ListData(props) {
     const [currentPage, setCurrentPage] = useState(1);
     const [todoPerPage] = useState(10);
 
+    const handleChange = (event, value) => {
+        setCurrentPage(value);
+    };
+
     const isComplete = ([key, data]) => {
         dispatch(CompleteTodo([key, data, currentUser.uid]))
     };
@@ -51,12 +55,9 @@ export default function ListData(props) {
 
     const indexOfLastTodo = currentPage * todoPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     let fetchData;
-    let totalData;
     if (props.data && all) {
-        totalData = Object.keys(props.data).length;
         fetchData = (
             Object.entries(props.data)
                 .slice(indexOfFirstTodo, indexOfLastTodo)
@@ -77,6 +78,7 @@ export default function ListData(props) {
         fetchData = (
             Object.entries(props.data)
                 .filter(([key, value]) => value.complete === true )
+                .slice(indexOfFirstTodo, indexOfLastTodo)
                 .map(([key, data]) => (
                     <ListItem button key={data.id} >
                         <ListItemIcon onClick={() => isComplete([data.id, data.todo])}>
@@ -94,6 +96,7 @@ export default function ListData(props) {
         fetchData = (
             Object.entries(props.data)
                 .filter(([key, value]) => value.complete === false )
+                .slice(indexOfFirstTodo, indexOfLastTodo)
                 .map(([key, data]) => (
                     <ListItem button key={data.id} >
                         <ListItemIcon onClick={() => isComplete([data.id, data.todo])}>
@@ -112,7 +115,7 @@ export default function ListData(props) {
             <h5>Not data</h5>
         )
     }
-
+    
     return (
         <React.Fragment>
         <div className="ListTodo">
@@ -140,10 +143,9 @@ export default function ListData(props) {
         </div>
             <div>
                 <Paginator
-                    todoPerPage={todoPerPage}
-                    totalTodo={totalData}
-                    paginate={paginate}
-                    href={"#/todo"}
+                    count={parseInt((fetchData.length/todoPerPage)+1)}
+                    page={currentPage}
+                    changed={handleChange}
                 />
             </div>
         </React.Fragment>

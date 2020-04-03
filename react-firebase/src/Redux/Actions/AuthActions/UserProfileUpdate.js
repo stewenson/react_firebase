@@ -38,7 +38,6 @@ export const UserProfileUpdate = query => {
                     },
                     message: 'Profile was Updated;'
                 });
-                alert('Profile was updated')
             }).catch(e => {
                 dispatch({
                     type: ERROR,

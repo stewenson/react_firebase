@@ -13,6 +13,7 @@ import '../src/Styles/RootStyle/RootStyle.scss';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+
 const apps = (
     <Provider store={store}>
         <AuthProvider>

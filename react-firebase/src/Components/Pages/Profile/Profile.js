@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import UpdateProfileForm from "./Form/UpdateProfileForm/UpdateProfileForm";
 import '../../../Styles/ProfileStyle/ProfileFormCard.scss';
 import Button from "@material-ui/core/Button";
@@ -12,23 +12,13 @@ import ProfileInfoCard from "./Card/ProfileInfoCard";
 import {useDispatch, useSelector} from "react-redux";
 import app from "../../../config/base";
 import {UserProfile} from "../../../Redux/Actions/AuthActions/UserProfile";
+import {AuthContext} from "../../Auth/Auth/Auth";
 
 
 export default function Profile() {
     const dispatch = useDispatch();
     const content = useSelector(state => state);
-    const data = content.auth.data;
-
-    const loadData = () => {
-        const user = app.auth().currentUser;
-        dispatch(UserProfile(user.uid))
-    };
-
-    useEffect(() => {
-        loadData();
-        handleClose();
-    }, [content.auth.message]);
-
+    const { currentUser } = useContext(AuthContext);
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -39,7 +29,14 @@ export default function Profile() {
         setOpen(false);
     };
 
-    const descriptionElementRef = React.useRef(null);
+    useEffect(() => {
+        const loadData = (id) => {
+            dispatch(UserProfile(id))
+        };
+        loadData(currentUser.uid);
+    }, [content.auth.message, dispatch, currentUser.uid]);
+
+    const descriptionElementRef = useRef(null);
     React.useEffect(() => {
         if (open) {
             const { current: descriptionElement } = descriptionElementRef;
@@ -49,6 +46,8 @@ export default function Profile() {
         }
     }, [open]);
 
+
+    const data = content.auth.data;
     return (
         <Container className="ProfileContainer" component="main" maxWidth="lg">
             <CssBaseline />

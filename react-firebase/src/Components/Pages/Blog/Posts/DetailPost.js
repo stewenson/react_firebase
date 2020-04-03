@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {FetchDetailPost} from "../../../Redux/Actions/BlogActions/FetchDetailPost";
+import {FetchDetailPost} from "../../../../Redux/Actions/BlogActions/FetchDetailPost";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
-import {UpdateLike} from "../../../Redux/Actions/BlogActions/UpdateLike";
+import {UpdateLike} from "../../../../Redux/Actions/BlogActions/UpdateLike";
 import {makeStyles} from "@material-ui/core/styles";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import CommentIcon from "@material-ui/icons/Comment";
-import ListOfComments from "./ListOfComments";
+import Comments from "../Comments/Comments";
+import {FetchAllComments} from "../../../../Redux/Actions/BlogActions/FetchAllComments";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,8 +51,9 @@ export default function DetailPost() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(FetchDetailPost(params))
-    }, [content.blog.likePerPost.length]);
+        dispatch(FetchDetailPost(params));
+        dispatch(FetchAllComments(params));
+    }, [content.blog.likePerPost.length, content.blog.addComment, params, dispatch]);
 
     const convertDate = (seconds) => {
         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -66,6 +67,8 @@ export default function DetailPost() {
     };
 
     let data = content.blog.detailPost;
+    let commentsData = content.blog.fetchAllComments;
+    let msg = content.blog.msg;
 
     return (
         <Grid container spacing={4}>
@@ -87,12 +90,8 @@ export default function DetailPost() {
                             badgeContent={data.like}
                             {...defaultProps}
                         />
-                        {/*<Badge*/}
-                        {/*    badgeContent={content.blog.fetchAllComments.data.length}*/}
-                        {/*    {...defaultPropsComment}*/}
-                        {/*/>*/}
                     </div>
-                    <ListOfComments postId={data.id} />
+                    <Comments msg={msg} data={commentsData} postId={data.id} />
                 </Grid>
             </div>
         </Grid>

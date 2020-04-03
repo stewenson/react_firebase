@@ -6,6 +6,8 @@ import {UPDATE_LIKE_WITHOUT_LOGIN} from "../../Actions/BlogActions/UpdateLikeWit
 import {FETCH_DETAIL_POST} from "../../Actions/BlogActions/FetchDetailPost";
 import {FETCH_ALL_COMMENTS} from "../../Actions/BlogActions/FetchAllComments";
 import {ADD_NEW_COMMENT} from "../../Actions/BlogActions/AddComment";
+import {DELETE_POST} from "../../Actions/BlogActions/DeletePost";
+import {UPDATE_POST} from "../../Actions/BlogActions/UpdatePost";
 
 
 const initState = {
@@ -16,6 +18,8 @@ const initState = {
     detailPost: {},
     userPosts: {},
     likePerPost: {},
+    deletedId: {},
+    updatePost: {},
     error: "",
     msg: '',
 };
@@ -41,6 +45,16 @@ function blogReducer(state = initState, action) {
             return {
                 ...state,
                 userPosts: action.data
+            };
+        case UPDATE_POST:
+            return {
+                ...state,
+                updatePost: action.data
+            };
+            case DELETE_POST:
+            return {
+                ...state,
+                deletedId: action.data
             };
         case FETCH_DETAIL_POST:
             return {
