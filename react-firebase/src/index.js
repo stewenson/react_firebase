@@ -1,33 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import app from "../src/config/base";
-import { createStore, applyMiddleware  } from 'redux';
+import base from "../src/config/base";
+import {createStore, compose,  applyMiddleware} from 'redux'
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { AuthProvider } from "./Components/Auth/Auth/Auth";
+import {AuthProvider} from "./screens/Auth/Auth/Auth";
 import {HashRouter as Router} from "react-router-dom";
-import rootReducer from './Redux/Reducers/rootReducer';
+import rootReducer from './Redux/rootReducer/rootReducer';
 import '../src/Styles/RootStyle/RootStyle.scss';
 
-
+// const store = createStore(rootReducer,
+//     compose(
+//         applyMiddleware(thunk),
+//         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+//     )
+// );
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+const app = (
+    <AuthProvider>
+        <Provider store={store}>
+                <Router>
+                    <App />
+                </Router>
+        </Provider>
+    </AuthProvider>
 
-const apps = (
-    <Provider store={store}>
-        <AuthProvider>
-            <Router>
-                <App />
-            </Router>
-        </AuthProvider>
-    </Provider>
 
 );
-
-app.auth().onAuthStateChanged(user => {
-    if (user) {
-        ReactDOM.render(apps, document.getElementById('root'));
-    }
-    ReactDOM.render(apps, document.getElementById('root'));
+// ReactDOM.render(app, document.getElementById('root'));
+base.auth().onAuthStateChanged(() => {
+        ReactDOM.render(app, document.getElementById('root'));
 });
