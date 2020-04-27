@@ -58,6 +58,7 @@ export default function Movie() {
     const content = useSelector(state => state);
     const classes = useStyles();
 
+    console.log(content.movie.data.Search)
     return (
         <React.Fragment>
             <CssBaseline />

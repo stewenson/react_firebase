@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import base from "../src/config/base";
-import {createStore, compose,  applyMiddleware} from 'redux'
+import {createStore,  applyMiddleware} from 'redux'
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import {AuthProvider} from "./screens/Auth/Auth/Auth";

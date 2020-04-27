@@ -10,6 +10,7 @@ import Blog  from "../screens/blog/Blog";
 import iTunes from "../screens/iTunes/iTunes";
 import Todo from "../screens/todo/Todo";
 import notFound from "../screens/404/notFound";
+import MovieDbApi from "../screens/MovieDBApi/MovieDbApi";
 
 export default function Routes() {
 
@@ -19,6 +20,7 @@ export default function Routes() {
                 <Route exact path='/' component={Home} />
                 <PrivateRoute  path='/todo' component={Todo} />
                 <Route exact path='/movie/' component={Movie} />
+                <Route  path='/tmdbapi' component={MovieDbApi} />
                 <Route  path='/login' component={SignIn} />
                 <Route exact path='/registration' component={SignUP} />
                 <Route exact path='/password_reset' component={PasswordReset} />

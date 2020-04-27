@@ -89,6 +89,13 @@ const Home = props => {
                         color={"primary"}
                         variant={"outlined"}
                     />
+                    <ButtonComponents
+                        style={{width: '100%', marginTop: '10px'}}
+                        clicked={() => props.history.push('/tmdbapi')}
+                        text={"Movie (The movie db APi)"}
+                        color={"primary"}
+                        variant={"outlined"}
+                    />
                 </Card.Body>
             ) }
         </Card>
