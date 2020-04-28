@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
-import PopularMovies from "../popularMovies/PopularMovies";
-import PopularSeries from "../popularSeries/PopularSeries";
-import Documentary from "../documentary/Documentary";
+import PopularMovies from "../movies/popularMovies/PopularMovies";
+import PopularSeries from "../movies/popularSeries/PopularSeries";
+import Documentary from "../movies/documentary/Documentary";
 import {useDispatch, useSelector} from "react-redux";
 import {getPopMovAction} from "../actions/getPopMovAction";
 import {getPopSeriesAction} from '../actions/getPopSeriesAction';
-import FamilyMovies from "../family/FamilyMovies";
+import Family from "../movies/family/Family";
 import {getFamilyMovAction} from "../actions/getFamilyMovAction";
 import {getDocumMovieAction} from "../actions/getDocumMovieAcrion";
 
@@ -27,7 +27,7 @@ export default function Main() {
         <div>
             <PopularMovies movies={popMovies}/>
             <PopularSeries series={popSeries}/>
-            <FamilyMovies family={family}/>
+            <Family family={family}/>
             <Documentary document={document}/>
         </div>
     )

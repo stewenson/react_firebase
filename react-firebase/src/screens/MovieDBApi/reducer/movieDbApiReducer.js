@@ -2,7 +2,9 @@ import {GET_POPULAR_MOVIES, ERROR} from "../actions/getPopMovAction";
 import {GET_POPULAR_SERIES} from "../actions/getPopSeriesAction";
 import {GET_FAMILY_MOVIES} from "../actions/getFamilyMovAction";
 import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovieAcrion";
-import {GET_DETAIL_MOVIE} from "../actions/getDetailAction";
+import {GET_DETAIL_MOVIE} from "../actions/getDetailMovieAction";
+import {GET_DETAIL_SERIES} from "../actions/getDetailSeriesAction";
+import {GET_CREDITS} from "../actions/getCreditsAction";
 
 const initState = {
     movies: [],
@@ -10,6 +12,7 @@ const initState = {
     family: [],
     document: [],
     detail: [],
+    credits: [],
     error: "",
 };
 
@@ -39,6 +42,16 @@ function movieDbApiReducer(state = initState, action) {
             return {
                 ...state,
                 detail: action.payload,
+            };
+        case GET_DETAIL_SERIES:
+            return {
+                ...state,
+                detail: action.payload,
+            };
+        case GET_CREDITS:
+            return {
+                ...state,
+                credits: action.payload,
             };
         case ERROR:
             return {
