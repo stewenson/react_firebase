@@ -5,6 +5,7 @@ import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovieAcrion";
 import {GET_DETAIL_MOVIE} from "../actions/getDetailMovieAction";
 import {GET_DETAIL_SERIES} from "../actions/getDetailSeriesAction";
 import {GET_CREDITS} from "../actions/getCreditsAction";
+import {GET_CREDITS_SEASON} from "../actions/getCreditsSeasonAction";
 
 const initState = {
     movies: [],
@@ -49,6 +50,11 @@ function movieDbApiReducer(state = initState, action) {
                 detail: action.payload,
             };
         case GET_CREDITS:
+            return {
+                ...state,
+                credits: action.payload,
+            };
+        case GET_CREDITS_SEASON:
             return {
                 ...state,
                 credits: action.payload,

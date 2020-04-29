@@ -52,7 +52,6 @@ export default function DetailMovie() {
         return fullDate.getFullYear() // 2019
     };
 
-    console.log(data.detail)
     return (
         <Container className="Container" maxWidth="lg">
             <div className={classes.root}>

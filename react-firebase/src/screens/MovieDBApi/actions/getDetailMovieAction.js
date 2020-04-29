@@ -4,8 +4,8 @@ export const ERROR = "ERROR";
 
 
 export const getDetailMovieAction = id =>  {
-    return  dispatch => {
-        axios
+    return async dispatch => {
+       await axios
             .get(`https://api.themoviedb.org/3/movie/${id}?api_key=3005d94c9609dfff31bb87e2643367b4&language=en-US`)
             .then(res =>
                 dispatch({

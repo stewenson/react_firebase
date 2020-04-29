@@ -17,10 +17,15 @@ export default function Main() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getPopMovAction())
-        dispatch(getPopSeriesAction())
-        dispatch(getFamilyMovAction())
-        dispatch(getDocumMovieAction())
+        try {
+            dispatch(getPopMovAction())
+            dispatch(getPopSeriesAction())
+            dispatch(getFamilyMovAction())
+            dispatch(getDocumMovieAction())
+        } catch (e) {
+            alert(e.message);
+        }
+
     }, [dispatch])
 
     return (

@@ -3,8 +3,8 @@ export const GET_POPULAR_MOVIES = "GET_POPULAR_MOVIES";
 export const ERROR = "ERROR";
 
 export const getPopMovAction = (query) => {
-    return dispatch => {
-        axios
+    return async dispatch => {
+       await axios
             .get(`https://api.themoviedb.org/3/movie/popular?api_key=3005d94c9609dfff31bb87e2643367b4&language=en-US&page=1`)
             .then(res =>
                 dispatch({

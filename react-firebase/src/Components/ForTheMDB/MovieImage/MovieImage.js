@@ -5,7 +5,7 @@ export default function MovieImage(props) {
     return (
         <>
         {props.image ?
-                <img className="MovieImage" src={`http://image.tmdb.org/t/p/w342/`+ props.image} alt=' '/>
+                <img className="MovieImage" src={`http://image.tmdb.org/t/p/w500/`+ props.image} alt=' '/>
                 :
                 <Progress/>
         }
