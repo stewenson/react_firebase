@@ -40,8 +40,13 @@ export default function DetailFamily() {
     const data = useSelector(state => state.movieDbAPI);
 
     useEffect(() => {
-        dispatch(getDetailMovieAction(params.id))
-        dispatch(getCreditsAction(params.id))
+        try {
+            dispatch(getDetailMovieAction(params.id))
+            dispatch(getCreditsAction(params.id))
+        } catch (e) {
+            alert(e.message);
+        }
+
     },[dispatch, params.id])
 
     // convert date and get only year

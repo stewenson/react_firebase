@@ -6,6 +6,8 @@ import {GET_DETAIL_MOVIE} from "../actions/getDetailMovieAction";
 import {GET_DETAIL_SERIES} from "../actions/getDetailSeriesAction";
 import {GET_CREDITS} from "../actions/getCreditsAction";
 import {GET_CREDITS_SEASON} from "../actions/getCreditsSeasonAction";
+import {GET_VIDEO} from "../actions/getVideoAction";
+import axios from "axios";
 
 const initState = {
     movies: [],
@@ -14,6 +16,8 @@ const initState = {
     document: [],
     detail: [],
     credits: [],
+    video: [],
+    token: axios.defaults.headers.common['Authorization'] = [],
     error: "",
 };
 
@@ -58,6 +62,12 @@ function movieDbApiReducer(state = initState, action) {
             return {
                 ...state,
                 credits: action.payload,
+            };
+        case GET_VIDEO:
+            return {
+                ...state,
+                video: action.payload,
+                token: action.token
             };
         case ERROR:
             return {

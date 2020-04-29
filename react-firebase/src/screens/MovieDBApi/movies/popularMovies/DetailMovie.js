@@ -14,7 +14,9 @@ import Actors from "../../../../Components/ForTheMDB/Actors/Actors";
 import ProductionCompanies from "../../../../Components/ForTheMDB/ProductionCompanies/ProductionCompanies";
 import ProductionCountries from "../../../../Components/ForTheMDB/ProductionCountries/ProductionCountries";
 import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
-// import Trailer from "../../../../Components/ForTheMDB/Trailer/Trailer";
+import ListGenres from "../../../../Components/ForTheMDB/Genres/ListGenres";
+import {getVideoAction} from "../../actions/getVideoAction";
+import Trailers from "../../../../Components/ForTheMDB/Trailers/Trailers";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,8 +44,14 @@ export default function DetailMovie() {
     const data = useSelector(state => state.movieDbAPI);
 
     useEffect(() => {
-        dispatch(getDetailMovieAction(params.id))
-        dispatch(getCreditsAction(params.id))
+        try {
+            dispatch(getDetailMovieAction(params.id))
+            dispatch(getCreditsAction(params.id))
+            dispatch(getVideoAction(params.id))
+        } catch (e) {
+          alert(e.message);
+        }
+
     },[dispatch, params.id])
 
     // convert date and get only year
@@ -87,8 +95,14 @@ export default function DetailMovie() {
                         <Title title={'Production Countries'} variant={'h5'} />
                         <ProductionCountries countries={data.detail.production_countries}/>
 
-                    {/*    Trailer*/}
-                    {/*<Trailer />*/}
+                        {/* Genres Title
+                        List of genres
+                        */}
+                        <Title title={'Genres'} variant={'h5'} />
+                        <ListGenres genres={data.detail.genres} />
+
+                        {/*    Trailer*/}
+                        <Trailers videos={data} />
                     </Grid>
 
                     {/*Image*/}
