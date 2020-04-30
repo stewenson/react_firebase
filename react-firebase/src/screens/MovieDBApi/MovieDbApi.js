@@ -6,6 +6,7 @@ import {Route, Switch} from "react-router-dom";
 import DetailSeries from "./movies/popularSeries/DetailSeries";
 import DetailFamily from "./movies/family/DetailFamily";
 import DetailDocument from "./movies/documentary/DetailDocument";
+import Footer from "./layout/Footer";
 
 export default function MovieDbApi() {
 
@@ -19,6 +20,7 @@ export default function MovieDbApi() {
                     <Route path="/tmdbapi/popularFamily/detail/:original_name/:id" component={DetailFamily} />
                     <Route path="/tmdbapi/popularDocument/detail/:original_name/:id" component={DetailDocument} />
                 </Switch>
+            <Footer />
         </div>
     )
 }
