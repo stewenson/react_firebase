@@ -12,16 +12,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ProductionCompanies(props) {
+export default function ListGenres(props) {
     const classes = useStyles();
     return (
         <div className={classes.chip}>
-            {props.companies ?
-                Object.entries(props.companies).map(([key, companies]) => (
-                    companies.logo_path ?
-                        <img style={{ width: '10%'}} key={companies.id} src={`http://image.tmdb.org/t/p/w92/`+ companies.logo_path} alt={companies.name}/>
-                        :
-                        <Chip key={companies.id} size="medium" color="primary" label={companies.name} />
+            {props.genres ?
+                Object.entries(props.genres).map(([key, genre]) => (
+                    <Chip key={genre.id} size="medium" label={genre.name} />
                     )
                 )
                 : null

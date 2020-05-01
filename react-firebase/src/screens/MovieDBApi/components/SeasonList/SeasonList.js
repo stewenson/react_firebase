@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import Progress from "../../Progress/Progress";
+import Progress from "../../../../Components/Progress/Progress";
 import {makeStyles} from "@material-ui/core/styles";
-import Paginator from "../../Pagination/Paginator";
-import '../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
+import Paginator from "../../../../Components/Pagination/Paginator";
+import '../../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
 import Grid from "@material-ui/core/Grid";
 import Title from "../Title/Title";
 import Container from "@material-ui/core/Container";

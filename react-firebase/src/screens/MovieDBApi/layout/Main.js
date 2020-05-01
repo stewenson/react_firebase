@@ -10,6 +10,7 @@ import {getFamilyMovAction} from "../actions/getFamilyMovAction";
 import {getDocumMovieAction} from "../actions/getDocumMovieAcrion";
 import {getTokenAction} from "../actions/getTokenAction";
 import axios from 'axios';
+import {Container} from "@material-ui/core";
 
 export default function Main() {
     const popMovies = useSelector(state => state.movieDbAPI);
@@ -35,11 +36,11 @@ export default function Main() {
     }, [dispatch])
 
     return (
-        <div>
+        <Container maxWidth='xl'>
             <PopularMovies movies={popMovies}/>
             <PopularSeries series={popSeries}/>
             <Family family={family}/>
             <Documentary document={document}/>
-        </div>
+        </Container>
     )
 }

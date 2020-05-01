@@ -1,21 +1,7 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
     footer: {
@@ -30,10 +16,11 @@ export default function Footer() {
     const classes = useStyles();
 
     return (
-        <footer className={classes.footer}>
+        <footer style={{background: 'rgb(46, 47, 56)', marginTop: '2%'}} className={classes.footer}>
             <Container maxWidth="sm">
-                <Typography variant="body1">My sticky footer can be found here.</Typography>
-                <Copyright />
+                <Grid item xs={6} sm={3}>
+                    <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" alt=""/>
+                </Grid>
             </Container>
         </footer>
     );

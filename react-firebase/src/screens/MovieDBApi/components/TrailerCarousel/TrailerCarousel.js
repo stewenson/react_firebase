@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-import Progress from "../../Progress/Progress";
-import '../../../Styles/TheMovieDBAPi/IFrame.scss';
+import Progress from "../../../../Components/Progress/Progress";
+import '../../../../Styles/TheMovieDBAPi/IFrame.scss';
 
 export default function TrailerCarousel(props) {
     console.log(props.videos.results)

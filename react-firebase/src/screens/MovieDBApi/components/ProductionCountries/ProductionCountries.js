@@ -12,15 +12,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ListGenres(props) {
+export default function ProductionCountries(props) {
     const classes = useStyles();
+
     return (
         <div className={classes.chip}>
-            {props.genres ?
-                Object.entries(props.genres).map(([key, genre]) => (
-                    <Chip key={genre.id} size="medium" color="primary" label={genre.name} />
-                    )
-                )
+            {props.countries ?
+                Object.entries(props.countries).map(([key, countries]) => (
+                    <Chip key={key} size="medium" label={countries.iso_3166_1+ "-" + countries.name} />
+                ))
                 : null
             }
         </div>

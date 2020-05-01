@@ -8,6 +8,8 @@ import {GET_CREDITS} from "../actions/getCreditsAction";
 import {GET_CREDITS_SEASON} from "../actions/getCreditsSeasonAction";
 import {GET_VIDEO} from "../actions/getVideoAction";
 import {GET_TOKEN} from "../actions/getTokenAction";
+import {GET_REVIEWS} from "../actions/getReviewsAction";
+import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchAction";
 
 const initState = {
     movies: [],
@@ -18,6 +20,9 @@ const initState = {
     credits: [],
     video: [],
     token: [],
+    reviews: [],
+    searchResult: [],
+    title: [],
     error: "",
 };
 
@@ -68,10 +73,26 @@ function movieDbApiReducer(state = initState, action) {
                 ...state,
                 video: action.payload,
             };
+        case GET_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload,
+            };
         case GET_TOKEN:
             return {
                 ...state,
                 token: action.payload,
+            };
+        case SEARCH_MOVIE:
+            return {
+                ...state,
+                searchResult: action.payload,
+                title: action.title
+            };
+        case SEARCH_ERROR:
+            return {
+                ...state,
+                error: action.payload,
             };
         case ERROR:
             return {

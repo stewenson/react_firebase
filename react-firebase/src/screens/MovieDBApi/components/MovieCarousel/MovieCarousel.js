@@ -1,7 +1,8 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import {Link} from "react-router-dom";
-import Progress from "../../Progress/Progress";
+import Progress from "../../../../Components/Progress/Progress";
+import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
 
 export default function MovieCarousel(props) {
 
@@ -50,8 +51,9 @@ export default function MovieCarousel(props) {
     };
     return (
         <React.Fragment>
-            <div style={{ paddingLeft: '3%', paddingRight: '3%'}}>
+            <div>
                 <Carousel responsive={responsive}
+                          transitionDuration={0}
                           swipeable={true}
                           draggable={false}
                           infinite={true}
@@ -61,8 +63,9 @@ export default function MovieCarousel(props) {
                         <div key={title.id} className='Title'>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                 {title.poster_path ?
-                                    <img src={`http://image.tmdb.org/t/p/w154/`+ title.poster_path} alt={title.original_title}/>
-                                :
+                                    // <img src={`http://image.tmdb.org/t/p/w154/`+ title.poster_path} alt={title.original_title}/>
+                                    <CarouselImage src={`http://image.tmdb.org/t/p/w154/`+ title.poster_path}/>
+                                    :
                                 null
                                 }
                                 </Link>

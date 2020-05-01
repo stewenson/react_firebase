@@ -36,7 +36,7 @@ export default function Header() {
                        </Link>
                    </LinkStyle>
                     <LinkStyle>
-                       <Link className='Link' to="/tmdbapi/search">
+                       <Link className='Link' to="/tmdbapi/searchMovies">
                            <TextLink>
                                <SearchIcon /> Search
                            </TextLink>

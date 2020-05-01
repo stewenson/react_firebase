@@ -1,18 +1,23 @@
 import React, {useEffect} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getDetailSeriesAction} from "../../actions/getDetailSeriesAction";
 import Container from "@material-ui/core/Container";
 import '../../../../Styles/TheMovieDBAPi/Background.scss';
 import Grid from "@material-ui/core/Grid";
 import {MovieTitle} from "../../../../Styles/TheMovieDBAPi/MovieTitle";
-import Title from "../../../../Components/ForTheMDB/Title/Title";
-import MovieImage from "../../../../Components/ForTheMDB/MovieImage/MovieImage";
-import SeasonList from "../../../../Components/ForTheMDB/SeasonList/SeasonList";
+import Title from "../../components/Title/Title";
+import MovieImage from "../../components/MovieImage/MovieImage";
+import SeasonList from "../../components/SeasonList/SeasonList";
 import {getCreditsSeasonAction} from "../../actions/getCreditsSeasonAction";
-import SeasonActors from "../../../../Components/ForTheMDB/SeasonActors/SeasonActors";
 import Trailers from "../Trailers";
-import Actors from "../../../../Components/ForTheMDB/Actors/Actors";
+import Actors from "../../components/Actors/Actors";
+import ListGenres from "../../components/Genres/ListGenres";
+import ProductionCompanies from "../../components/ProductionCompanies/ProductionCompanies";
+import ProductionCountries from "../../components/ProductionCountries/ProductionCountries";
+import ReviewsList from "../../components/ReviewsList/ReviewsList";
+import {getVideoAction} from "../../actions/getVideoAction";
+import {getReviewsAction} from "../../actions/getReviewsAction";
 
 
 export default function DetailSeries() {
@@ -23,6 +28,8 @@ export default function DetailSeries() {
     useEffect(() => {
         dispatch(getDetailSeriesAction(params.id))
         dispatch(getCreditsSeasonAction(params.id))
+        dispatch(getVideoAction(params.id, 'tv'))
+        dispatch(getReviewsAction(params.id, 'tv'))
     },[dispatch, params.id])
 
     // console.log(data.detail)
@@ -33,10 +40,9 @@ export default function DetailSeries() {
     };
     const imageUrl = `http://image.tmdb.org/t/p/original/` + data.detail.backdrop_path;
 
-    console.log(data.detail)
-
     return (
         <React.Fragment>
+            {/* Bckgroung image*/}
             <div className="rmdb-movieinfo"
                  style={{
                      background: data.detail.backdrop_path
@@ -44,46 +50,47 @@ export default function DetailSeries() {
                          : null
                  }}
             >
+                {/*Main container*/}
                 <Container>
                     <div className="rmdb-description-container">
                         <Grid container spacing={3} className="rmdb-movieinfo-content">
+                            {/*Movie image*/}
                             <Grid item xs={12} sm={4} className="rmdb-movieinfo-thumb">
                                 {data.detail.poster_path ?
                                     <MovieImage image={data.detail.poster_path} />
                                     :
                                     null
                                 }
-                            </Grid>
-                            <Grid item xs={12} sm={8} className="rmdb-movieinfo-text">
-                                <MovieTitle>
-                                    {data.detail.name} {convertDate(data.detail.last_air_date)}
-                                </MovieTitle>
-                                {/*Movie Description overview*/}
-                                <Title title={'Overview'} variant={'h5'} color={'orange'}/>
-                                <Title title={data.detail.overview} variant={'h6'} />
+                                {/*Trailers button container*/}
                                 <Container>
                                     <Grid container spacing={3}>
-                                        <Grid item xs={12} sm={6}>
-                                            <Link className='rmdb-imdb-link' to='/'>
-                                                Watch on IMDB
-                                            </Link>
-                                        </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <Trailers videos={data} />
                                         </Grid>
                                     </Grid>
                                 </Container>
+                            </Grid>
+                            {/*Movie info Title, Overview*/}
+                            <Grid item xs={12} sm={8} className="rmdb-movieinfo-text">
+                                <MovieTitle>
+                                    {data.detail.title} {convertDate(data.detail.release_date)}
+                                </MovieTitle>
+                                <Title title={'“' + data.detail.tagline + '„'} variant={'h5'} align={'center'}/>
+                                <Title title={'Overview'} variant={'h5'} color={'orange'}/>
+                                <Title title={data.detail.overview} variant={'h6'} />
+                                {/*Metadata containers*/}
                                 <Container>
                                     <div>
                                         <Grid container spacing={3}>
-                                            <Grid item xs={6} sm={4}>
+                                            <Grid item xs={6} sm={3}>
                                                 <Title title={'Runtime'} variant={'h5'} color={'orange'}/>
-                                                <p className="rmdb-imdb-rating-number">{data.detail.episode_run_time} min</p>
+                                                <p className="rmdb-imdb-rating-number">{data.detail.runtime} min</p>
                                             </Grid>
-                                            <Grid item xs={6} sm={4}>
+                                            <Grid item xs={6} sm={3}>
                                                 <Title title={'Imdb Rating'} variant={'h5'} color={'orange'}/>
                                                 <meter
                                                     className="rmdb-imdb-rating"
+                                                    width='50'
                                                     min="0"
                                                     max="100"
                                                     optimum="100"
@@ -93,82 +100,58 @@ export default function DetailSeries() {
                                                 />
                                                 <p className="rmdb-imdb-rating-number">{data.detail.vote_average}</p>
                                             </Grid>
-                                            <Grid item xs={6} sm={4}>
-                                                <Title title={'Number of Seasons'} variant={'h5'} color={'orange'}/>
-                                                <p className="rmdb-imdb-rating-number">{data.detail.seasons ? Object.entries(data.detail.seasons).length : null} seasons</p>
+                                            <Grid item xs={6} sm={3}>
+                                                <Title title={'Budget'} variant={'h5'} color={'orange'}/>
+                                                <p className="rmdb-imdb-rating-number">$ {data.detail.budget}</p>
+                                            </Grid>
+                                            <Grid item xs={6} sm={3}>
+                                                <Title title={'Revenue'} variant={'h5'} color={'orange'}/>
+                                                <p className="rmdb-imdb-rating-number">{data.detail.revenue}</p>
                                             </Grid>
                                         </Grid>
                                     </div>
                                 </Container>
+                                {/*Genres container*/}
+                                <Container>
+                                    <Title title={'Genres'} variant={'h5'} color={'orange'}/>
+                                    <ListGenres genres={data.detail.genres}/>
+                                </Container>
+                                {/*Companies Container*/}
+                                <Container>
+                                    <Title title={'Production Companies'} variant={'h5'} color={'orange'}/>
+                                    <ProductionCompanies companies={data.detail.production_companies}/>
+                                </Container>
+                                {/*Countries container*/}
+                                <Container>
+                                    <Title title={'Production Countries'} variant={'h5'} color={'orange'}/>
+                                    <ProductionCountries countries={data.detail.production_countries}/>
+                                </Container>
                             </Grid>
-                        {/*    */}
-                            <Container>
-                                <div className="rmdb-description-container">
-                                    <div className="rmdb-movieinfo-text">
-                                        <Grid container spacing={3}>
-                                            <Grid item xs={3} sm={2}>
-                                                <Title title={'Last Episode'} variant={'h5'} color={'orange'}/>
-                                            </Grid>
-                                            <Grid item xs={3} sm={2}>
-                                                <p className="rmdb-imdb-rating-number">{data.detail.last_episode_to_air ? data.detail.last_episode_to_air.air_date : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={3} sm={2}>
-                                                <p className="rmdb-imdb-rating-number">Season - {data.detail.last_episode_to_air ? data.detail.last_episode_to_air.season_number : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={6} sm={3}>
-                                                <p className="rmdb-imdb-rating-number">Episode - {data.detail.last_episode_to_air ? data.detail.last_episode_to_air.episode_number : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={6} sm={3}>
-                                                <p className="rmdb-imdb-rating-number">Name -{data.detail.last_episode_to_air ? data.detail.last_episode_to_air.name: 'none'}</p>
-                                            </Grid>
-                                        </Grid>
-                                    </div>
-                                </div>
-                            </Container>
-                        {/**/}
-                            {/*    */}
-                            <Container>
-                                <div className="rmdb-description-container">
-                                    <div className="rmdb-movieinfo-text">
-                                        <Grid container spacing={3}>
-                                            <Grid item xs={3} sm={2}>
-                                                <Title title={'Next Episode'} variant={'h5'} color={'orange'}/>
-                                            </Grid>
-                                            <Grid item xs={3} sm={2}>
-                                                <p className="rmdb-imdb-rating-number">{data.detail.next_episode_to_air ? data.detail.next_episode_to_air.air_date : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={3} sm={2}>
-                                                <p className="rmdb-imdb-rating-number">Season - {data.detail.next_episode_to_air ? data.detail.next_episode_to_air.season_number : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={6} sm={2}>
-                                                <p className="rmdb-imdb-rating-number">Episode - {data.detail.next_episode_to_air ? data.detail.next_episode_to_air.episode_number : 'none'}</p>
-                                            </Grid>
-                                            <Grid item xs={6} sm={3}>
-                                                <p className="rmdb-imdb-rating-number">Name - {data.detail.next_episode_to_air ? data.detail.next_episode_to_air.name: 'none'}</p>
-                                            </Grid>
-                                        </Grid>
-                                    </div>
-                                </div>
-                            </Container>
-                            {/**/}
                         </Grid>
                     </div>
                 </Container>
-
             </div>
             <Container maxWidth='lg'>
-                {/* Actors Title list of Actors */}
-                <Title title={'Actors'} variant={'h4'} align={'center'} color={'black'}/>
-                <SeasonActors actors={data.credits.cast}/>
-            </Container>
-            <Container maxWidth='lg'>
-                {/* Actors Title list of Actors */}
-                <Title title={'Crew'} variant={'h4'} align={'center'} color={'black'}/>
-                <Actors actors={data.credits.crew}/>
-            </Container>
-            <Container maxWidth='lg'>
-                <Title title={'Seasons'} variant={'h4'} align={'center'} color={'black'} />
-                <SeasonList seasons={data.detail.seasons} />
+                {/*Actors container*/}
+                <Container maxWidth='lg'>
+                    <Title title={'Casts'} variant={'h4'} color={'orange'}/>
+                    <Actors actors={data.credits.cast}/>
+                </Container>
+                {/*Crew Containers*/}
+                <Container maxWidth='lg'>
+                    <Title title={'Crew'} variant={'h4'} color={'orange'}/>
+                    <Actors actors={data.credits.crew}/>
+                </Container>
+                {/*Series Containers */}
+                <Container maxWidth='lg'>
+                    <Title title={'Seasons'} variant={'h4'} color={'orange'} />
+                    <SeasonList seasons={data.detail.seasons} />
+                </Container>
+                {/*Reviews Container*/}
+                <Container maxWidth='lg'>
+                    <Title title={'Reviews'} variant={'h4'} color={'orange'}/>
+                    <ReviewsList reviews={data.reviews.results}/>
+                </Container>
             </Container>
         </React.Fragment>
     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import Button from '@material-ui/core/Button';
-import TrailerCarousel from "../../../Components/ForTheMDB/TrailerCarousel/TrailerCarousel";
+import TrailerCarousel from "../components/TrailerCarousel/TrailerCarousel";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import '../../../Styles/TheMovieDBAPi/MovieTrailers.scss';
