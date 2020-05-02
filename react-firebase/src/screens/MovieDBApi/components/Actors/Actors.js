@@ -31,7 +31,7 @@ export default function Actors(props) {
             {props.actors ? props.actors.map((actor) => (
                     <GridListTile key={actor.cast_id ? actor.cast_id: actor.credit_id} className='Title'>
                         {actor.profile_path ?
-                            <img src={`http://image.tmdb.org/t/p/w154/`+ actor.profile_path} alt={actor.name}/>
+                            <img src={`http://image.tmdb.org/t/p/w92/`+ actor.profile_path} alt={actor.name}/>
                             :
                             <Title title={'No image'} variant={'h4'} align={'center'} color={'white'}/>
                         }

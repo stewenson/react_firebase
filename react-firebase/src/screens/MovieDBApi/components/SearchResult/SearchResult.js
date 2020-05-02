@@ -22,14 +22,14 @@ export default function SearchResult(props) {
     };
 
     return (
-        <Container maxWidth='lg'>
+        <Container maxWidth='xl'>
             <div>
                 <Grid container spacing={3}>
                     {props.data.results ?
                         props.data.results.map(movie => (
                             <Grid key={movie.id} item xs={12} md={2} sm={4}>
                                 {movie.poster_path ?
-                                    <CarouselImage src={`http://image.tmdb.org/t/p/w154/` + movie.poster_path}/>
+                                    <CarouselImage src={`http://image.tmdb.org/t/p/w220_and_h330_face/` + movie.poster_path}/>
                                     :
                                     <Title title={movie.original_title}
                                            variant={'h6'}

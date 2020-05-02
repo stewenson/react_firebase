@@ -4,8 +4,6 @@ import Progress from "../../../../Components/Progress/Progress";
 import '../../../../Styles/TheMovieDBAPi/IFrame.scss';
 
 export default function TrailerCarousel(props) {
-    console.log(props.videos.results)
-
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -30,9 +28,10 @@ export default function TrailerCarousel(props) {
                                     title="myFrame"
                                     id="application_area"
                                     key={video.id}
-                                    src={`http://www.youtube.com/embed/${video.key}`}
+                                    src={`http://www.youtube.com/embed/${video.key}?rel=0&autoplay=1`}
                                     frameBorder="0"
                                     allowFullScreen
+                                    allow="autoplay; encrypted-media"
                                 />
                             </div>
                         ))

@@ -1,28 +1,20 @@
 import React from "react";
-import Chip from "@material-ui/core/Chip";
-import {makeStyles} from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-    chip: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
-    },
-}));
+import Grid from "@material-ui/core/Grid";
 
 export default function ProductionCountries(props) {
-    const classes = useStyles();
 
     return (
-        <div className={classes.chip}>
+        <Grid container spacing={1}>
             {props.countries ?
                 Object.entries(props.countries).map(([key, countries]) => (
-                    <Chip key={key} size="medium" label={countries.iso_3166_1+ "-" + countries.name} />
+                    <Grid key={key} item>
+                        <p className="rmdb-imdb-rating-number">
+                            {countries.name},
+                        </p>
+                    </Grid>
                 ))
                 : null
             }
-        </div>
+        </Grid>
     )
 }

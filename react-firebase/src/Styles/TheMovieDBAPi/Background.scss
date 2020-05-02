@@ -1,6 +1,6 @@
 .rmdb-movieinfo {
   background-size: cover!important;
-  //background-position: 50%!important;
+  background-position: 50% !important;
   width: 100%;
   height: auto;
   padding: 40px 40px;
@@ -8,25 +8,47 @@
   -webkit-animation: animateMovieinfo 1s;
   animation: animateMovieinfo 1s;
 }
+.rmdb-detail-container {
+  animation: animateMovieinfo 1s;
+}
 
+@keyframes animateMovieinfo {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 .rmdb-movieinfo-thumb {
   width: 100%;
   height: auto;
+  animation: animateMovieinfo 1s;
 }
 .rmdb-movieinfo-text {
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   overflow: hidden;
   box-sizing: border-box;
+  animation: animateMovieinfo 1s;
 }
 .rmdb-movieinfo-content {
   background: rgba(0,0,0,.8);
+  animation: animateMovieinfo 1s;
+}
+
+ul.MuiGridList-root.makeStyles-root-242 {
+  animation: animateMovieinfo 1s;
 }
 .rmdb-imdb-rating {
   width: 100%;
 }
 p.rmdb-imdb-rating-number {
-  font-size: 1.25rem;
+  font-size: 1rem;
+  strong {
+    color: black;
+  }
 }
 
 img.MovieImage {
@@ -35,6 +57,7 @@ img.MovieImage {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  animation: animateMovieinfo 1s;
 }
 .rmdb-imdbButton {
   color: yellow;
@@ -50,4 +73,9 @@ img.MovieImage {
 
 .rmdb-movieinfo-content-2 {
   background: rgba(0,0,0,.8);
+}
+
+.MuiGrid-root.rmdb-movieinfo-text.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-8 {
+  padding-top: 7%;
+  padding-bottom: 7%;
 }

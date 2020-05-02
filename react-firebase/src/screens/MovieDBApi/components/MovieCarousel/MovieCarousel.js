@@ -61,7 +61,7 @@ export default function MovieCarousel(props) {
                 >
                     {props.data ? props.data.map((title) => (
                         <div key={title.id} className='Title'>
-                            <Link to={{pathname: `/tmdbapi/${props.path}/detail/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
+                            <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                 {title.poster_path ?
                                     // <img src={`http://image.tmdb.org/t/p/w154/`+ title.poster_path} alt={title.original_title}/>
                                     <CarouselImage src={`http://image.tmdb.org/t/p/w154/`+ title.poster_path}/>

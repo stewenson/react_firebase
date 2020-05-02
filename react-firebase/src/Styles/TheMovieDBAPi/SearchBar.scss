@@ -1,19 +1,40 @@
-.rmdb-search {
+.rmdb-search-form{
     background-image: url(https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg);
     background-repeat: no-repeat;
-    height: 100%;
-    padding-top: 10%;
-    margin-top: 1%;
-    form {
-        margin-left: 25%;
-        .MuiPaper-root.makeStyles-root-77.MuiPaper-elevation3.MuiPaper-rounded {
-            border-radius: 25px;
-        }
+    width: 80%;
+    height: auto;
+    padding: 40px 40px;
+    box-sizing: border-box;
+    animation: animateMovieinfo 1s;
+    .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
+        padding-top: 0px;
     }
-    .MuiPaper-root.makeStyles-root-77.MuiPaper-elevation3.MuiPaper-rounded {
+    form {
+        margin-top: 40px;
+        animation: animateMovieinfo 1s;
+    }
+    form.makeStyles-root-173 {
+        background: #2e2f38;
         border-radius: 25px;
+        opacity: 0.5;
+        width: 450px !important;
+    }
+    label#filled-basic-label {
+        color: black;
+        text-align: center;
     }
 }
-.MuiPaper-root.makeStyles-root-77.MuiPaper-elevation3.MuiPaper-rounded {
-    border-radius: 25px;
+
+@keyframes animateMovieinfo {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.rmdb-main-container {
+    padding-top: 40px;
 }

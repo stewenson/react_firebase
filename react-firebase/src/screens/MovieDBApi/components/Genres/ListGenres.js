@@ -1,28 +1,20 @@
 import React from "react";
-import Chip from "@material-ui/core/Chip";
-import {makeStyles} from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-    chip: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
-    },
-}));
+import Grid from "@material-ui/core/Grid";
 
 export default function ListGenres(props) {
-    const classes = useStyles();
     return (
-        <div className={classes.chip}>
+        <Grid container spacing={1}>
             {props.genres ?
                 Object.entries(props.genres).map(([key, genre]) => (
-                    <Chip key={genre.id} size="medium" label={genre.name} />
+                    <Grid key={genre.id} item>
+                    <p>
+                        {genre.name},
+                    </p>
+                    </Grid>
                     )
                 )
                 : null
             }
-        </div>
+        </Grid>
     )
 }

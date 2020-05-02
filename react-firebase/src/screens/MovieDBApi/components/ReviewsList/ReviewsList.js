@@ -20,18 +20,19 @@ export default function ReviewsList(props) {
     const classes = useStyles();
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const [todoPerPage] = useState(2);
+    const [todoPerPage] = useState(1);
     const indexOfLastTodo = currentPage * todoPerPage;
     const indexOfFirstTodo = indexOfLastTodo - todoPerPage;
 
     let totalData;
-    if (props.seasons) {
+    if (props.reviews) {
         totalData = Object.entries(props.reviews).length;
     }
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
     };
+    // console.log(props.reviews)
 
     return (
         <div className={classes.root}>
@@ -40,7 +41,7 @@ export default function ReviewsList(props) {
                         {props.reviews ? Object.entries(props.reviews)
                                 .slice(indexOfFirstTodo, indexOfLastTodo)
                                 .map(([key,review]) => (
-                                    <Grid key={review.id} item xs={12} md={6}>
+                                    <Grid key={review.id} item xs={12} md={12}>
                                         <Title title={review.author} variant={'h5'} color={'red'} />
                                         <div  className='review-content'>
                                             <Title title={review.content} variant={'body1'} />
@@ -49,8 +50,7 @@ export default function ReviewsList(props) {
                                     // </div>
                                 ))
                             :
-                            <Title title={'No reviews'} variant={'body1'} />
-
+                            <Title title={'No reviews'} variant={'body1'}  color={'black'}/>
                         }
                     </Grid>
 

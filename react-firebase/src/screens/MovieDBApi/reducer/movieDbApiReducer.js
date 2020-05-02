@@ -3,13 +3,13 @@ import {GET_POPULAR_SERIES} from "../actions/getPopSeriesAction";
 import {GET_FAMILY_MOVIES} from "../actions/getFamilyMovAction";
 import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovieAcrion";
 import {GET_DETAIL_MOVIE} from "../actions/getDetailMovieAction";
-import {GET_DETAIL_SERIES} from "../actions/getDetailSeriesAction";
 import {GET_CREDITS} from "../actions/getCreditsAction";
 import {GET_CREDITS_SEASON} from "../actions/getCreditsSeasonAction";
 import {GET_VIDEO} from "../actions/getVideoAction";
 import {GET_TOKEN} from "../actions/getTokenAction";
 import {GET_REVIEWS} from "../actions/getReviewsAction";
 import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchAction";
+import {CLEAR_DATA} from "../actions/clearDetailAction";
 
 const initState = {
     movies: [],
@@ -53,10 +53,21 @@ function movieDbApiReducer(state = initState, action) {
                 ...state,
                 detail: action.payload,
             };
-        case GET_DETAIL_SERIES:
+        case CLEAR_DATA:
             return {
                 ...state,
                 detail: action.payload,
+                movies: action.payload,
+                series: action.payload,
+                family: action.payload,
+                document: action.payload,
+                credits: action.payload,
+                video: action.payload,
+                token: action.payload,
+                reviews: action.payload,
+                searchResult: action.payload,
+                title: action.payload,
+                error: "",
             };
         case GET_CREDITS:
             return {
