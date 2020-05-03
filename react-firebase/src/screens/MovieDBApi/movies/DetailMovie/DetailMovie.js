@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
                 /*  Redux Actions */
@@ -30,39 +30,48 @@ import '../../../../Styles/TheMovieDBAPi/Background.scss';
                         /* Styled Components*/
 import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
 import {ContainerLine, LineHorizontal, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {Recommendatios} from "../Recommendation";
+import {getRecommAction} from "../../actions/getRecommAction";
 
 export default function DetailMovie() {
     const params = useParams();
     const dispatch = useDispatch();
     const data = useSelector(state => state.movieDbAPI);
+    const [load, isLoad] = useState(true);
     const imageUrl = `http://image.tmdb.org/t/p/original/` + data.detail.backdrop_path;
 
     useEffect(() => {
-        try {
-            dispatch(getDetailMovieAction(params.id, params.category))
-            params.category === 'movie' ?
-                dispatch(getCreditsAction(params.id))
-                :
-                dispatch(getCreditsSeasonAction(params.id))
-            dispatch(getVideoAction(params.id, params.category))
-            dispatch(getReviewsAction(params.id, params.category))
-            dispatch(getTokenAction())
-        } catch (e) {
+        if (load)
+            try {
+                dispatch(getDetailMovieAction(params.id, params.category))
+                params.category === 'movie' ?
+                    dispatch(getCreditsAction(params.id))
+                    :
+                    dispatch(getCreditsSeasonAction(params.id))
+                dispatch(getVideoAction(params.id, params.category))
+                dispatch(getReviewsAction(params.id, params.category))
+                dispatch(getRecommAction(params.id, params.category))
+                dispatch(getTokenAction())
+                window.scrollTo(0, 0)
+            } catch (e) {
           alert(e.message);
         }
 
-    },[dispatch, params.id, params.category])
+    },[dispatch, params.id, params.category, load])
 
     // Unmounting
     useEffect(() => {
         return () => {
+            isLoad(false)
             dispatch(clearDetailAction())
         }
-    },[dispatch])
+    },[dispatch, load])
+
+    if (!load) return null;
 
     return (
         <React.Fragment>
-            {data.detail ?
+            {/*{data.detail ?*/}
                 <div>
 
                      {/*  Bckgroung image  */}
@@ -80,7 +89,7 @@ export default function DetailMovie() {
                                     {/*Movie image*/}
                                     <Grid item xs={12} sm={4} className="rmdb-movieinfo-thumb">
                                         {data.detail.poster_path ?
-                                            <MovieImage image={data.detail.poster_path}/>
+                                            <MovieImage autofocud image={data.detail.poster_path}/>
                                             :
                                             null
                                         }
@@ -123,8 +132,9 @@ export default function DetailMovie() {
                             </div>
                         </Container>
                     </div>
-                    <Container maxWidth='lg' className='rmdb-detail-container'>
 
+                    {/* Detail Container*/}
+                    <Container maxWidth='md' className='rmdb-detail-container'>
                         {data.credits.cast ?
                             <>
                                 {/*   Actors list   */}
@@ -213,6 +223,10 @@ export default function DetailMovie() {
                             ''
                         }
 
+                        {/*/!* Recommendation *!/*/}
+                        <Title title={'Recommendation'} variant={'h5'} marginTop={'3%'} color={'black'}/>
+                        <LineHorizontalBlack />
+                        <Recommendatios data={data.recommendations.results} category={params.category}/>
 
                         {/*   Reviews List  */}
                         <Title title={'Reviews'} variant={'h5'} marginTop={'3%'} color={'black'}/>
@@ -234,9 +248,6 @@ export default function DetailMovie() {
 
                     </Container>
                 </div>
-            :
-                <Progress />
-            }
         </React.Fragment>
     )
 }

@@ -1,0 +1,18 @@
+.rmdb-main-container {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,4,24,1) 19%, rgba(87,6,17,1) 32%, rgba(121,9,9,1) 45%, rgba(84,72,85,1) 85%, rgba(44,138,165,1) 94%, rgba(0,212,255,1) 100%);
+  width: 100%;
+  height: auto;
+  animation: animationOpacity 1s;
+  padding-bottom: 2%;
+}
+
+@keyframes animationOpacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

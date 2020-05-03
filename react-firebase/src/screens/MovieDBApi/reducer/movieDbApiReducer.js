@@ -10,6 +10,7 @@ import {GET_TOKEN} from "../actions/getTokenAction";
 import {GET_REVIEWS} from "../actions/getReviewsAction";
 import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchAction";
 import {CLEAR_DATA} from "../actions/clearDetailAction";
+import {GET_RECOMMANDATIONS} from "../actions/getRecommAction";
 
 const initState = {
     movies: [],
@@ -22,6 +23,7 @@ const initState = {
     token: [],
     reviews: [],
     searchResult: [],
+    recommendations: [],
     title: [],
     error: "",
 };
@@ -73,6 +75,11 @@ function movieDbApiReducer(state = initState, action) {
             return {
                 ...state,
                 credits: action.payload,
+            };
+        case GET_RECOMMANDATIONS:
+            return {
+                ...state,
+                recommendations: action.payload,
             };
         case GET_CREDITS_SEASON:
             return {

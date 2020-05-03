@@ -5,6 +5,7 @@ import Progress from "../../../../Components/Progress/Progress";
 import GridList from "@material-ui/core/GridList";
 import {makeStyles} from "@material-ui/core/styles";
 import Title from "../Title/Title";
+import '../../../../Styles/TheMovieDBAPi/Actors.scss';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,11 +30,11 @@ export default function Actors(props) {
     return (
         <GridList className={classes.root}>
             {props.actors ? props.actors.map((actor) => (
-                    <GridListTile key={actor.cast_id ? actor.cast_id: actor.credit_id} className='Title'>
+                    <GridListTile style={{ width: 'auto'}} key={actor.cast_id ? actor.cast_id: actor.credit_id} className='Title'>
                         {actor.profile_path ?
-                            <img src={`http://image.tmdb.org/t/p/w92/`+ actor.profile_path} alt={actor.name}/>
+                            <img style={{ width: 'auto'}} src={`http://image.tmdb.org/t/p/w92/`+ actor.profile_path} alt={actor.name}/>
                             :
-                            <Title title={'No image'} variant={'h4'} align={'center'} color={'white'}/>
+                            <Title variant={'h4'} align={'center'} color={'white'}/>
                         }
                         <GridListTileBar title={actor.name} subtitle={actor.character ? actor.character : actor.department}/>
                     </GridListTile>

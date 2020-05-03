@@ -5,8 +5,8 @@
   height: auto;
   padding: 40px 40px;
   box-sizing: border-box;
-  -webkit-animation: animateMovieinfo 1s;
-  animation: animateMovieinfo 1s;
+  -webkit-animation: animateMovieinfo 1.6s;
+  animation: animateMovieinfo 1.6s;
 }
 .rmdb-detail-container {
   animation: animateMovieinfo 1s;
@@ -24,31 +24,33 @@
 .rmdb-movieinfo-thumb {
   width: 100%;
   height: auto;
-  animation: animateMovieinfo 1s;
+  animation: animateMovieinfo 1.6s;
 }
 .rmdb-movieinfo-text {
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   overflow: hidden;
   box-sizing: border-box;
-  animation: animateMovieinfo 1s;
+  animation: animateMovieinfo 1.6s;
 }
 .rmdb-movieinfo-content {
   background: rgba(0,0,0,.8);
-  animation: animateMovieinfo 1s;
+  animation: animateMovieinfo 1.6s;
 }
 
 ul.MuiGridList-root.makeStyles-root-242 {
-  animation: animateMovieinfo 1s;
+  animation: animateMovieinfo 1.6s;
 }
 .rmdb-imdb-rating {
   width: 100%;
+  animation: animateMovieinfo 1.6s;
 }
 p.rmdb-imdb-rating-number {
   font-size: 1rem;
   strong {
     color: black;
   }
+  animation: animateMovieinfo 1.6s;
 }
 
 img.MovieImage {
@@ -57,25 +59,18 @@ img.MovieImage {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  animation: animateMovieinfo 1s;
+  animation: animateMovieinfo 1.6s;
 }
-.rmdb-imdbButton {
-  color: yellow;
-}
-.rmdb-imdb-link {
-  color: orange;
-  font-weight: 900;
-  font-family: serif;
-  font-size: 1.3rem;
-  border-color: orange;
-  text-decoration-line: underline;
-}
-
 .rmdb-movieinfo-content-2 {
   background: rgba(0,0,0,.8);
+  animation: animateMovieinfo 1.6s;
 }
+.MovieImage {
+  animation: animateMovieinfo 1.6s;
 
+}
 .MuiGrid-root.rmdb-movieinfo-text.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-8 {
   padding-top: 7%;
   padding-bottom: 7%;
+  animation: animateMovieinfo 1.6s;
 }

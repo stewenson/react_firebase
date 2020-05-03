@@ -10,7 +10,7 @@ const opacity = keyframes`
   }
 `;
 export const MovieTitle = styled.div`
-    animation: 1s ${opacity};
+    animation: 1.6s ${opacity};
     font-style: italic;
     font-family: serif;
     font-weight: 900;

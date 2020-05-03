@@ -1,0 +1,52 @@
+@keyframes animationOpacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rmdb-moviecarousel {
+  animation: animationOpacity 2s;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: calc(0% + 0px);
+}
+.react-multiple-carousel__arrow--left {
+  left: calc(0% + 0px);
+}
+
+.react-multiple-carousel__arrow:hover {
+  position: absolute;
+  outline: 0;
+  transition: all .5s;
+  z-index: 1000;
+  border-radius: 0px;
+  //background: #6c757d;
+  min-width: auto;
+  min-height: 100%;
+  opacity: 1;
+  cursor: pointer;
+  width: 40px;
+}
+.react-multiple-carousel__arrow::before {
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  display: block;
+  font-family: revicons;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+}
+.rmdb-item-animation:hover {
+  width: 250px;
+}
+.react-multi-carousel-list {
+  animation: animationOpacity 2s;
+}

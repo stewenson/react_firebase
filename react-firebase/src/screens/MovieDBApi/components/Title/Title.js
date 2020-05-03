@@ -6,10 +6,9 @@ export default function Title(props) {
         <Typography  style={{ color: props.color ? props.color : '',
             paddingLeft: props.paddingLeft ? props.paddingLeft : '',
             marginTop: props.marginTop ? props.marginTop : '',
+            paddingTop: props.paddingTop ? props.paddingTop : '',
             fontWeight: props.fontWeight ? props.fontWeight : ''
-        }}
-            variant={props.variant}
-                     align={props.align}
+        }} variant={props.variant} align={props.align} gutterBottom
         >
             {props.title} {props.date ? props.date : null}
         </Typography>

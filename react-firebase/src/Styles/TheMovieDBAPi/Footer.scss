@@ -1,0 +1,24 @@
+@keyframes animationOpacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rmdb-footer {
+  background: rgb(46, 47, 56);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  img {
+    width: 50%;
+    height: 50%;
+  }
+  animation: animationOpacity 2s;
+}
+
+#root {
+  animation: animationOpacity 1s;
+}

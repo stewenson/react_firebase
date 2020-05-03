@@ -19,6 +19,7 @@ export default function SearchResult(props) {
     const handleChange = (event, value) => {
         setCurrentPage(value);
         dispatch(searchAction(props.title, value))
+        // window.scrollTo(0, 0);
     };
 
     return (
