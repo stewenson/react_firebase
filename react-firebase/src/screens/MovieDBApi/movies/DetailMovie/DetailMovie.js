@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
                 /*  Redux Actions */
-import {getDetailMovieAction} from "../../actions/getDetailMovieAction";
-import {getCreditsAction} from "../../actions/getCreditsAction";
+import {getDetailMovie} from "../../actions/getDetailMovie";
+import {getCredits} from "../../actions/getCredits";
 import {getVideoAction} from "../../actions/getVideoAction";
 import {getTokenAction} from "../../actions/getTokenAction";
                 /* Material-ui */
@@ -14,8 +14,8 @@ import Title from "../../components/Title/Title";
 import MovieImage from "../../components/MovieImage/MovieImage";
 import Actors from "../../components/Actors/Actors";
 import {getReviewsAction} from "../../actions/getReviewsAction";
-import {clearDetailAction} from "../../actions/clearDetailAction";
-import {getCreditsSeasonAction} from "../../actions/getCreditsSeasonAction";
+import {clearDetail} from "../../actions/clearDetail";
+import {getCreditsSeason} from "../../actions/getCreditsSeason";
 import Trailers from "../../components/Trailers/Trailers";
 import ProductionCompanies from "../../components/ProductionCompanies/ProductionCompanies";
 import ProductionCountries from "../../components/ProductionCountries/ProductionCountries";
@@ -30,7 +30,7 @@ import '../../../../Styles/TheMovieDBAPi/Background.scss';
                         /* Styled Components*/
 import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
 import {ContainerLine, LineHorizontal, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
-import {Recommendatios} from "../Recommendation";
+import {Recommendatios} from "../../components/Recommendation/Recommendation";
 import {getRecommAction} from "../../actions/getRecommAction";
 
 export default function DetailMovie() {
@@ -43,11 +43,11 @@ export default function DetailMovie() {
     useEffect(() => {
         if (load)
             try {
-                dispatch(getDetailMovieAction(params.id, params.category))
+                dispatch(getDetailMovie(params.id, params.category))
                 params.category === 'movie' ?
-                    dispatch(getCreditsAction(params.id))
+                    dispatch(getCredits(params.id))
                     :
-                    dispatch(getCreditsSeasonAction(params.id))
+                    dispatch(getCreditsSeason(params.id))
                 dispatch(getVideoAction(params.id, params.category))
                 dispatch(getReviewsAction(params.id, params.category))
                 dispatch(getRecommAction(params.id, params.category))
@@ -63,7 +63,7 @@ export default function DetailMovie() {
     useEffect(() => {
         return () => {
             isLoad(false)
-            dispatch(clearDetailAction())
+            dispatch(clearDetail())
         }
     },[dispatch, load])
 
@@ -103,7 +103,7 @@ export default function DetailMovie() {
                                             {data.detail.title ? data.detail.title : data.detail.name}  {data.detail.release_date ? TitleDate(data.detail.release_date) : '' }
                                              { data.detail.first_air_date ? `${TitleDate(data.detail.first_air_date)} -` : ''}  { data.detail.last_air_date ? TitleDate(data.detail.last_air_date) : ''}
                                         </MovieTitle>
-                                        <Title title={` “ ${data.detail.tagline ? data.detail.tagline : ''} „`} variant={'h5'} />
+                                        <Title title={`${data.detail.tagline ?  '“' + data.detail.tagline + '„' : ''} `} variant={'h5'} />
                                         <LineHorizontal />
 
                                         {/*   Movie info   */}
@@ -141,16 +141,22 @@ export default function DetailMovie() {
                                 <Title title={'Casts'} variant={'h5'} marginTop={'10px'} color={'black'}/>
                                 <LineHorizontalBlack />
                                 <Actors actors={data.credits.cast}/>
-
+                                </>
+                            :
+                            null
+                        }
+                        {data.credits.crew ?
+                            <>
                                 {/*   Crews list   */}
                                 <Title title={'Crews'} variant={'h5'} marginTop={'10px'} color={'black'}/>
                                 <LineHorizontalBlack />
                                 <Actors actors={data.credits.crew}/>
                                 <ContainerLine />
                             </>
-                            :
-                            ''
-                        }
+                                :
+                                null
+                                }
+
 
                         {/*   Detail   */}
                         <Title title={'Details'} variant={'h5'} marginTop={'3%'} color={'black'}/>
@@ -228,11 +234,18 @@ export default function DetailMovie() {
                         <LineHorizontalBlack />
                         <Recommendatios data={data.recommendations.results} category={params.category}/>
 
-                        {/*   Reviews List  */}
-                        <Title title={'Reviews'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                        <LineHorizontalBlack />
-                        <ReviewsList reviews={data.reviews.results}/>
-                        <ContainerLine />
+                        {data.reviews ?
+                               // Reviews List
+                            <React.Fragment>
+                                <Title title={'Reviews'} variant={'h5'} marginTop={'3%'} color={'black'}/>
+                                <LineHorizontalBlack />
+                                <ReviewsList reviews={data.reviews.results}/>
+                                <ContainerLine />
+                            </React.Fragment>
+                            :
+                            null
+                        }
+
 
                     {/*    Seasons list    */}
                         {data.detail.seasons ?

@@ -19,3 +19,9 @@ export const CarouselImage = styled.img`
     padding: 0px 4%;
 `;
 
+export const SearchImage = styled.img`
+    animation: 1s ${opacity};
+    width: 100%;
+    height: auto;
+    padding: 0px 4%;
+`;

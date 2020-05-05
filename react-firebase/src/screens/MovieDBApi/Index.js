@@ -4,9 +4,9 @@ import Main from "./layout/Main";
 import DetailMovie from "./movies/DetailMovie/DetailMovie";
 import {Route, Switch} from "react-router-dom";
 import Footer from "./layout/Footer";
-import SearchMovie from "./SearchMovie/SearchMovie";
+import SearchMovie from "./movies/SearchMovie/SearchMovie";
 
-export default function MovieDbApi() {
+export default function Index() {
 
     return (
         <div>
@@ -20,6 +20,3 @@ export default function MovieDbApi() {
         </div>
     )
 }
-
-// API key
-    // 3005d94c9609dfff31bb87e2643367b4

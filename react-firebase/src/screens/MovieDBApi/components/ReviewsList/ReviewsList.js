@@ -41,16 +41,19 @@ export default function ReviewsList(props) {
                         {props.reviews ? Object.entries(props.reviews)
                                 .slice(indexOfFirstTodo, indexOfLastTodo)
                                 .map(([key,review]) => (
+                                    review.author ?
                                     <Grid key={review.id} item xs={12} md={12}>
                                         <Title title={review.author} variant={'h5'} color={'red'} />
                                         <div  className='review-content'>
                                             <Title title={review.content} variant={'body1'} />
                                         </div>
                                     </Grid>
+                                        :
+                                        <Title title={'No reviews'} variant={'body1'}  color={'black'}/>
                                     // </div>
                                 ))
                             :
-                            <Title title={'No reviews'} variant={'body1'}  color={'black'}/>
+                            null
                         }
                     </Grid>
 

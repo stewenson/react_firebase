@@ -1,15 +1,15 @@
 import {GET_POPULAR_MOVIES, ERROR} from "../actions/getPopMovAction";
 import {GET_POPULAR_SERIES} from "../actions/getPopSeriesAction";
 import {GET_FAMILY_MOVIES} from "../actions/getFamilyMovAction";
-import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovieAcrion";
-import {GET_DETAIL_MOVIE} from "../actions/getDetailMovieAction";
-import {GET_CREDITS} from "../actions/getCreditsAction";
-import {GET_CREDITS_SEASON} from "../actions/getCreditsSeasonAction";
+import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovie";
+import {GET_DETAIL_MOVIE} from "../actions/getDetailMovie";
+import {GET_CREDITS} from "../actions/getCredits";
+import {GET_CREDITS_SEASON} from "../actions/getCreditsSeason";
 import {GET_VIDEO} from "../actions/getVideoAction";
 import {GET_TOKEN} from "../actions/getTokenAction";
 import {GET_REVIEWS} from "../actions/getReviewsAction";
 import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchAction";
-import {CLEAR_DATA} from "../actions/clearDetailAction";
+import {CLEAR_DATA} from "../actions/clearDetail";
 import {GET_RECOMMANDATIONS} from "../actions/getRecommAction";
 
 const initState = {
@@ -105,14 +105,15 @@ function movieDbApiReducer(state = initState, action) {
             return {
                 ...state,
                 searchResult: action.payload,
-                title: action.title
-            };
-        case SEARCH_ERROR:
-            return {
-                ...state,
-                error: action.payload,
+                title: action.title,
+                error: action.msg
             };
         case ERROR:
+            return {
+                ...state,
+                error: action.msg
+            };
+        case SEARCH_ERROR:
             return {
                 ...state,
                 error: action.msg

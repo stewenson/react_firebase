@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import 'react-multi-carousel/lib/styles.css';
-import '../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
+import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
 import Carousel from "react-multi-carousel";
 import {Link} from "react-router-dom";
-import Progress from "../../../Components/Progress/Progress";
-import {CarouselImage} from "../../../Styles/TheMovieDBAPi/CarouselImg";
-import Title from "../components/Title/Title";
+import Progress from "../../../../Components/Progress/Progress";
+import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
+import Title from "../../components/Title/Title";
 import {useDispatch} from "react-redux";
-import {clearDetailAction} from "../actions/clearDetailAction";
+import {clearDetail} from "../../actions/clearDetail";
 
 export const MovieCarousel = (props) => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const MovieCarousel = (props) => {
     useEffect(() => {
         return async ()=> {
             await isLoad(false);
-            await dispatch(clearDetailAction());
+            await dispatch(clearDetail());
         }
     },[load, dispatch]);
 

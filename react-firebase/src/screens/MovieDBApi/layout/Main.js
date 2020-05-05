@@ -4,11 +4,11 @@ import '../../../Styles/TheMovieDBAPi/MainContainer.scss';
 import Title from "../components/Title/Title";
 import {useDispatch, useSelector} from "react-redux";
 import {getPopMovAction} from "../actions/getPopMovAction";
-import {clearDetailAction} from "../actions/clearDetailAction";
-import {MovieCarousel} from "../movies/MovieCarousel";
+import {clearDetail} from "../actions/clearDetail";
+import {MovieCarousel} from "../components/MovieCarousel/MovieCarousel";
 import {getPopSeriesAction} from "../actions/getPopSeriesAction";
 import {getFamilyMovAction} from "../actions/getFamilyMovAction";
-import {getDocumMovieAction} from "../actions/getDocumMovieAcrion";
+import {getDocumMovieAction} from "../actions/getDocumMovie";
 
 export default function Main() {
     const dispatch = useDispatch();
@@ -39,8 +39,7 @@ export default function Main() {
     useEffect(() => {
         return () => {
             isLoad(false)
-            dispatch(clearDetailAction())
-            console.log('unmount')
+            dispatch(clearDetail())
         }
     },[dispatch, load])
 

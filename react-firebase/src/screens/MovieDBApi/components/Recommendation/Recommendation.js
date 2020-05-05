@@ -1,10 +1,10 @@
 import React from "react";
 import 'react-multi-carousel/lib/styles.css';
-import '../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
+import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
 import Carousel from "react-multi-carousel";
 import {Link} from "react-router-dom";
-import Progress from "../../../Components/Progress/Progress";
-import {CarouselImage} from "../../../Styles/TheMovieDBAPi/CarouselImg";
+import Progress from "../../../../Components/Progress/Progress";
+import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
 
 export const Recommendatios = (props) => {
 
@@ -70,17 +70,16 @@ export const Recommendatios = (props) => {
                       additionalTransfrom={0}
             >
                 {props.data ? props.data.map((title) => (
+                    title.poster_path ?
                         <div key={title.id} className='Title'>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
-                                {title.poster_path ?
-                                    <div>
-                                        <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
-                                    </div>
-                                    :
-                                    null
-                                }
+                                <div>
+                                    <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
+                                </div>
                             </Link>
                         </div>
+                        :
+                        null
                     ))
                     :
                     <Progress/>

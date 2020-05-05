@@ -1,6 +1,6 @@
 import axios from "axios";
 export const SEARCH_MOVIE = "SEARCH_MOVIE";
-export const SEARCH_ERROR = "ERROR";
+export const SEARCH_ERROR = "SEARCH_ERROR";
 
 
 export const searchAction = (title, page) =>  {
@@ -11,14 +11,15 @@ export const searchAction = (title, page) =>  {
                 dispatch({
                     type: SEARCH_MOVIE,
                     payload: res.data,
-                    title: title
+                    title: title,
+                    msg: ''
                 })
             )
-            .catch(e =>
+            .catch(
                 dispatch({
-                    type: SEARCH_ERROR,
-                    msg: "Movie doesnt exist"
+                type: SEARCH_ERROR,
+                msg: "Movie not Found"
                 })
-            );
+            )
     };
 };

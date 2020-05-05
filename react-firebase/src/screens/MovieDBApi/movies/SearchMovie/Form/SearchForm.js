@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import {useDispatch} from "react-redux";
 import {makeStyles} from "@material-ui/core/styles";
 import {ValidationSchema} from "./ValidationSchema";
-import {searchAction} from "../../actions/searchAction";
+import {searchAction} from "../../../actions/searchAction";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
