@@ -3,11 +3,11 @@
     background-repeat: no-repeat;
     width: 80%;
     height: auto;
-    padding: 40px 40px;
+    padding: 50px 40px;
     box-sizing: border-box;
     animation: animateMovieinfo 1s;
     .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
-        padding-top: 0px;
+        padding-top: 5%;
     }
     form {
         margin-top: 40px;
@@ -34,7 +34,6 @@
         opacity: 1;
     }
 }
-
-.rmdb-main-container {
-    padding-top: 40px;
+.MuiContainer-root.MuiContainer-maxWidthMd {
+    padding-top: 1%;
 }

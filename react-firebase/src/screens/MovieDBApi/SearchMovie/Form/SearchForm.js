@@ -5,6 +5,10 @@ import {useDispatch} from "react-redux";
 import {makeStyles} from "@material-ui/core/styles";
 import {ValidationSchema} from "./ValidationSchema";
 import {searchAction} from "../../actions/searchAction";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import '../Styles/FormStyles.scss';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,22 +40,40 @@ export default function SearchForm () {
         onSubmit: SearchMovie
     });
     return (
-        <React.Fragment>
-            <form className={classes.root} onSubmit={formik.handleSubmit}>
-                    <TextField id="filled-basic"
-                               label="Enter movie title"
-                               name="title"
-                               type="text"
-                               placeholder="Search movie by title"
-                               inputProps={{ 'aria-label': 'Search movie by title' }}
-                               onChange={formik.handleChange}
-                               value={formik.values.title}
-                               fullWidth
-                    />
-                    <strong className='ErrorMessage'>
-                        {formik.errors.title ? <div>{formik.errors.title}</div> : null}
-                    </strong>
-            </form>
-        </React.Fragment>
+        <Container component="main" maxWidth="md">
+            <CssBaseline />
+            <div className={classes.paper}>
+                {/*<Title title={'Search for movies, tv shows'} variant={'h5'} color={'black'} align={'center'}/>*/}
+                <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
+                   <div>
+                       <TextField
+                           variant="outlined"
+                           margin="normal"
+                           required
+                           fullWidth
+                           label="Search for movies, tv shows"
+                           name="title"
+                           type="text"
+                           placeholder="Search for movies, tv shows"
+                           inputProps={{ 'aria-label': 'Search for movies, tv shows' }}
+                           onChange={formik.handleChange}
+                           value={formik.values.title}
+                       />
+                       <strong className='ErrorMessage'>
+                           {formik.errors.title ? <div>{formik.errors.title}</div> : null}
+                       </strong>
+                       <Button
+                           type="submit"
+
+                           variant="contained"
+                           color="primary"
+                           className={classes.submit}
+                       >
+                           Search
+                       </Button>
+                   </div>
+                </form>
+            </div>
+        </Container>
     );
 };
