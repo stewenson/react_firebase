@@ -3,11 +3,11 @@ import {Container} from "@material-ui/core";
 import '../../../Styles/TheMovieDBAPi/MainContainer.scss';
 import Title from "../components/Title/Title";
 import {useDispatch, useSelector} from "react-redux";
-import {getPopMovAction} from "../actions/getPopMovAction";
+import {getPopuparMovie} from "../actions/getPopuparMovie";
 import {clearDetail} from "../actions/clearDetail";
 import {MovieCarousel} from "../components/MovieCarousel/MovieCarousel";
-import {getPopSeriesAction} from "../actions/getPopSeriesAction";
-import {getFamilyMovAction} from "../actions/getFamilyMovAction";
+import {getPopuparSeries} from "../actions/getPopuparSeries";
+import {getFamilyMovie} from "../actions/getFamilyMovie";
 import {getDocumMovieAction} from "../actions/getDocumMovie";
 
 export default function Main() {
@@ -21,29 +21,28 @@ export default function Main() {
     const dataSeries = popSeries.series.results
     const dataFamily = family.family.results
     const dataDocument = document.document.results
-    const [load, isLoad] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect( () => {
-        if (load)
-            try  {
-                dispatch(getPopMovAction())
-                dispatch(getPopSeriesAction())
-                dispatch(getFamilyMovAction())
-                dispatch(getDocumMovieAction())
-            } catch (e) {
-                alert(e.message);
-            }
-    }, [load, dispatch])
+        const loadData = () => {
+            dispatch(getPopuparMovie())
+            dispatch(getPopuparSeries())
+            dispatch(getFamilyMovie())
+            dispatch(getDocumMovieAction())
+            setLoading(false);
+        };
+        loadData();
+    }, [loading, dispatch])
 
     // Unmounting
     useEffect(() => {
         return () => {
-            isLoad(false)
+            setLoading(true)
             dispatch(clearDetail())
         }
-    },[dispatch, load])
+    },[dispatch, loading])
 
-    if (!load) return null;
+    if (loading) return null;
 
     return (
         <Container maxWidth='xl' className='rmdb-main-container' >

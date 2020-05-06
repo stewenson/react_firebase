@@ -1,41 +1,32 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
-import Carousel from "react-multi-carousel";
-/* Actions */
-import {clearDetail} from "../../actions/clearDetail";
-/* Css */
+import React from "react";
 import 'react-multi-carousel/lib/styles.css';
 import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
-import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
-/* Components */
+import Carousel from "react-multi-carousel";
+import {Link} from "react-router-dom";
 import Progress from "../../../../Components/Progress/Progress";
+import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
 import Title from "../../components/Title/Title";
+import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
 
-export const MovieCarousel = (props) => {
-    const dispatch = useDispatch();
-    const [loading, setLoading]=useState(false);
+export const Recommendatios = (props) => {
 
-    useEffect(() => {
-        return async () => {
-            await dispatch(clearDetail());
-            setLoading(true);
-        }
-    },[loading, dispatch]);
-
-    if (loading) return null;
+    const scrotToTop = () => {
+        setTimeout(function () {
+            window.scrollTo(0, 0)
+        }, 1500)
+    }
 
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
-            items: 20,
-            slidesToSlide: 20
+            items: 7,
+            slidesToSlide: 7
         },
         desktop: {
             breakpoint: { max: 3000, min: 1741 },
-            items: 11,
-            slidesToSlide: 10
+            items: 7,
+            slidesToSlide: 7
         },
         tablet: {
             breakpoint: { max: 1054, min: 1045 },
@@ -73,13 +64,17 @@ export const MovieCarousel = (props) => {
             slidesToSlide: 9
         }
     }
+    if (props.data) {
+        if (props.data.length === 0) return null;
+    }
     if (!props.data) return null;
 
     return (
-        <div className='rmdb-moviecarousel'>
-            <Title paddingLeft={'3%'} className='Category' title={props.title} variant={'h5'} align={'left'} color={'white'} marginTop={props.marginTop}/>
+        <React.Fragment>
+            <Title title={'Recommendation'} variant={'h5'} marginTop={'3%'} color={'black'}/>
+            <LineHorizontalBlack/>
+            <div className='rmdb-moviecarousel'>
                 <Carousel responsive={responsive}
-                          ssr
                           itemClass={props.category}
                           transitionDuration={0}
                           swipeable
@@ -90,24 +85,24 @@ export const MovieCarousel = (props) => {
                           additionalTransfrom={0}
                 >
                     {props.data ? props.data.map((title) => (
-                        <div key={title.id} className='Title'>
-                            <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
-                                {title.poster_path ?
-                                    <div>
-                                        <CarouselImage
-                                            style={{ width: "100%", height: "100%" }}
-                                            src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
-                                    </div>
-                                    :
-                                    null
-                                }
-                            </Link>
-                        </div>
+                            title.poster_path ?
+                                <div key={title.id} className='Title'>
+                                    <Link onClick={scrotToTop} to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
+                                        <div>
+                                            <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
+                                        </div>
+                                    </Link>
+                                </div>
+                                :
+                                null
                         ))
                         :
                         <Progress/>
                     }
                 </Carousel>
-        </div>
+            </div>
+            <ContainerLine/>
+        </React.Fragment>
+
     )
 }

@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import Grid from "@material-ui/core/Grid";
-import {SearchImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
+import {SearchImage} from "../../../../../Styles/TheMovieDBAPi/CarouselImg";
 import {useDispatch} from "react-redux";
-import {searchAction} from "../../actions/searchAction";
-import Paginator from "../../../../Components/Pagination/Paginator";
+import {searchMovie} from "../../../actions/searchMovie";
+import Paginator from "../../../../../Components/Pagination/Paginator";
 import {Link} from "react-router-dom";
-import Title from "../Title/Title";
-import '../../movies/SearchMovie/Styles/SearchMovie.scss';
-import {clearError} from "../../actions/ClearError";
+import Title from "../../../components/Title/Title";
+import '../Styles/SearchMovie.scss';
+import {clearError} from "../../../actions/ClearError";
 
 export default function SearchResult(props) {
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function SearchResult(props) {
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
-        dispatch(searchAction(props.title, value))
+        dispatch(searchMovie(props.title, value))
         dispatch(clearError())
         window.scrollTo(0, 0);
     };

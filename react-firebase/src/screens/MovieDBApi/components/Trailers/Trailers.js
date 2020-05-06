@@ -1,9 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
+/* Material ui */
 import Button from '@material-ui/core/Button';
+/* Components */
 import TrailerCarousel from "../../components/TrailerCarousel/TrailerCarousel";
-import '../../../../Styles/TheMovieDBAPi/MovieTrailers.scss';
 import Progress from "../../../../Components/Progress/Progress";
+/* CSS */
+import '../../../../Styles/TheMovieDBAPi/MovieTrailers.scss';
 
 const customStyles = {
     content : {

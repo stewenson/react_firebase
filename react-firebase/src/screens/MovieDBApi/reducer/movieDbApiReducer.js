@@ -1,16 +1,16 @@
-import {GET_POPULAR_MOVIES, ERROR} from "../actions/getPopMovAction";
-import {GET_POPULAR_SERIES} from "../actions/getPopSeriesAction";
-import {GET_FAMILY_MOVIES} from "../actions/getFamilyMovAction";
+import {GET_POPULAR_MOVIES, ERROR} from "../actions/getPopuparMovie";
+import {GET_POPULAR_SERIES} from "../actions/getPopuparSeries";
+import {GET_FAMILY_MOVIES} from "../actions/getFamilyMovie";
 import {GET_DOCUMENT_MOVIES} from "../actions/getDocumMovie";
 import {GET_DETAIL_MOVIE} from "../actions/getDetailMovie";
 import {GET_CREDITS} from "../actions/getCredits";
 import {GET_CREDITS_SEASON} from "../actions/getCreditsSeason";
-import {GET_VIDEO} from "../actions/getVideoAction";
+import {GET_VIDEO} from "../actions/getVideo";
 import {GET_TOKEN} from "../actions/getTokenAction";
-import {GET_REVIEWS} from "../actions/getReviewsAction";
-import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchAction";
+import {GET_REVIEWS} from "../actions/getReviews";
+import {SEARCH_ERROR, SEARCH_MOVIE} from "../actions/searchMovie";
 import {CLEAR_DATA} from "../actions/clearDetail";
-import {GET_RECOMMANDATIONS} from "../actions/getRecommAction";
+import {GET_RECOMMANDATIONS} from "../actions/getRecommendation";
 
 const initState = {
     movies: [],

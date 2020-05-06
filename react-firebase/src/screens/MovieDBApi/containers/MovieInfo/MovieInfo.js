@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import {LineVertical} from "../../../../Styles/TheMovieDBAPi/Line";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import ListGenres from "../Genres/ListGenres";
+import Genres from "../Genres/Genres";
 
 export const MovieInfo = (props) => {
     return (
@@ -18,7 +18,7 @@ export const MovieInfo = (props) => {
             </Grid>
             <LineVertical />
             <Grid item>
-                <ListGenres genres={props.genres}/>
+                <Genres genres={props.genres}/>
             </Grid>
             <LineVertical />
             {props.numOfSeasons || props.numberOfEpisodes ?

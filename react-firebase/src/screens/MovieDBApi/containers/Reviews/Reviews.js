@@ -3,8 +3,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import Paginator from "../../../../Components/Pagination/Paginator";
 import '../../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
 import Grid from "@material-ui/core/Grid";
-import Title from "../Title/Title";
+import Title from "../../../MovieDBApi/components/Title/Title";
 import '../../../../Styles/TheMovieDBAPi/ReviewContent.scss';
+import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,8 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ReviewsList(props) {
+export const  Reviews = (props) => {
     const classes = useStyles();
+
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [todoPerPage] = useState(1);
@@ -27,15 +29,20 @@ export default function ReviewsList(props) {
     let totalData;
     if (props.reviews) {
         totalData = Object.entries(props.reviews).length;
+        if (totalData === 0) return null;
     }
 
     const handleChange = (event, value) => {
         setCurrentPage(value);
     };
-    // console.log(props.reviews)
+
+    if (!props.reviews) return null;
 
     return (
-        <div className={classes.root}>
+        <React.Fragment>
+            <Title title={'Reviews'} variant={'h5'} marginTop={'3%'} color={'black'}/>
+            <LineHorizontalBlack />
+            <div className={classes.root}>
                 <div className={classes.root}>
                     <Grid container spacing={3}>
                         {props.reviews ? Object.entries(props.reviews)
@@ -63,7 +70,9 @@ export default function ReviewsList(props) {
                     page={currentPage}
                     changed={handleChange}
                 />
-        </div>
+            </div>
+            <ContainerLine/>
+        </React.Fragment>
 
     )
 }

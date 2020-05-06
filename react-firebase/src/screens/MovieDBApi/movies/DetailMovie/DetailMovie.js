@@ -1,266 +1,199 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-                /*  Redux Actions */
-import {getDetailMovie} from "../../actions/getDetailMovie";
-import {getCredits} from "../../actions/getCredits";
-import {getVideoAction} from "../../actions/getVideoAction";
-import {getTokenAction} from "../../actions/getTokenAction";
-                /* Material-ui */
+/* Material-ui */
 import Grid from '@material-ui/core/Grid';
 import Container from "@material-ui/core/Container";
-                /* Comoponents */
-import Title from "../../components/Title/Title";
-import MovieImage from "../../components/MovieImage/MovieImage";
-import Actors from "../../components/Actors/Actors";
-import {getReviewsAction} from "../../actions/getReviewsAction";
+/*  Redux Actions */
+import {getDetailMovie} from "../../actions/getDetailMovie";
+import {getCredits} from "../../actions/getCredits";
+import {getVideo} from "../../actions/getVideo";
+import {getTokenAction} from "../../actions/getTokenAction";
+import {getReviews} from "../../actions/getReviews";
 import {clearDetail} from "../../actions/clearDetail";
 import {getCreditsSeason} from "../../actions/getCreditsSeason";
+import {getRecommendation} from "../../actions/getRecommendation";
+/* Comoponents */
+import Title from "../../components/Title/Title";
+import MovieImage from "../../components/MovieImage/MovieImage";
 import Trailers from "../../components/Trailers/Trailers";
-import ProductionCompanies from "../../components/ProductionCompanies/ProductionCompanies";
-import ProductionCountries from "../../components/ProductionCountries/ProductionCountries";
-import ReviewsList from "../../components/ReviewsList/ReviewsList";
-import Progress from "../../../../Components/Progress/Progress";
-import Networks from "../../components/Networks/Networks";
-import SeasonList from "../../components/SeasonList/SeasonList";
 import {TitleDate} from "../../components/TitleDate/TitleDate";
-import {MovieInfo} from "../../components/MovieInfo/MovieInfo";
+/* Containers */
+import ProductionCompanies from "../../containers/ProductionCompanies/ProductionCompanies";
+import ProductionCountries from "../../containers/ProductionCountries/ProductionCountries";
+import {Reviews} from "../../containers/Reviews/Reviews";
+import Networks from "../../containers/Networks/Networks";
+import Seasons from "../../containers/Seasons/Seasons";
+import {MovieInfo} from "../../containers/MovieInfo/MovieInfo";
+import {Recommendatios} from "../../containers/Recommendation/Recommendation";
+import {Credits} from "../../containers/Credits/Credits";
+import {BoxOffice} from "../../containers/BoxOffice/BoxOffice";
+import {Detail} from "../../containers/Detail/Detail";
                         /* Styles */
 import '../../../../Styles/TheMovieDBAPi/Background.scss';
                         /* Styled Components*/
 import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
-import {ContainerLine, LineHorizontal, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
-import {Recommendatios} from "../../components/Recommendation/Recommendation";
-import {getRecommAction} from "../../actions/getRecommAction";
+import {ContainerLine, LineHorizontal} from "../../../../Styles/TheMovieDBAPi/Line";
+import {LastEpisode} from "../../containers/LastEpisode/LastEpisode";
 
 export default function DetailMovie() {
     const params = useParams();
     const dispatch = useDispatch();
     const data = useSelector(state => state.movieDbAPI);
-    const [load, isLoad] = useState(true);
+    const [loading, setLoading] = useState(true);
     const imageUrl = `http://image.tmdb.org/t/p/original/` + data.detail.backdrop_path;
 
-    useEffect(() => {
-        if (load)
-            try {
-                dispatch(getDetailMovie(params.id, params.category))
-                params.category === 'movie' ?
-                    dispatch(getCredits(params.id))
-                    :
-                    dispatch(getCreditsSeason(params.id))
-                dispatch(getVideoAction(params.id, params.category))
-                dispatch(getReviewsAction(params.id, params.category))
-                dispatch(getRecommAction(params.id, params.category))
-                dispatch(getTokenAction())
-                window.scrollTo(0, 0)
-            } catch (e) {
-          alert(e.message);
-        }
 
-    },[dispatch, params.id, params.category, load])
+    useEffect(() => {
+        const loadData = () => {
+            dispatch(getDetailMovie(params.id, params.category))
+            params.category === 'movie' ?
+                dispatch(getCredits(params.id))
+                :
+                dispatch(getCreditsSeason(params.id))
+            dispatch(getVideo(params.id, params.category))
+            dispatch(getReviews(params.id, params.category))
+            dispatch(getRecommendation(params.id, params.category))
+            dispatch(getTokenAction())
+            setLoading(false);
+        };
+        loadData();
+    }, [dispatch, params.id, params.category, loading])
 
     // Unmounting
     useEffect(() => {
         return () => {
-            isLoad(false)
+            setLoading(true)
             dispatch(clearDetail())
         }
-    },[dispatch, load])
+    }, [dispatch, loading])
 
-    if (!load) return null;
+    if (loading) return null;
+
+    if (data.detail.last_episode_to_air) {
+        console.log(data.detail.last_episode_to_air)
+    }
 
     return (
         <React.Fragment>
             {/*{data.detail ?*/}
-                <div>
+            <div>
+                {/*  Bckgroung image  */}
+                <div className="rmdb-movieinfo"
+                     style={{
+                         background: data.detail.backdrop_path
+                             ? `url(${imageUrl})`
+                             : null
+                     }}>
 
-                     {/*  Bckgroung image  */}
-                    <div className="rmdb-movieinfo"
-                         style={{
-                             background: data.detail.backdrop_path
-                                 ? `url(${imageUrl})`
-                                 : <Progress />
-                         }}>
+                    {/*   Main container   */}
+                    <Container>
+                        <div className="rmdb-description-container">
+                            <Grid container spacing={3} className="rmdb-movieinfo-content">
+                                {/*Movie image*/}
+                                <Grid item xs={12} sm={4} className="rmdb-movieinfo-thumb">
+                                    {data.detail.poster_path ?
+                                        <MovieImage autofocud image={data.detail.poster_path}/>
+                                        :
+                                        null
+                                    }
+                                </Grid>
 
-                        {/*   Main container   */}
-                        <Container>
-                            <div className="rmdb-description-container">
-                                <Grid container spacing={3} className="rmdb-movieinfo-content">
-                                    {/*Movie image*/}
-                                    <Grid item xs={12} sm={4} className="rmdb-movieinfo-thumb">
-                                        {data.detail.poster_path ?
-                                            <MovieImage autofocud image={data.detail.poster_path}/>
-                                            :
-                                            null
-                                        }
-                                    </Grid>
+                                {/*   Movie info Title, Overview   */}
+                                <Grid item xs={12} sm={8} className="rmdb-movieinfo-text">
 
-                                    {/*   Movie info Title, Overview   */}
-                                    <Grid item xs={12} sm={8} className="rmdb-movieinfo-text">
+                                    {/*  TitleDate component to get only year   */}
+                                    <MovieTitle>
+                                        {data.detail.title ? data.detail.title : data.detail.name} {data.detail.release_date ? TitleDate(data.detail.release_date) : ''}
+                                        {data.detail.first_air_date ? `${TitleDate(data.detail.first_air_date)} -` : ''} {data.detail.last_air_date ? TitleDate(data.detail.last_air_date) : ''}
+                                    </MovieTitle>
+                                    <Title title={`${data.detail.tagline ? '“' + data.detail.tagline + '„' : ''} `}
+                                           variant={'h5'}/>
+                                    <LineHorizontal/>
 
-                                        {/*  TitleDate component to get only year   */}
-                                        <MovieTitle>
-                                            {data.detail.title ? data.detail.title : data.detail.name}  {data.detail.release_date ? TitleDate(data.detail.release_date) : '' }
-                                             { data.detail.first_air_date ? `${TitleDate(data.detail.first_air_date)} -` : ''}  { data.detail.last_air_date ? TitleDate(data.detail.last_air_date) : ''}
-                                        </MovieTitle>
-                                        <Title title={`${data.detail.tagline ?  '“' + data.detail.tagline + '„' : ''} `} variant={'h5'} />
-                                        <LineHorizontal />
+                                    {/*   Movie info   */}
+                                    <MovieInfo runtime={data.detail.runtime}
+                                               episodeRuntime={data.detail.episode_runtime}
+                                               voteAverage={data.detail.vote_average}
+                                               genres={data.detail.genres}
+                                               numOfSeasons={data.detail.number_of_seasons}
+                                               numberOfEpisodes={data.detail.number_of_episodes}
+                                    />
 
-                                        {/*   Movie info   */}
-                                        <MovieInfo runtime={data.detail.runtime}
-                                                   episodeRuntime={data.detail.episode_runtime}
-                                                   voteAverage={data.detail.vote_average}
-                                                   genres={data.detail.genres}
-                                                   numOfSeasons={data.detail.number_of_seasons}
-                                                   numberOfEpisodes={data.detail.number_of_episodes}
-                                        />
+                                    {/*   Overview    */}
+                                    <Title title={'Overview'} variant={'h5'} color={'orange'} marginTop={'3%'}/>
+                                    <Title title={data.detail.overview} variant={'h6'}/>
 
-                                        {/*   Overview    */}
-                                        <Title title={'Overview'} variant={'h5'} color={'orange'} marginTop={'3%'}/>
-                                        <Title title={data.detail.overview} variant={'h6'} />
-
-                                        {/*   Trailers button container   */}
-                                        <Container>
-                                            <Grid container spacing={3}>
-                                                <Grid item xs={12} sm={6}>
-                                                    <Trailers videos={data} />
-                                                </Grid>
+                                    {/*   Trailers button container   */}
+                                    <Container>
+                                        <Grid container spacing={3}>
+                                            <Grid item xs={12} sm={6}>
+                                                <Trailers videos={data}/>
                                             </Grid>
-                                        </Container>
-                                    </Grid>
+                                        </Grid>
+                                    </Container>
                                 </Grid>
-                            </div>
-                        </Container>
-                    </div>
-
-                    {/* Detail Container*/}
-                    <Container maxWidth='md' className='rmdb-detail-container'>
-                        {data.credits.cast ?
-                            <>
-                                {/*   Actors list   */}
-                                <Title title={'Casts'} variant={'h5'} marginTop={'10px'} color={'black'}/>
-                                <LineHorizontalBlack />
-                                <Actors actors={data.credits.cast}/>
-                                </>
-                            :
-                            null
-                        }
-                        {data.credits.crew ?
-                            <>
-                                {/*   Crews list   */}
-                                <Title title={'Crews'} variant={'h5'} marginTop={'10px'} color={'black'}/>
-                                <LineHorizontalBlack />
-                                <Actors actors={data.credits.crew}/>
-                                <ContainerLine />
-                            </>
-                                :
-                                null
-                                }
-
-
-                        {/*   Detail   */}
-                        <Title title={'Details'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                        <LineHorizontalBlack />
-                        <Grid container spacing={1}>
-                            <Grid item md={12}>
-                                <p className="rmdb-imdb-rating-number">
-                                    <strong>Language: </strong>
-                                    {data.detail.original_language}
-                                </p>
                             </Grid>
-                            <Grid item md={12}>
-                                <p className="rmdb-imdb-rating-number">
-                                    <strong>Released Date: </strong>
-                                    {data.detail.release_date ? data.detail.release_date : data.detail.first_air_date}
-                                </p>
-                            </Grid>
-
-                            {data.detail.production_countries ?
-                                <Grid item md={12} >
-                                    <p className="rmdb-imdb-rating-number">
-                                        <strong>Filming Location: </strong>
-                                    </p>
-                                    <ProductionCountries countries={data.detail.production_countries}/>
-                                </Grid>
-                                :
-                                ''
-                            }
-                            {data.detail.networks ?
-                                <Grid item md={12} >
-                                    <p className="rmdb-imdb-rating-number">
-                                        <strong>Networks: </strong>
-                                    </p>
-                                    <Networks networks={data.detail.networks}/>
-                                </Grid>
-                                :
-                                ''
-                            }
-                            <Grid item md={12} >
-                                <p className="rmdb-imdb-rating-number">
-                                    <strong>Filming Companies: </strong>
-                                </p>
-                                <ProductionCompanies companies={data.detail.production_companies}/>
-                            </Grid>
-                        </Grid>
-                        <ContainerLine />
-
-                        {data.detail.budget || data.detail.reneveue ?
-                            <>
-                                {/*   Box Office   */}
-                                <Title title={'Box Office'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                                <LineHorizontalBlack />
-                                <Grid container spacing={1}>
-                                    <Grid item md={12}>
-                                        <p className="rmdb-imdb-rating-number">
-                                            <strong>Budget: </strong>
-                                            $ {data.detail.budget} (estimated)
-                                        </p>
-                                    </Grid>
-                                    <Grid item md={12}>
-                                        <p className="rmdb-imdb-rating-number">
-                                            <strong>Revenue: </strong>
-                                            $ {data.detail.revenue}
-                                        </p>
-                                    </Grid>
-                                </Grid>
-                                <ContainerLine />
-                            </>
-                            :
-                            ''
-                        }
-
-                        {/*/!* Recommendation *!/*/}
-                        <Title title={'Recommendation'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                        <LineHorizontalBlack />
-                        <Recommendatios data={data.recommendations.results} category={params.category}/>
-
-                        {data.reviews ?
-                               // Reviews List
-                            <React.Fragment>
-                                <Title title={'Reviews'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                                <LineHorizontalBlack />
-                                <ReviewsList reviews={data.reviews.results}/>
-                                <ContainerLine />
-                            </React.Fragment>
-                            :
-                            null
-                        }
-
-
-                    {/*    Seasons list    */}
-                        {data.detail.seasons ?
-                            <>
-                                <Title title={'Seasons'} variant={'h5'} marginTop={'3%'} color={'black'}/>
-                                <LineHorizontalBlack />
-                                <SeasonList seasons={data.detail.seasons} />
-                                <ContainerLine />
-                                </>
-                            :
-                            ''
-                        }
-
+                        </div>
                     </Container>
                 </div>
+
+                {/* Detail */}
+                <Container maxWidth='md' className='rmdb-detail-container'>
+                    {/*List Of actors*/}
+                    <Credits casts={data.credits.cast}/>
+
+                    {/* List of crews*/}
+                    <Credits casts={data.credits.crew}/>
+
+                    {/*   Detail  Container */}
+                    <Detail langueage={data.detail.original_language}
+                            languageSeries={data.detail.languages}
+                            releaseDate={data.detail.release_date}
+                            firstAirDate={data.detail.first_air_date}
+                    />
+
+                    {/* Filming Countries container*/}
+                    <ProductionCountries countries={data.detail.production_countries}/>
+
+                    {/* Filming companies container*/}
+                    <ProductionCompanies companies={data.detail.production_companies}/>
+
+                    {/* Networks container*/}
+                    <Networks networks={data.detail.networks}/>
+
+                    {/* Box Office Container*/}
+                    <BoxOffice budget={data.detail.budget}
+                               revenue={data.detail.revenue}
+                    />
+
+                    {/* Last Episode*/}
+                    {data.detail.last_episode_to_air ?
+                        <LastEpisode
+                            airDate={data.detail.last_episode_to_air.air_date}
+                            seasonNumber={data.detail.last_episode_to_air.season_number}
+                            episodeNumber={data.detail.last_episode_to_air.episode_number}
+                            name={data.detail.last_episode_to_air.name}
+                            overview={data.detail.last_episode_to_air.overview}
+                            img={data.detail.last_episode_to_air.still_path}
+                        />
+                        :
+                        null
+                    }
+
+
+                    {/* Recommendaton container*/}
+                    <Recommendatios data={data.recommendations.results} category={params.category}/>
+
+                    {/* Reviews Container*/}
+                    <Reviews reviews={data.reviews.results}/>
+
+                    {/*    Seasons list    */}
+                    <Seasons seasons={data.detail.seasons}/>
+                    <ContainerLine/>
+
+                </Container>
+            </div>
         </React.Fragment>
     )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 
-export default function ListGenres(props) {
+export default function Genres(props) {
     return (
         <Grid container spacing={1}>
             {props.genres ?

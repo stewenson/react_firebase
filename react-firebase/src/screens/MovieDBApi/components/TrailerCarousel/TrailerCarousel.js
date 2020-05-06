@@ -1,7 +1,8 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-import Progress from "../../../../Components/Progress/Progress";
 import '../../../../Styles/TheMovieDBAPi/IFrame.scss';
+/* Components */
+import Title from "../Title/Title";
 
 export default function TrailerCarousel(props) {
     const responsive = {
@@ -12,6 +13,7 @@ export default function TrailerCarousel(props) {
         },
     };
 
+    if (props.videos.results) return <Title title={'No trailers'} align={'center'} variant={'h5'} color={'orange'} marginTop={'3%'}/>;
     return (
         <React.Fragment>
             <div>
@@ -28,7 +30,7 @@ export default function TrailerCarousel(props) {
                                     title="myFrame"
                                     id="application_area"
                                     key={video.id}
-                                    src={`http://www.youtube.com/embed/${video.key}?rel=0&autoplay=1`}
+                                    src={`http://www.youtube.com/embed/${video.key}`}
                                     frameBorder="0"
                                     allowFullScreen
                                     allow="autoplay; encrypted-media"
@@ -36,7 +38,7 @@ export default function TrailerCarousel(props) {
                             </div>
                         ))
                         :
-                        <Progress/>
+                        null
                     }
                 </Carousel>
             </div>

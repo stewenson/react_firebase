@@ -3,7 +3,7 @@ import '../../../../Styles/TheMovieDBAPi/SearchBar.scss';
 import SearchForm from "./Form/SearchForm";
 import {Container} from "@material-ui/core";
 import {useSelector} from "react-redux";
-import SearchResult from "../../components/SearchResult/SearchResult";
+import SearchResult from "./SearchResult/SearchResult";
 
 export default function SearchMovie() {
     const detail = useSelector(state => state.movieDbAPI);
