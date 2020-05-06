@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "../../components/Title/Title";
-import {LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
 import SingleLineGridList from "../../components/GridList/SingleLineGridList";
 
 export const Credits = (props) => {
@@ -9,9 +9,10 @@ export const Credits = (props) => {
 
     return (
         <div>
-            <Title title={'Casts'} variant={'h5'} marginTop={'10px'} color={'black'}/>
+            <Title title={props.title} variant={'h5'} marginTop={'10px'} color={'black'}/>
             <LineHorizontalBlack />
             <SingleLineGridList actors={props.casts}/>
+            <ContainerLine/>
         </div>
     )
 }

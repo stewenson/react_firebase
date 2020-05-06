@@ -19,10 +19,7 @@ import MovieImage from "../../components/MovieImage/MovieImage";
 import Trailers from "../../components/Trailers/Trailers";
 import {TitleDate} from "../../components/TitleDate/TitleDate";
 /* Containers */
-import ProductionCompanies from "../../containers/ProductionCompanies/ProductionCompanies";
-import ProductionCountries from "../../containers/ProductionCountries/ProductionCountries";
 import {Reviews} from "../../containers/Reviews/Reviews";
-import Networks from "../../containers/Networks/Networks";
 import Seasons from "../../containers/Seasons/Seasons";
 import {MovieInfo} from "../../containers/MovieInfo/MovieInfo";
 import {Recommendatios} from "../../containers/Recommendation/Recommendation";
@@ -33,7 +30,7 @@ import {Detail} from "../../containers/Detail/Detail";
 import '../../../../Styles/TheMovieDBAPi/Background.scss';
                         /* Styled Components*/
 import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
-import {ContainerLine, LineHorizontal} from "../../../../Styles/TheMovieDBAPi/Line";
+import {LineHorizontal} from "../../../../Styles/TheMovieDBAPi/Line";
 import {LastEpisode} from "../../containers/LastEpisode/LastEpisode";
 
 export default function DetailMovie() {
@@ -70,13 +67,12 @@ export default function DetailMovie() {
 
     if (loading) return null;
 
-    if (data.detail.last_episode_to_air) {
-        console.log(data.detail.last_episode_to_air)
-    }
+    if (data.detail.length === 0)
+        return (<Title title={'There is no data for this movie.'} variant={'h1'} align={'center'} />)
 
+    console.log(data.detail)
     return (
         <React.Fragment>
-            {/*{data.detail ?*/}
             <div>
                 {/*  Bckgroung image  */}
                 <div className="rmdb-movieinfo"
@@ -108,7 +104,7 @@ export default function DetailMovie() {
                                         {data.detail.first_air_date ? `${TitleDate(data.detail.first_air_date)} -` : ''} {data.detail.last_air_date ? TitleDate(data.detail.last_air_date) : ''}
                                     </MovieTitle>
                                     <Title title={`${data.detail.tagline ? '“' + data.detail.tagline + '„' : ''} `}
-                                           variant={'h5'}/>
+                                           variant={'h6'}/>
                                     <LineHorizontal/>
 
                                     {/*   Movie info   */}
@@ -121,8 +117,8 @@ export default function DetailMovie() {
                                     />
 
                                     {/*   Overview    */}
-                                    <Title title={'Overview'} variant={'h5'} color={'orange'} marginTop={'3%'}/>
-                                    <Title title={data.detail.overview} variant={'h6'}/>
+                                    <Title title={'Overview'} variant={'h6'} color={'orange'} marginTop={'3%'}/>
+                                    <Title title={data.detail.overview} variant={'body1'}/>
 
                                     {/*   Trailers button container   */}
                                     <Container>
@@ -141,26 +137,20 @@ export default function DetailMovie() {
                 {/* Detail */}
                 <Container maxWidth='md' className='rmdb-detail-container'>
                     {/*List Of actors*/}
-                    <Credits casts={data.credits.cast}/>
+                    <Credits title={'Casts'} casts={data.credits.cast}/>
 
                     {/* List of crews*/}
-                    <Credits casts={data.credits.crew}/>
+                    <Credits title={'Crews'} casts={data.credits.crew}/>
 
                     {/*   Detail  Container */}
                     <Detail langueage={data.detail.original_language}
                             languageSeries={data.detail.languages}
                             releaseDate={data.detail.release_date}
                             firstAirDate={data.detail.first_air_date}
+                            countries={data.detail.production_countries}
+                            companies={data.detail.production_companies}
+                            networks={data.detail.networks}
                     />
-
-                    {/* Filming Countries container*/}
-                    <ProductionCountries countries={data.detail.production_countries}/>
-
-                    {/* Filming companies container*/}
-                    <ProductionCompanies companies={data.detail.production_companies}/>
-
-                    {/* Networks container*/}
-                    <Networks networks={data.detail.networks}/>
 
                     {/* Box Office Container*/}
                     <BoxOffice budget={data.detail.budget}
@@ -190,7 +180,6 @@ export default function DetailMovie() {
 
                     {/*    Seasons list    */}
                     <Seasons seasons={data.detail.seasons}/>
-                    <ContainerLine/>
 
                 </Container>
             </div>

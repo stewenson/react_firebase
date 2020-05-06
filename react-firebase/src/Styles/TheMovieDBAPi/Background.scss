@@ -52,6 +52,17 @@ p.rmdb-imdb-rating-number {
   }
   animation: animateMovieinfo 1.6s;
 }
+.rmdb-text {
+  strong {
+    color: black;
+    font-size: 1.1rem;
+  }
+  p{
+    color: black;
+    font-size: 1.1rem;
+  }
+}
+
 
 img.MovieImage {
   max-width: 100%;
@@ -73,4 +84,13 @@ img.MovieImage {
   padding-top: 7%;
   padding-bottom: 7%;
   animation: animateMovieinfo 1.6s;
+}
+
+h5.MuiTypography-root.MuiTypography-h5.MuiTypography-gutterBottom,
+h2.MuiTypography-root.rmdb-actor-title.MuiTypography-h5 {
+  color: black;
+  font-family: cursive;
+  margin-top: 10px;
+  font-style: italic;
+  font-weight: 900;
 }

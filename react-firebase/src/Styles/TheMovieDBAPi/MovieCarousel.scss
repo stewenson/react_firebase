@@ -10,8 +10,7 @@
 
 .rmdb-moviecarousel {
   animation: animationOpacity 1s;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 0 2%;
 }
 
 .react-multiple-carousel__arrow--right {
@@ -44,9 +43,7 @@
   z-index: 2;
   position: relative;
 }
-.rmdb-item-animation:hover {
-  width: 250px;
-}
+
 .react-multi-carousel-list {
   animation: animationOpacity 1s;
 }

@@ -9,7 +9,6 @@ import 'react-multi-carousel/lib/styles.css';
 import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
 import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
 /* Components */
-import Progress from "../../../../Components/Progress/Progress";
 import Title from "../../components/Title/Title";
 
 export const MovieCarousel = (props) => {
@@ -17,8 +16,8 @@ export const MovieCarousel = (props) => {
     const [loading, setLoading]=useState(false);
 
     useEffect(() => {
-        return async () => {
-            await dispatch(clearDetail());
+        return  () => {
+            dispatch(clearDetail());
             setLoading(true);
         }
     },[loading, dispatch]);
@@ -34,8 +33,8 @@ export const MovieCarousel = (props) => {
         },
         desktop: {
             breakpoint: { max: 3000, min: 1741 },
-            items: 11,
-            slidesToSlide: 10
+            items: 10,
+            slidesToSlide: 9
         },
         tablet: {
             breakpoint: { max: 1054, min: 1045 },
@@ -79,7 +78,6 @@ export const MovieCarousel = (props) => {
         <div className='rmdb-moviecarousel'>
             <Title paddingLeft={'3%'} className='Category' title={props.title} variant={'h5'} align={'left'} color={'white'} marginTop={props.marginTop}/>
                 <Carousel responsive={responsive}
-                          ssr
                           itemClass={props.category}
                           transitionDuration={0}
                           swipeable
@@ -87,26 +85,20 @@ export const MovieCarousel = (props) => {
                           infinite={true}
                           keyBoardControl={true}
                           focusOnSelect={true}
-                          additionalTransfrom={0}
+                          focusO
                 >
-                    {props.data ? props.data.map((title) => (
-                        <div key={title.id} className='Title'>
+                    {props.data.map((title) => (
+                        title.poster_path ?
+                        <div key={title.id} className='item'>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
-                                {title.poster_path ?
-                                    <div>
-                                        <CarouselImage
-                                            style={{ width: "100%", height: "100%" }}
-                                            src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
-                                    </div>
-                                    :
-                                    null
-                                }
+                                <div>
+                                    <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
+                                </div>
                             </Link>
                         </div>
-                        ))
-                        :
-                        <Progress/>
-                    }
+                            :
+                            null
+                        ))}
                 </Carousel>
         </div>
     )

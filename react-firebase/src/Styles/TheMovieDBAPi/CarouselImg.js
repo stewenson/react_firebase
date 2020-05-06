@@ -15,7 +15,7 @@ export const CarouselImage = styled.img`
     animation: 1s ${opacity};
     width: 100%;
     height: auto;
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 0px 4%;
 `;
 

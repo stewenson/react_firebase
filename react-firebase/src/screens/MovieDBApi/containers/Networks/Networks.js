@@ -1,14 +1,13 @@
 import React from "react";
 import {CompaniesImage} from "../../../../Styles/TheMovieDBAPi/CompaniesImage";
 import Grid from "@material-ui/core/Grid";
-import {ContainerLine} from "../../../../Styles/TheMovieDBAPi/Line";
 
 export default function Networks(props) {
 
     if (!props.networks) return null;
     return (
         <Grid item md={12} >
-            <p className="rmdb-imdb-rating-number">
+            <p className="rmdb-text">
                 <strong>Networks: </strong>
             </p>
             {props.networks ?
@@ -16,14 +15,13 @@ export default function Networks(props) {
                     networks.logo_path ?
                         <CompaniesImage  key={networks.id} src={`http://image.tmdb.org/t/p/w92/`+ networks.logo_path} alt={networks.name}/>
                         :
-                        <p key={networks.id} className="rmdb-imdb-rating-number">
+                        <p key={networks.id} className="rmdb-text">
                             {networks.name}
                         </p>
                     )
                 )
                 : null
             }
-            <ContainerLine/>
         </Grid>
     )
 }

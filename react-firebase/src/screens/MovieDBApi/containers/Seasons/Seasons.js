@@ -5,7 +5,7 @@ import '../../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
 import Grid from "@material-ui/core/Grid";
 import Title from "../../components/Title/Title";
 import {SearchImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
-import {LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
 
 export default function Seasons(props) {
     // Pagination
@@ -53,6 +53,7 @@ export default function Seasons(props) {
                 page={currentPage}
                 changed={handleChange}
             />
+            <ContainerLine/>
         </React.Fragment>
     )
 }

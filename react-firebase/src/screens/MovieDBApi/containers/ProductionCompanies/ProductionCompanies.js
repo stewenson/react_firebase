@@ -8,7 +8,7 @@ export default function ProductionCompanies(props) {
 
     return (
         <Grid item xs={12} >
-            <p className="rmdb-imdb-rating-number">
+            <p className="rmdb-text">
                 <strong>Filming Companies: </strong>
             </p>
                 <Grid container spacing={1}>
@@ -17,7 +17,7 @@ export default function ProductionCompanies(props) {
                             companies.logo_path ?
                                 <CompaniesImage key={companies.id} src={`http://image.tmdb.org/t/p/w92/`+ companies.logo_path} alt={companies.name} />
                                 :
-                                <p key={companies.id} className="rmdb-imdb-rating-number">
+                                <p key={companies.id} className="rmdb-text">
                                     {companies.name}
                                 </p>
                             )

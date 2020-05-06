@@ -7,14 +7,14 @@ export default function ProductionCountries(props) {
 
     return (
         <Grid item xs={12} >
-            <p className="rmdb-imdb-rating-number">
+            <p className="rmdb-text">
                 <strong>Filming Location: </strong>
             </p>
             <Grid container spacing={1}>
                 {props.countries ?
                     Object.entries(props.countries).map(([key, countries]) => (
                         <Grid key={key} item>
-                            <p className="rmdb-imdb-rating-number">
+                            <p className="rmdb-text">
                                 {countries.name},
                             </p>
                         </Grid>
