@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import Progress from "../../../../Components/Progress/Progress";
 import Paginator from "../../../../Components/Pagination/Paginator";
-import '../../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
+import '../../Styles/SeasonDescr.scss';
 import Grid from "@material-ui/core/Grid";
 import Title from "../../components/Title/Title";
-import {SearchImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
-import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {SearchImage} from "../../Styles/CarouselImg";
+import {ContainerLine, LineHorizontalBlack} from "../../Styles/Line";
 
 export default function Seasons(props) {
     // Pagination

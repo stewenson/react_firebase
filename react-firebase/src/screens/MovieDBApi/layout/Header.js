@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Link} from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
-import {LinkStyle} from '../../../Styles/TheMovieDBAPi/LinkStyle';
-import {TextLink} from "../../../Styles/TheMovieDBAPi/LinkStyle";
+import {LinkStyle} from '../Styles/LinkStyle';
+import {TextLink} from "../Styles/LinkStyle";
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({

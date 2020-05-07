@@ -27,10 +27,10 @@ import {Credits} from "../../containers/Credits/Credits";
 import {BoxOffice} from "../../containers/BoxOffice/BoxOffice";
 import {Detail} from "../../containers/Detail/Detail";
                         /* Styles */
-import '../../../../Styles/TheMovieDBAPi/Background.scss';
+import '../../Styles/Background.scss';
                         /* Styled Components*/
-import {MovieTitle} from '../../../../Styles/TheMovieDBAPi/MovieTitle';
-import {LineHorizontal} from "../../../../Styles/TheMovieDBAPi/Line";
+import {MovieTitle} from '../../Styles/MovieTitle';
+import {LineHorizontal} from "../../Styles/Line";
 import {LastEpisode} from "../../containers/LastEpisode/LastEpisode";
 
 export default function DetailMovie() {
@@ -67,10 +67,6 @@ export default function DetailMovie() {
 
     if (loading) return null;
 
-    if (data.detail.length === 0)
-        return (<Title title={'There is no data for this movie.'} variant={'h1'} align={'center'} />)
-
-    console.log(data.detail)
     return (
         <React.Fragment>
             <div>

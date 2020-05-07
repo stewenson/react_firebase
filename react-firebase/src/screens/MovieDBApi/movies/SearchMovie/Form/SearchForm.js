@@ -47,6 +47,7 @@ export default function SearchForm () {
                 <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
                    <div>
                        <TextField
+                           autoFocus
                            variant="outlined"
                            margin="normal"
                            required

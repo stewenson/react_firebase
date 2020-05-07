@@ -1,8 +1,8 @@
 import React from "react";
 import Title from "../../components/Title/Title";
-import {LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {LineHorizontalBlack} from "../../Styles/Line";
 import Grid from "@material-ui/core/Grid";
-import {SearchImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
+import {SearchImage} from "../../Styles/CarouselImg";
 
 export const LastEpisode = ({airDate, seasonNumber, episodeNumber, name, overview, img}) => {
     return (

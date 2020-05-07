@@ -1,6 +1,6 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
-import '../../../../Styles/TheMovieDBAPi/IFrame.scss';
+import '../../Styles/IFrame.scss';
 /* Components */
 import Title from "../Title/Title";
 
@@ -13,15 +13,14 @@ export default function TrailerCarousel(props) {
         },
     };
 
-    console.log(props.videos.results.length)
     if (props.videos.results.length === 0) return <Title title={'No trailers'} align={'center'} variant={'h5'} color={'orange'} marginTop={'3%'}/>;
+
     return (
         <React.Fragment>
             <div>
                 <Carousel responsive={responsive}
                           swipeable={true}
                           draggable={false}
-                          infinite={true}
                           keyBoardControl={true}
                 >
                     {props.videos.results ? Object.entries(props.videos.results)

@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import {LineVertical} from "../../../../Styles/TheMovieDBAPi/Line";
+import {LineVertical} from "../../Styles/Line";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Genres from "../Genres/Genres";
 

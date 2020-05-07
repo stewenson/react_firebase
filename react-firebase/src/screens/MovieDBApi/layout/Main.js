@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Container} from "@material-ui/core";
-import '../../../Styles/TheMovieDBAPi/MainContainer.scss';
+import '../Styles/MainContainer.scss';
 import Title from "../components/Title/Title";
 import {useDispatch, useSelector} from "react-redux";
 import {getPopuparMovie} from "../actions/getPopuparMovie";

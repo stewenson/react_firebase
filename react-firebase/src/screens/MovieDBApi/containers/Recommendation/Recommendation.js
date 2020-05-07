@@ -1,12 +1,12 @@
 import React from "react";
 import 'react-multi-carousel/lib/styles.css';
-import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
+import '../../Styles/MovieCarousel.scss';
 import Carousel from "react-multi-carousel";
 import {Link} from "react-router-dom";
 import Progress from "../../../../Components/Progress/Progress";
-import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
+import {CarouselImage} from "../../Styles/CarouselImg";
 import Title from "../../components/Title/Title";
-import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {ContainerLine, LineHorizontalBlack} from "../../Styles/Line";
 
 export const Recommendatios = (props) => {
 
@@ -37,31 +37,6 @@ export const Recommendatios = (props) => {
             breakpoint: { max: 681, min: 0 },
             items: 3,
             slidesToSlide: 3,
-        },
-        respons2: {
-            breakpoint: { max: 868, min: 682 },
-            items: 4,
-            slidesToSlide: 4
-        },
-        respons3: {
-            breakpoint: { max: 1045, min: 872 },
-            items: 5,
-            slidesToSlide: 5
-        },
-        respons4: {
-            breakpoint: { max: 1214, min: 1054 },
-            items: 7,
-            slidesToSlide: 7
-        },
-        respons5: {
-            breakpoint: { max: 1396, min: 1215 },
-            items: 8,
-            slidesToSlide: 8,
-        },
-        respons6: {
-            breakpoint: { max: 1564, min: 1397 },
-            items: 9,
-            slidesToSlide: 9
         }
     }
     if (props.data) {
@@ -71,7 +46,7 @@ export const Recommendatios = (props) => {
 
     return (
         <React.Fragment>
-            <Title title={'Recommendation'} variant={'h5'} marginTop={'3%'} color={'black'}/>
+            <Title title={props.title} variant={'h5'} marginTop={'3%'} color={props.color ? props.color : 'black'}/>
             <LineHorizontalBlack/>
             <div className='rmdb-moviecarousel'>
                 <Carousel responsive={responsive}
@@ -87,7 +62,7 @@ export const Recommendatios = (props) => {
                     {props.data ? props.data.map((title) => (
                             title.poster_path ?
                                 <div key={title.id} className='Title'>
-                                    <Link onClick={scrotToTop} to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
+                                    <Link onClick={scrotToTop} to={{pathname: `/tmdbapi/${props.path}/detail/${props.category ? props.category : title.media_type}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                         <div>
                                             <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
                                         </div>

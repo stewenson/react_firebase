@@ -1,5 +1,5 @@
 import React from "react";
-import '../../../../Styles/TheMovieDBAPi/SearchBar.scss';
+import '../../Styles/SearchBar.scss';
 import SearchForm from "./Form/SearchForm";
 import {Container} from "@material-ui/core";
 import {useSelector} from "react-redux";

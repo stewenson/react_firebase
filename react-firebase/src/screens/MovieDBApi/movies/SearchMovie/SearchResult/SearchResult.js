@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Grid from "@material-ui/core/Grid";
-import {SearchImage} from "../../../../../Styles/TheMovieDBAPi/CarouselImg";
+import {SearchImage} from "../../../Styles/CarouselImg";
 import {useDispatch} from "react-redux";
 import {searchMovie} from "../../../actions/searchMovie";
 import Paginator from "../../../../../Components/Pagination/Paginator";
@@ -26,6 +26,7 @@ export default function SearchResult(props) {
     };
 
     if (!props.data.results) return null;
+    if (props.data.results.length === 0) return <Title title={'No movies available for this name'} align={'center'} variant={'h3'} color={'red'} marginTop={'3%'}/>;
 
     return (
         <React.Fragment>
@@ -47,7 +48,7 @@ export default function SearchResult(props) {
                     </Grid>
                     :
                     null
-            ))
+                ))
             }
             <Grid container spacing={1}>
                 {props.data.results ?

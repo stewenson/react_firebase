@@ -1,5 +1,5 @@
 import React from "react";
-import {CompaniesImage} from "../../../../Styles/TheMovieDBAPi/CompaniesImage";
+import {CompaniesImage} from "../../Styles/CompaniesImage";
 import Grid from "@material-ui/core/Grid";
 
 export default function Networks(props) {

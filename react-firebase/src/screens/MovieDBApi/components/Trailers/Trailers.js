@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import TrailerCarousel from "../../components/TrailerCarousel/TrailerCarousel";
 import Progress from "../../../../Components/Progress/Progress";
 /* CSS */
-import '../../../../Styles/TheMovieDBAPi/MovieTrailers.scss';
+import '../../Styles/MovieTrailers.scss';
 
 const customStyles = {
     content : {

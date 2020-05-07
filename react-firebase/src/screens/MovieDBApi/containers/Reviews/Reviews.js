@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import Paginator from "../../../../Components/Pagination/Paginator";
-import '../../../../Styles/TheMovieDBAPi/SeasonDescr.scss';
+import '../../Styles/SeasonDescr.scss';
 import Grid from "@material-ui/core/Grid";
 import Title from "../../../MovieDBApi/components/Title/Title";
-import '../../../../Styles/TheMovieDBAPi/ReviewContent.scss';
-import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import '../../Styles/ReviewContent.scss';
+import {ContainerLine, LineHorizontalBlack} from "../../Styles/Line";
 
 const useStyles = makeStyles((theme) => ({
     root: {

@@ -6,8 +6,8 @@ import Carousel from "react-multi-carousel";
 import {clearDetail} from "../../actions/clearDetail";
 /* Css */
 import 'react-multi-carousel/lib/styles.css';
-import '../../../../Styles/TheMovieDBAPi/MovieCarousel.scss';
-import {CarouselImage} from "../../../../Styles/TheMovieDBAPi/CarouselImg";
+import '../../Styles/MovieCarousel.scss';
+import {CarouselImage} from "../../Styles/CarouselImg";
 /* Components */
 import Title from "../../components/Title/Title";
 
@@ -91,9 +91,7 @@ export const MovieCarousel = (props) => {
                         title.poster_path ?
                         <div key={title.id} className='item'>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
-                                <div>
-                                    <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
-                                </div>
+                                <CarouselImage src={`http://image.tmdb.org/t/p/w154/${title.poster_path}`}/>
                             </Link>
                         </div>
                             :

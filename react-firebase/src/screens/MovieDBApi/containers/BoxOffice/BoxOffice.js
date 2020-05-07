@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "../../components/Title/Title";
-import {ContainerLine, LineHorizontalBlack} from "../../../../Styles/TheMovieDBAPi/Line";
+import {ContainerLine, LineHorizontalBlack} from "../../Styles/Line";
 import Grid from "@material-ui/core/Grid";
 
 export const BoxOffice = ({budget, revenue}) => {
