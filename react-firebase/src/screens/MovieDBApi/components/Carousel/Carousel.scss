@@ -24,9 +24,9 @@ h1 {
   text-align: center;
 }
 
-//:root {
-//  --swiper-theme-color: #fff;
-//}
+:root {
+  --swiper-theme-color: #fff;
+}
 
 .netflix-slider .swiper-wrapper {
   padding: 40px 0;
@@ -63,23 +63,39 @@ h1 {
   transform: scale(2);
   z-index: 1;
 }
+
 // Title over image css
 .title {
   display: none;
 }
 
 img:hover + .title {
-  color: white;
+  color: gold;
   display: block;
   position: absolute;
   bottom: 18px;
   left: 5px;
   //font-size: 1vw;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
   background: rgba(0,0,0, 0.8);
-  text-shadow: 4px 4px 2px rgba(0, 0, 0, 1);
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.5);
 }
+
+// Imdb rating
+.vote-average {
+  color: gold;
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-weight: 900;
+  background: rgba(0,0,0,0.6);
+}
+p.MuiTypography-root.vote-average.MuiTypography-body1 {
+  font-weight: bold;
+}
+
+// first item hover
 .swiper-slide {
   transition: 250ms all;
 

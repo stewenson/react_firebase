@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {clearDetail} from "../../actions/clearDetail";
 import {Link} from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
+import GradeIcon from '@material-ui/icons/Grade';
 
 export const Carousel = (props) => {
 
@@ -24,7 +25,7 @@ export const Carousel = (props) => {
         breakpoints: {
             // when window width is >= 320px
             320: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 10
             },
             // when window width is >= 480px
@@ -32,13 +33,34 @@ export const Carousel = (props) => {
                 slidesPerView: 3,
                 spaceBetween: 10
             },
-            // when window width is >= 640px
-            640: {
+            // when window width is >= 630px
+            900: {
+                slidesPerView: 4,
+                spaceBetween: 10
+            },
+            // when window width is >= 1200px
+            1200: {
                 slidesPerView: 5,
                 spaceBetween: 10
-            },  // when window width is >= 900px
-            900: {
+            },
+            // when window width is >= 1500px
+            1500: {
+                slidesPerView: 6,
+                spaceBetween: 10
+            },
+            // when window width is >= 1800px
+            1800: {
                 slidesPerView: 7,
+                spaceBetween: 10
+            },
+            // when window width is >= 2100px
+            2100: {
+                slidesPerView: 10,
+                spaceBetween: 10
+            },
+            // when window width is >= 2300px
+            2300: {
+                slidesPerView: 11,
                 spaceBetween: 10
             },
         },
@@ -66,6 +88,9 @@ export const Carousel = (props) => {
                                     {(title.name && title.name.length > 10) ? `${title.name.slice(0, 20)+'...'}` : title.name}
                                     {(title.original_title && title.original_title.length > 10) ? `${title.original_title.slice(0, 20)+'...'}` : title.original_title}
                                 </Typography>
+                                <Typography className='vote-average'>
+                                    <GradeIcon /> {title.vote_average}/10
+                                </Typography>
                             </Link>
                         </div>
                         :
@@ -75,6 +100,9 @@ export const Carousel = (props) => {
                                 <Typography className='title'>
                                     {(title.name && title.name.length > 10) ? `${title.name.slice(0, 20)+'...'}` : title.name}
                                     {(title.original_title && title.original_title.length > 10) ? `${title.original_title.slice(0, 20)+'...'}` : title.original_title}
+                                </Typography>
+                                <Typography className='vote-average'>
+                                    <GradeIcon /> {title.vote_average}/10
                                 </Typography>
                             </Link>
                         </div>
