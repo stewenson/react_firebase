@@ -63,7 +63,8 @@ export const Carousel = (props) => {
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                 <img src={`http://image.tmdb.org/t/p/${ props.path === 'popularDocument' ? 'w300_and_h300_bestv2' : 'w300'}/${props.path === 'popularDocument' ? title.poster_path : title.backdrop_path}`} alt=""/>
                                 <Typography className='title'>
-                                    {title.name ? title.name : title.original_title}
+                                    {(title.name && title.name.length > 10) ? `${title.name.slice(0, 20)+'...'}` : title.name}
+                                    {(title.original_title && title.original_title.length > 10) ? `${title.original_title.slice(0, 20)+'...'}` : title.original_title}
                                 </Typography>
                             </Link>
                         </div>
@@ -72,7 +73,8 @@ export const Carousel = (props) => {
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                 <img src="https://www.randschemicals.com/wp-content/themes/randschemical/images/di.png" alt=""/>
                                 <Typography className='title'>
-                                    {title.name ? title.name : title.original_title}
+                                    {(title.name && title.name.length > 10) ? `${title.name.slice(0, 20)+'...'}` : title.name}
+                                    {(title.original_title && title.original_title.length > 10) ? `${title.original_title.slice(0, 20)+'...'}` : title.original_title}
                                 </Typography>
                             </Link>
                         </div>

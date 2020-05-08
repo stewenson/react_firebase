@@ -4,7 +4,7 @@ import {ContainerLine, LineHorizontalBlack} from "../../Styles/Line";
 import SingleLineGridList from "../../components/GridList/SingleLineGridList";
 
 export const Credits = (props) => {
-
+    console.log(props.casts)
     if (!props.casts) return null;
 
     return (

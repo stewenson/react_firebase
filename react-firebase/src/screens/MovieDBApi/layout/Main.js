@@ -44,8 +44,6 @@ export default function Main() {
 
     if (loading) return null;
 
-    console.log(dataDocument)
-
     return (
         <Container maxWidth='xl' className='rmdb-main-container' >
             <Title title={'Find Your movies'} variant={'h4'} color={'red'} align={'center'}/>

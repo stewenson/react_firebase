@@ -63,7 +63,7 @@ h1 {
   transform: scale(2);
   z-index: 1;
 }
-
+// Title over image css
 .title {
   display: none;
 }
@@ -72,10 +72,27 @@ img:hover + .title {
   color: white;
   display: block;
   position: absolute;
-  bottom: 70px;
+  bottom: 18px;
   left: 5px;
-  height: 20%;
-  font-size: 1vw;
+  //font-size: 1vw;
+  font-size: 12px;
   font-weight: 900;
-  text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.72);
+  background: rgba(0,0,0, 0.8);
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 1);
+}
+.swiper-slide {
+  transition: 250ms all;
+
+  &:hover {
+    transform: scale(1.2);
+    z-index: 1;
+  }
+
+  &:first-child:hover {
+    margin: 0 40px;
+  }
+
+  &:last-child:hover {
+    margin: 0 -40px;
+  }
 }
