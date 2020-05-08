@@ -24,7 +24,7 @@ export const Carousel = (props) => {
         breakpoints: {
             // when window width is >= 320px
             320: {
-                slidesPerView: 2,
+                slidesPerView: 3,
                 spaceBetween: 10
             },
             // when window width is >= 480px
@@ -34,12 +34,13 @@ export const Carousel = (props) => {
             },
             // when window width is >= 640px
             640: {
-                slidesPerView: 6,
+                slidesPerView: 5,
+                spaceBetween: 10
+            },  // when window width is >= 900px
+            900: {
+                slidesPerView: 7,
                 spaceBetween: 10
             },
-
-            // slidesPerView: 6,
-            // spaceBetween: 5,
         },
         navigation: {
             nextEl: '.swiper-button-next',
@@ -60,14 +61,21 @@ export const Carousel = (props) => {
                     title.poster_path ?
                         <div key={title.id}>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
-                                <img src={`http://image.tmdb.org/t/p/${ props.path === 'popularDocument' ? 'w154' : 'w300'}/${props.path === 'popularDocument' ? title.poster_path : title.backdrop_path}`} alt=""/>
-                                <Typography className='title' variant="subtitle1" style={{ color: 'white'}}>
+                                <img src={`http://image.tmdb.org/t/p/${ props.path === 'popularDocument' ? 'w300_and_h300_bestv2' : 'w300'}/${props.path === 'popularDocument' ? title.poster_path : title.backdrop_path}`} alt=""/>
+                                <Typography className='title'>
                                     {title.name ? title.name : title.original_title}
                                 </Typography>
                             </Link>
                         </div>
                         :
-                        null
+                        <div key={title.id}>
+                            <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
+                                <img src="https://www.randschemicals.com/wp-content/themes/randschemical/images/di.png" alt=""/>
+                                <Typography className='title'>
+                                    {title.name ? title.name : title.original_title}
+                                </Typography>
+                            </Link>
+                        </div>
                 ))}
             </Swiper>
         </div>

@@ -5,7 +5,6 @@ import Title from "../components/Title/Title";
 import {useDispatch, useSelector} from "react-redux";
 import {getPopuparMovie} from "../actions/getPopuparMovie";
 import {clearDetail} from "../actions/clearDetail";
-import {MovieCarousel} from "../components/MovieCarousel/MovieCarousel";
 import {getPopuparSeries} from "../actions/getPopuparSeries";
 import {getFamilyMovie} from "../actions/getFamilyMovie";
 import {getDocumMovieAction} from "../actions/getDocumMovie";
@@ -19,9 +18,9 @@ export default function Main() {
     const document = useSelector(state => state.movieDbAPI);
 
     const dataMoives = popMovies.movies.results;
-    const dataSeries = popSeries.series.results
-    const dataFamily = family.family.results
-    const dataDocument = document.document.results
+    const dataSeries = popSeries.series.results;
+    const dataFamily = family.family.results;
+    const dataDocument = document.document.results;
     const [loading, setLoading] = useState(true);
 
     useEffect( () => {
@@ -53,8 +52,7 @@ export default function Main() {
            <Carousel data={dataMoives} path={'popularMovie'} title={'Popular Movies'} category={'movie'}/>
            <Carousel data={dataSeries} path={'popularSeries'} title={'Popular Series'} category={'tv'}/>
            <Carousel data={dataFamily} path={'popularMovie'} title={'Popular Family Movies'} marginTop={'3%'} category={'movie'}/>
-           {/*<Carousel data={dataDocument} path={'popularDocument'} title={'Popular Documentary Movies'} marginTop={'3%'} category={'movie'}/>*/}
-            <MovieCarousel data={dataDocument} path={'popularMovie'} title={'Popular Documentary Movies'} marginTop={'3%'} category={'movie'} />
+           <Carousel data={dataDocument} path={'popularDocument'} title={'Popular Documentary Movies'} marginTop={'3%'} category={'movie'}/>
         </Container>
     )
 }
