@@ -6,6 +6,7 @@ import {clearDetail} from "../../actions/clearDetail";
 import {Link} from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 import GradeIcon from '@material-ui/icons/Grade';
+import {TitleDate} from "../TitleDate/TitleDate";
 
 export const Carousel = (props) => {
 
@@ -36,17 +37,18 @@ export const Carousel = (props) => {
             // when window width is >= 630px
             900: {
                 slidesPerView: 4,
-                spaceBetween: 10
+                spaceBetween: 10,
             },
             // when window width is >= 1200px
             1200: {
                 slidesPerView: 5,
-                spaceBetween: 10
+                spaceBetween: 10,
             },
             // when window width is >= 1500px
             1500: {
                 slidesPerView: 6,
-                spaceBetween: 10
+                spaceBetween: 10,
+
             },
             // when window width is >= 1800px
             1800: {
@@ -68,10 +70,10 @@ export const Carousel = (props) => {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+        slidesPerGroup: 2,
     }
 
     if (!props.data) return null;
-    // console.log(props.data)
 
     return(
         <div className='netflix-slider'>
@@ -84,12 +86,12 @@ export const Carousel = (props) => {
                         <div key={title.id}>
                             <Link to={{pathname: `/tmdbapi/${props.path}/detail/${props.category}/${title.original_title}/${title.id}`, query: `/tmdbapi/${props.path}/detail`}}>
                                 <img src={`http://image.tmdb.org/t/p/${ props.path === 'popularDocument' ? 'w300_and_h300_bestv2' : 'w300'}/${props.path === 'popularDocument' ? title.poster_path : title.backdrop_path}`} alt=""/>
-                                <Typography className='title'>
+                                <Typography className='title' align='left'>
                                     {(title.name && title.name.length > 10) ? `${title.name.slice(0, 20)+'...'}` : title.name}
                                     {(title.original_title && title.original_title.length > 10) ? `${title.original_title.slice(0, 20)+'...'}` : title.original_title}
-                                </Typography>
-                                <Typography className='vote-average'>
-                                    <GradeIcon /> {title.vote_average}/10
+                                    <br/>
+                                    {title.release_date ? TitleDate(title.release_date) +' ' : TitleDate(title.first_air_date) + ' '}
+                                    <GradeIcon fontSize='small'/>{title.vote_average}/10
                                 </Typography>
                             </Link>
                         </div>
