@@ -9,6 +9,7 @@ import {MovieCarousel} from "../components/MovieCarousel/MovieCarousel";
 import {getPopuparSeries} from "../actions/getPopuparSeries";
 import {getFamilyMovie} from "../actions/getFamilyMovie";
 import {getDocumMovieAction} from "../actions/getDocumMovie";
+import {Carousel} from "../components/Carousel/Carousel";
 
 export default function Main() {
     const dispatch = useDispatch();
@@ -44,12 +45,15 @@ export default function Main() {
 
     if (loading) return null;
 
+    console.log(dataDocument)
+
     return (
         <Container maxWidth='xl' className='rmdb-main-container' >
-            <Title title={'Find Your movies'} variant={'h3'} color={'white'} align={'center'}/>
-            <MovieCarousel data={dataMoives} path={'popularMovie'} title={'Popular Movies'} marginTop={'3%'} category={'movie'} />
-            <MovieCarousel data={dataSeries} path={'popularSeries'} title={'Popular Tv Series'} marginTop={'3%'} category={'tv'} />
-            <MovieCarousel data={dataFamily} path={'popularMovie'} title={'Popular Family Movies'} marginTop={'3%'} category={'movie'} />
+            <Title title={'Find Your movies'} variant={'h4'} color={'red'} align={'center'}/>
+           <Carousel data={dataMoives} path={'popularMovie'} title={'Popular Movies'} category={'movie'}/>
+           <Carousel data={dataSeries} path={'popularSeries'} title={'Popular Series'} category={'tv'}/>
+           <Carousel data={dataFamily} path={'popularMovie'} title={'Popular Family Movies'} marginTop={'3%'} category={'movie'}/>
+           {/*<Carousel data={dataDocument} path={'popularDocument'} title={'Popular Documentary Movies'} marginTop={'3%'} category={'movie'}/>*/}
             <MovieCarousel data={dataDocument} path={'popularMovie'} title={'Popular Documentary Movies'} marginTop={'3%'} category={'movie'} />
         </Container>
     )
